@@ -1,7 +1,6 @@
-<b>Projekt:</b>
-Musiklärarportalen.se
+<h2>Projekt: Musiklärarportalen.se</h2>
 
-Projektdeltagare:
+<h4>Projektdeltagare:</h4>
 - Henrik Petersson (hp222bf)
 - Christoffer Rydberg (cr222cs)
 - Simon Ebeling (se222ej)
