@@ -1,4 +1,4 @@
-Projekt:
+<b>Projekt:</b>
 Musiklärarportalen.se
 
 Projektdeltagare:
