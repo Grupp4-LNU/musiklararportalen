@@ -1,18 +1,21 @@
 <?php
+# Silence is golden.
+?>
+<?php
 /*
-	Plugin Name: MLP Musiklektion Post Type
+	Plugin Name: MLP MusicLesson
 	Plugin URI: http://musiklararportalen.se
-	Description: Creates music lessons.
+	Description: Music lessons for your wordpress site.
 	Version: 0.1
-	Author: Christoffer Rydberg, Simon Ebeling, Henrik Petersson
-	Author URI: http://christoffer.rydberg.me , http://www.joshi.se
+	Author: Musiklärarportalen
+	Author URI: http://www.musiklararportalen.se
 */
-
-class MLP_MusikLektion_Post_Type {
+class MLP_musiclesson {
 	public function __construct()
 	{
 		$this->register_post_type();
 		$this->taxonomies();
+		$this->add_lesson_details_metabox();
 	}
 	
 	public function register_post_type()
@@ -30,17 +33,14 @@ class MLP_MusikLektion_Post_Type {
 				'not_found' => 'Ingen lektion hittad',
 				'not_found_in_trash' => 'Ingen lektion hittad i papperskorgen'				
 			),
-			'query_var' => 'lektioner',
-			'rewrite' => array(
-				'slug' => 'lessons/'
-			),
+			'query_var' => 'lektion',
+			'rewrite' => array( 'slug' => 'lektion'),
 			'public' => true,
 			'menu_position' => 5,
 			'menu_icon' => admin_url().'images/media-button-music.gif',
 			'supports' => array(
 				'title',
 				'thumbnail',
-				'excerpt',
 				'comments',
 				'author'
 			),
@@ -50,16 +50,23 @@ class MLP_MusikLektion_Post_Type {
 			'show_in_admin_bar' => true
 		);
 		register_post_type('mlp_musiclesson', $args);
+		
+		
+		$set = get_option('post_type_rules_flased_mlp_musiclesson');
+		if ($set !== true){
+		   flush_rewrite_rules(false);
+		   update_option('post_type_rules_flased_mlp_musiclesson',true);
+		}
 	}
 	
 	public function taxonomies() {
 		$taxonomies = array();
 		
 		$taxonomies['mlp_grade'] = array(
-			'hierarchical' => true,
-			'query_var' => 'lesson_grades',
+			'hierarchical' => false,
+			'query_var' => 'lektion_arskurs',
 			'rewrite' => array(
-				'slug' => 'lessons/grades'
+				'slug' => 'lektion/arskurs'
 			),
 			'labels' => array(
 				'name' => 'Årskurser',
@@ -76,10 +83,10 @@ class MLP_MusikLektion_Post_Type {
 		);
 		
 		$taxonomies['mlp_category'] = array(
-			'hierarchical' => true,
-			'query_var' => 'lesson_categories',
+			'hierarchical' => false,
+			'query_var' => 'lektion_kategori',
 			'rewrite' => array(
-				'slug' => 'lessons/mlp_categories'
+				'slug' => 'lektion/kategorier'
 			),
 			'labels' => array(
 				'name' => 'Lektionskategorier',
@@ -124,25 +131,53 @@ class MLP_MusikLektion_Post_Type {
 		wp_insert_term($value, $taxonomy, $args);
 	}
 	
-	public function metaboxes() {
+	public function add_lesson_details_metabox() {
 		add_action('add_meta_boxes', function() {
-			// css id, title, cb func, page, priority, cb func arguments
-			add_meta_box('mlp_music_lesson_', 'lesson length', 'lesson_length', 'mlp_lesson');
-			
-			function movie_length($post) {
-				?>
-				<p>
-					<label for=''>Lektionslänmgst</label>
-					<input type='text' class='widefat' name='mlp_lesson_length' id='mlp_lesson_length' value='' />
-				</p>
-				<?php
-			}
+			add_meta_box('mlp_lesson_details', 'Lektionsdetaljer', 'lesson_details', 'mlp_musiclesson');
 		});
+		
+		function lesson_details($post) {
+			$intro = get_post_meta($post->ID, 'mlp_intro', true);
+			$goals = get_post_meta($post->ID, 'mlp_goals', true);
+			$execution = get_post_meta($post->ID, 'mlp_execution', true);
+			?>
+			<p>
+				<label for='mlp_intro'>Inledning</label>
+				<textarea class='widefat' id='mlp_intro' name='mlp_intro'><?php echo esc_attr($intro); ?></textarea>
+			</p>
+			<p>
+				<label for='mlp_goals'>Mål</label>
+				<textarea class='widefat' id='mlp_goals' name='mlp_goals'><?php echo esc_attr($goals); ?></textarea>
+			</p>
+			<p>
+				<label for='mlp_execution'>Utförande</label>
+				<textarea class='widefat' id='mlp_execution' name='mlp_execution'><?php echo esc_attr($execution); ?></textarea>
+			</p>
+			<?php
+		}
+
+		add_action('save_post', function($id) {
+			$this->update_post_meta_data($id, 'mlp_intro');
+			$this->update_post_meta_data($id, 'mlp_goals');
+			$this->update_post_meta_data($id, 'mlp_execution');
+		});
+	}
+
+	// Save post meta data if 
+	public function update_post_meta_data($id, $field) {
+		if( isset($_POST[$field]) ) {
+			update_post_meta(
+				$id, 
+				$field, 
+				strip_tags($_POST[$field])
+			);
+		}
 	}
 }
 
-add_action('init', 'MLP_musiklektion_init');
+add_action('init', 'MLP_musiclesson_init');
 
-function MLP_musiklektion_init() {
-	new MLP_MusikLektion_Post_Type();
+function MLP_musiclesson_init() {
+	new MLP_musiclesson();
+	include dirname(__FILE__) . '/mlp_musiclesson_shortcode.php';
 }
