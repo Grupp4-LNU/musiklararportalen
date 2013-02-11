@@ -22,6 +22,7 @@ add_shortcode('mlp_musiclesson', function() {
 					<div>
 						". get_the_excerpt() ."
 					</div>
+				</li>
 			";
 		}
 	} else {

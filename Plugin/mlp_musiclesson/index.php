@@ -63,7 +63,7 @@ class MLP_musiclesson {
 		$taxonomies = array();
 		
 		$taxonomies['mlp_grade'] = array(
-			'hierarchical' => false,
+			'hierarchical' => true,
 			'query_var' => 'mlp_grade',
 			'rewrite' => array(
 				'slug' => 'lektioner/mlp_grade'
@@ -83,7 +83,7 @@ class MLP_musiclesson {
 		);
 		
 		$taxonomies['mlp_category'] = array(
-			'hierarchical' => false,
+			'hierarchical' => true,
 			'query_var' => 'mlp_category',
 			'rewrite' => array(
 				'slug' => 'lektioner/mlp_category'
