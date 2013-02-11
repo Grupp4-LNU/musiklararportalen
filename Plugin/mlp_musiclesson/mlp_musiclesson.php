@@ -37,13 +37,14 @@ class MLP_musiclesson {
 			'rewrite' => array( 'slug' => 'lektioner'),
 			'public' => true,
 			'menu_position' => 5,
-			'menu_icon' => admin_url().'images/media-button-music.gif',
+            'menu_icon' => plugins_url( '/images/icon16.png', __FILE__ ),
 			'supports' => array(
 				'title',
 				'thumbnail',
 				'comments',
 				'author'
 			),
+            'has_archive' => true,			
 			'show_in_menu' => true,
 			'show_ui' => true,
 			'show_in_nav_menus' => true,
@@ -89,16 +90,16 @@ class MLP_musiclesson {
 				'slug' => 'lektioner/mlp_category'
 			),
 			'labels' => array(
-				'name' => 'Lektionskategorier',
-				'singular_name' => "Lektionskategori",
-				'add_new' => 'Lägg till Lektionskategori',
-				'add_new_item' => 'Lägg till Lektionskategori',
-				'edit_item' => 'Redigera Lektionskategori',
-				'new_item' => 'Lägg till Lektionskategori',
-				'view_item' => 'Visa Lektionkategori',
-				'search_items' => 'Sök bland Lektionskategorier',
-				'not_found' => 'Inga Lektionskategorier hittad',
-				'not_found_in_trash' => 'Inga Lektionskategorier hittad i papperskorgen'				
+				'name' => 'Huvudämne',
+				'singular_name' => "Huvudämne",
+				'add_new' => 'Lägg till Huvudämne',
+				'add_new_item' => 'Lägg till Huvudämne',
+				'edit_item' => 'Redigera Huvudämne',
+				'new_item' => 'Lägg till Huvudämne',
+				'view_item' => 'Visa Huvudämne',
+				'search_items' => 'Sök bland Huvudämnen',
+				'not_found' => 'Inget Huvudämne hittat',
+				'not_found_in_trash' => 'Inget Huvudämne hittat i papperskorgen'				
 			)
 		);
 		
@@ -107,8 +108,9 @@ class MLP_musiclesson {
 		$this->add_taxonomy_data('mlp_grade', '1-3', "Årskurs 1-3");
 		$this->add_taxonomy_data('mlp_grade', '4-6', "Årskurs 4-6");
 		$this->add_taxonomy_data('mlp_grade', '7-9', "Årskurs 7-9");
+		$this->add_taxonomy_data('mlp_grade', 'Gymn', "Årskurs Gymnasiet.");		
 		
-		$this->add_taxonomy_data('mlp_category', 'Spela och Sjunga', 'Spela och sjunga');
+		$this->add_taxonomy_data('mlp_category', 'Spela och Sjunga', 'Spela och Sjunga');
 		$this->add_taxonomy_data('mlp_category', 'Musikskapande', 'Musikskapande');
 		$this->add_taxonomy_data('mlp_category', 'Musikanalys', 'Musikanalys');
 	}
@@ -141,18 +143,15 @@ class MLP_musiclesson {
 			$goals = get_post_meta($post->ID, 'mlp_goals', true);
 			$execution = get_post_meta($post->ID, 'mlp_execution', true);
 			?>
-			<p>
-				<label for='mlp_intro'>Inledning</label>
+				<h3><label for='mlp_intro'>Inledning</label></h3>
 				<textarea class='widefat' id='mlp_intro' name='mlp_intro'><?php echo esc_attr($intro); ?></textarea>
-			</p>
-			<p>
-				<label for='mlp_goals'>Mål</label>
+
+				<h3><label for='mlp_goals'>Mål</label></h3>
 				<textarea class='widefat' id='mlp_goals' name='mlp_goals'><?php echo esc_attr($goals); ?></textarea>
-			</p>
-			<p>
-				<label for='mlp_execution'>Utförande</label>
+
+				<h3><label for='mlp_execution'>Utförande</label></h3>
 				<textarea class='widefat' id='mlp_execution' name='mlp_execution'><?php echo esc_attr($execution); ?></textarea>
-			</p>
+
 			<?php
 		}
 
@@ -176,8 +175,30 @@ class MLP_musiclesson {
 }
 
 add_action('init', 'MLP_musiclesson_init');
+add_filter( 'template_include', 'include_template_function', 1 );
+
+function include_template_function( $template_path ) {
+    if ( get_post_type() == 'mlp_musiclesson' ) {
+        if ( is_single() ) {
+            // checks if the file exists in the theme first,
+            // otherwise serve the file from the plugin
+            if ( $theme_file = locate_template( array ( 'single-mlp_musiclesson.php' ) ) ) {
+                $template_path = $theme_file;
+            } else {
+                $template_path = plugin_dir_path( __FILE__ ) . '/single-mlp_musiclesson.php';
+            }
+        }
+        elseif ( is_archive() ) {
+            if ( $theme_file = locate_template( array ( 'archive-mlp_musiclesson.php' ) ) ) {
+                $template_path = $theme_file;
+            } else { $template_path = plugin_dir_path( __FILE__ ) . '/archive-mlp_musiclesson.php';
+ 
+            }
+        }		
+    }
+    return $template_path;
+}
 
 function MLP_musiclesson_init() {
 	new MLP_musiclesson();
-	include dirname(__FILE__) . '/mlp_musiclesson_shortcode.php';
 }

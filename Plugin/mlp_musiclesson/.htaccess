@@ -1,6 +1,10 @@
 Order Deny,Allow
 Deny from all
 
-<FilesMatch "^mlp_musiclesson\.(css|js)$">
+<FilesMatch "^mlp_musiclesson\.(css|js|png|jpg|jpeg)$">
+	Allow from all
+</FilesMatch>
+
+<FilesMatch "^mlp_musiclesson\images\.(css|js|png|jpg|jpeg)$">
 	Allow from all
 </FilesMatch>
