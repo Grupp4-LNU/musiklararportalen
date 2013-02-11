@@ -34,7 +34,7 @@ class MLP_musiclesson {
 				'not_found_in_trash' => 'Ingen lektion hittad i papperskorgen'				
 			),
 			'query_var' => 'lektion',
-			'rewrite' => array( 'slug' => 'lektion'),
+			'rewrite' => array( 'slug' => 'lektioner'),
 			'public' => true,
 			'menu_position' => 5,
 			'menu_icon' => admin_url().'images/media-button-music.gif',
@@ -64,9 +64,9 @@ class MLP_musiclesson {
 		
 		$taxonomies['mlp_grade'] = array(
 			'hierarchical' => false,
-			'query_var' => 'lektion_arskurs',
+			'query_var' => 'mlp_grade',
 			'rewrite' => array(
-				'slug' => 'lektion/arskurs'
+				'slug' => 'lektioner/mlp_grade'
 			),
 			'labels' => array(
 				'name' => 'Årskurser',
@@ -84,9 +84,9 @@ class MLP_musiclesson {
 		
 		$taxonomies['mlp_category'] = array(
 			'hierarchical' => false,
-			'query_var' => 'lektion_kategori',
+			'query_var' => 'mlp_category',
 			'rewrite' => array(
-				'slug' => 'lektion/kategorier'
+				'slug' => 'lektioner/mlp_category'
 			),
 			'labels' => array(
 				'name' => 'Lektionskategorier',
