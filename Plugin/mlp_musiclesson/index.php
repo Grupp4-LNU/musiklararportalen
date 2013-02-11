@@ -66,7 +66,7 @@ class MLP_musiclesson {
 			'hierarchical' => true,
 			'query_var' => 'mlp_grade',
 			'rewrite' => array(
-				'slug' => 'lektioner/mlp_grade'
+				'slug' => 'lektioner/grades'
 			),
 			'labels' => array(
 				'name' => 'Årskurser',
