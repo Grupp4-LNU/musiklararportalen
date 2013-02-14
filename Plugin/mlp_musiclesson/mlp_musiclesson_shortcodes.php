@@ -15,7 +15,7 @@ add_shortcode( 'insert_lesson', 'shortcode_insert_lesson' );
  * @return void
  */
 function shortcode_insert_lesson() {
-	if( is_user_logged_in() ) {	
+	if( is_user_logged_in() ) {			
 		
 		// Check if the form has been submitted
 		if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && 'insert_new_lesson' == $_POST['action'] ) {	
@@ -28,12 +28,39 @@ function shortcode_insert_lesson() {
 				echo '<p>'. __( 'Please enter a lesson name.', 'mlp_musiclesson' ) .'</p>';
 			}
 			
-			/*
+			if ( isset( $_POST['lesson_intro'] ) ) {
+				// Set the lesson title
+				$introduction = $_POST['lesson_intro'];
+			} else {
+				// No title were entered
+				echo '<p>'. __( 'Please enter a lesson introduction.', 'mlp_musiclesson' ) .'</p>';
+			}
+			
+			if ( isset( $_POST['lesson_goal'] ) ) {
+				// Set the lesson title
+				$goal = $_POST['lesson_goal'];
+			} else {
+				// No title were entered
+				echo '<p>'. __( 'Please enter a goal for the lesson.', 'mlp_musiclesson' ) .'</p>';
+			}
+			
+			if ( isset( $_POST['lesson_execution'] ) ) {
+				// Set the lesson title
+				$execution = $_POST['lesson_goal'];
+			} else {
+				// No title were entered
+				echo '<p>'. __( 'Please enter a description for the execution of the lesson.', 'mlp_musiclesson' ) .'</p>';
+			}
+			
 			$lesson_grades = array();
-			foreach( $_POST['mlp_grade'] as $grade ) {
+			foreach( $_POST['grade'] as $grade ) {
 				$lesson_grades[] = $grade;
 			}
-			*/
+			
+			$lesson_categories = array();
+			foreach( $_POST['category'] as $category ) {
+				$lesson_categories[] = $category;
+			}
 			
 			// Prepare insert new lesson
 			$new_lesson_post = array(
@@ -45,7 +72,12 @@ function shortcode_insert_lesson() {
 			// Insert the new lesson post
 			$post_id = wp_insert_post( $new_lesson_post );
 							
-			//wp_set_post_terms( $post_id, $lesson_grades, 'mlp_grade', false );
+			wp_set_post_terms( $post_id, $lesson_grades, 'mlp_grade', false );
+			wp_set_post_terms( $post_id, $lesson_categories, 'mlp_category', false );
+			
+			add_post_meta($post_id, 'mlp_intro', $introduction);
+			add_post_meta($post_id, 'mlp_goals', $goal);
+			add_post_meta($post_id, 'mlp_execution', $execution);
 			
 			/*
 			if ( isset( $_FILES['file']['tmp_name'] ) ) {
@@ -57,28 +89,48 @@ function shortcode_insert_lesson() {
 			
 			//set_post_thumbnail( $post_id, $attachment_id );
 		
-			_e( '<p>Thank you! Your recipe has been submitted to our database. You will be notified when it has been reviewed by an administrator!</p>', 'dp-recipes' );
+			_e( '<p>Thank you! Your lesson has been submitted to our database. You will be notified when it has been reviewed by an administrator!</p>', 'dp-recipes' );
 			_e( '<p>You will be redirected in 5 seconds, if not click <a href="'.home_url().'">here</a>.</p>', 'dp-recipes' );
 			
 			echo "<meta http-equiv='refresh' content='5;url='".home_url()."' />";
 		}
 		else
 		{
-			echo '<div id="recipe_form">'."\n";
-			echo '<form id="insert_new_recipe" name="insert_new_recipe" method="post" action="" class="recipe-form" enctype="multipart/form-data">'."\n";
+			echo '<div id="lesson_form">'."\n";
+			echo '<form id="insert_new_lesson" name="insert_new_lesson" method="post" action="" class="lesson-form" enctype="multipart/form-data">'."\n";
 			
-			echo '<!-- Recipe Title -->'."\n";
+			echo '<!-- Lesson Title -->'."\n";
 			echo '<label for="lesson_title">'. __( 'Lesson Name', 'mlp_musiclesson' ) .':</label>'."\n";
 			echo '<input type="text" id="lesson_title" value="" tabindex="1" name="lesson_title" />'."\n";
 			
-			/*
-			echo '<!-- Category -->'."\n";
-			echo '<!-- Recipe Title -->'."\n";
-			echo '<label for="recipe_category">'. __( 'Grade', 'mlp_musiclesson' ) .':</label>'."\n";
-			$select_grades = wp_dropdown_categories( array( 'echo' => 0, 'taxonomy' => 'mlp_grade', 'hide_empty' => 0 ) );
-			$select_grades = str_replace( "name='mlp_grade' id=", "name='grade[]' multiple='multiple' id=", $select_grades );
-			echo $select_grades;
-			*/
+			echo '<!-- Grades -->';
+			echo '<label for="mlp_musiclesson_grades">'. __( 'Grade', 'mlp_musiclesson' ) .'</label>';
+			$grades = get_terms('mlp_grade');
+			foreach ($grades as $grade) {
+				echo '<input type="checkbox" name="grade[]" value="'.$grade->term_id.'" id="grade'.$grade->term_id.'" />';
+				echo '<label for="grade'.$grade->term_id.'">'.$grade->name.'</label>';
+			}
+			
+			echo '<!-- Lesson Categories -->';
+			echo '<label for="mlp_musiclesson_categories">'. __( 'Huvudämne', 'mlp_musiclesson' ) .'</label>';
+			$lessonCategories = get_terms('mlp_category');
+			foreach ($lessonCategories as $lessonCategory) {
+				echo '<input type="checkbox" name="category[]" value="'.$lessonCategory->term_id.'" id="grade'.$lessonCategory->term_id.'" />';
+				echo '<label for="grade'.$lessonCategory->term_id.'">'.$lessonCategory->name.'</label>';
+			}
+			
+			echo '<!-- Lesson Intro -->'."\n";
+			echo '<label for="lesson_intro">'. __( 'Introduction', 'mlp_musiclesson' ) .':</label>'."\n";
+			echo '<textarea id="lesson_intro" value="" tabindex="1" name="lesson_intro"></textarea>'."\n";
+			
+			echo '<!-- Lesson Goal -->'."\n";
+			echo '<label for="lesson_goal">'. __( 'Goal', 'mlp_musiclesson' ) .':</label>'."\n";
+			echo '<textarea id="lesson_goal" value="" tabindex="1" name="lesson_goal"></textarea>'."\n";
+			
+			echo '<!-- Lesson Execution -->'."\n";
+			echo '<label for="lesson_execution">'. __( 'Execution', 'mlp_musiclesson' ) .':</label>'."\n";
+			echo '<textarea id="lesson_execution" value="" tabindex="1" name="lesson_execution"></textarea>'."\n";
+			
 			
 			/*
 			echo '<label for="file">'. __( 'Select image', 'mlp_musiclesson' ) .':</label>'."\n";

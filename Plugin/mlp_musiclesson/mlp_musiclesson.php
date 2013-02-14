@@ -10,7 +10,6 @@
 	Author: Musiklärarportalen
 	Author URI: http://www.musiklararportalen.se
 */
-
 define('MLP_MUSICLESSON_VERSION', '0.2');
 define('MLP_MUSICLESSON_PLUGIN_PATH', plugin_dir_path( __FILE__ ));
 
@@ -25,4 +24,4 @@ function MLP_musiclesson_init() {
 	mlp_add_lesson_details_metabox();
 }
 
-add_action('init', 'MLP_musiclesson_init');
+add_action('init', 'MLP_musiclesson_init');;

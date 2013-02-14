@@ -86,8 +86,6 @@ function mlp_create_lesson_taxonomies() {
 		)
 	);
 	
-	mlp_register_all_taxonomies($taxonomies);
-	
 	mlp_add_taxonomy_data('mlp_grade', '1-3', "Årskurs 1-3");
 	mlp_add_taxonomy_data('mlp_grade', '4-6', "Årskurs 4-6");
 	mlp_add_taxonomy_data('mlp_grade', '7-9', "Årskurs 7-9");
@@ -96,6 +94,8 @@ function mlp_create_lesson_taxonomies() {
 	mlp_add_taxonomy_data('mlp_category', 'Spela och Sjunga', 'Spela och Sjunga');
 	mlp_add_taxonomy_data('mlp_category', 'Musikskapande', 'Musikskapande');
 	mlp_add_taxonomy_data('mlp_category', 'Musikanalys', 'Musikanalys');
+	
+	mlp_register_all_taxonomies($taxonomies);
 }
 
 function mlp_register_all_taxonomies($taxonomies) {
