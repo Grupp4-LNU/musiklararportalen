@@ -65,7 +65,7 @@ function shortcode_insert_lesson() {
 			// Prepare insert new lesson
 			$new_lesson_post = array(
 				'post_title'    => $title,
-				'post_status'   => 'pending',
+				'post_status'   => 'publish',
 				'post_type'     => 'mlp_musiclesson'
 			);
 
@@ -100,11 +100,11 @@ function shortcode_insert_lesson() {
 			echo '<form id="insert_new_lesson" name="insert_new_lesson" method="post" action="" class="lesson-form" enctype="multipart/form-data">'."\n";
 			
 			echo '<!-- Lesson Title -->'."\n";
-			echo '<label for="lesson_title">'. __( 'Lesson Name', 'mlp_musiclesson' ) .':</label>'."\n";
-			echo '<input type="text" id="lesson_title" value="" tabindex="1" name="lesson_title" />'."\n";
+			echo '<label for="lesson_title">'. __( 'Lesson Name', 'mlp_musiclesson' ) .':</label>';
+			echo '<input type="text" id="lesson_title" value="" tabindex="1" name="lesson_title" /><br />';
 			
 			echo '<!-- Grades -->';
-			echo '<label for="mlp_musiclesson_grades">'. __( 'Grade', 'mlp_musiclesson' ) .'</label>';
+			echo '<label for="mlp_musiclesson_grades">'. __( 'Grade', 'mlp_musiclesson' ) .'</label><br />';
 			$grades = get_terms('mlp_grade');
 			foreach ($grades as $grade) {
 				echo '<input type="checkbox" name="grade[]" value="'.$grade->term_id.'" id="grade'.$grade->term_id.'" />';
@@ -112,7 +112,7 @@ function shortcode_insert_lesson() {
 			}
 			
 			echo '<!-- Lesson Categories -->';
-			echo '<label for="mlp_musiclesson_categories">'. __( 'Huvudämne', 'mlp_musiclesson' ) .'</label>';
+			echo '<br /><label for="mlp_musiclesson_categories">'. __( 'Category', 'mlp_musiclesson' ) .'</label><br />';
 			$lessonCategories = get_terms('mlp_category');
 			foreach ($lessonCategories as $lessonCategory) {
 				echo '<input type="checkbox" name="category[]" value="'.$lessonCategory->term_id.'" id="grade'.$lessonCategory->term_id.'" />';
@@ -120,17 +120,16 @@ function shortcode_insert_lesson() {
 			}
 			
 			echo '<!-- Lesson Intro -->'."\n";
-			echo '<label for="lesson_intro">'. __( 'Introduction', 'mlp_musiclesson' ) .':</label>'."\n";
-			echo '<textarea id="lesson_intro" value="" tabindex="1" name="lesson_intro"></textarea>'."\n";
+			echo '<br /><label for="lesson_intro">'. __( 'Introduction', 'mlp_musiclesson' ) .':</label><br />'."\n";
+			echo '<textarea id="lesson_intro" value="" tabindex="1" name="lesson_intro"></textarea><br />'."\n";
 			
 			echo '<!-- Lesson Goal -->'."\n";
-			echo '<label for="lesson_goal">'. __( 'Goal', 'mlp_musiclesson' ) .':</label>'."\n";
-			echo '<textarea id="lesson_goal" value="" tabindex="1" name="lesson_goal"></textarea>'."\n";
+			echo '<label for="lesson_goal">'. __( 'Goal', 'mlp_musiclesson' ) .':</label><br />'."\n";
+			echo '<textarea id="lesson_goal" value="" tabindex="1" name="lesson_goal"></textarea><br />'."\n";
 			
 			echo '<!-- Lesson Execution -->'."\n";
-			echo '<label for="lesson_execution">'. __( 'Execution', 'mlp_musiclesson' ) .':</label>'."\n";
-			echo '<textarea id="lesson_execution" value="" tabindex="1" name="lesson_execution"></textarea>'."\n";
-			
+			echo '<label for="lesson_execution">'. __( 'Execution', 'mlp_musiclesson' ) .':</label><br />'."\n";
+			echo '<textarea id="lesson_execution" value="" tabindex="1" name="lesson_execution"></textarea><br />'."\n";
 			
 			/*
 			echo '<label for="file">'. __( 'Select image', 'mlp_musiclesson' ) .':</label>'."\n";
