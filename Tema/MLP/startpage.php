@@ -65,7 +65,7 @@
 			<?php //News Container ?>
 			<div class="preview_post_container">				
 
-				<h3>Senaste Nyheter</h3>				
+				<h3><?php _e( 'Latest News', 'buddypress' ); ?></h3>				
 
 				<?php if ( $news_query->have_posts() ) : ?>
 
@@ -106,7 +106,7 @@
 			<?php //Article Container ?>			
 			<div class="preview_post_container">
 						
-				<h3>Senaste Artiklar</h3>	
+				<h3><?php _e( 'Latest Articles', 'buddypress' ); ?></h3>	
 
 				<?php if ( $article_query->have_posts() ) : ?>
 
@@ -149,7 +149,7 @@
 			<?php //Lesson Container ?>			
 			<div class="preview_lesson_container">
 						
-				<h3>Senaste Lektioner</h3>	
+				<h3><?php _e( 'Latest Lessons', 'buddypress' ); ?></h3>	
 				
 				<div>
 
@@ -175,7 +175,17 @@
 									if($terms) :
 								?>
 								<p class="date">
-								<strong>Huvudämne: </strong>									
+								<?php 
+								$args=array('name' => 'mlp_category');
+								$output = 'objects';
+								$taxonomies = get_taxonomies($args,$output);
+var_dump($taxonomies);								
+								if  ($taxonomies) {
+								  foreach ($taxonomies  as $taxonomy ) {
+									echo '<strong>' . $taxonomy->singular_name . '</strong>';
+								  }
+								}  
+								?>							
 								<?php
 										foreach ( $terms as $term ) {
 										echo '<a href="' . esc_attr(get_term_link($term, 'mlp_category')) . '" title="' . sprintf( __( "View all posts in %s" ), $term->name ) . '" ' . '>' . $term->name.'</a> ';

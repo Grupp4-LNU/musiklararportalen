@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 function excerpt($limit) {
       $excerpt = explode(' ', get_the_excerpt(), $limit);
