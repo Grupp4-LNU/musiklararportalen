@@ -2496,9 +2496,13 @@ div.preview_lesson{
 	width: 29%;
 	float:left;
 	margin-left: 20px;
+	margin-bottom: 10px;
 	padding: 10px 5px 5px 10px;
 }
 div.preview_lesson:first-child{
+	margin-left: 0; 
+}
+div.preview_lesson:nth-child(3n +1){
 	margin-left: 0; 
 }
 div.preview_lesson .author-box{

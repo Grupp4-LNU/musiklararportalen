@@ -29,25 +29,33 @@
 							<span class="post-utility alignright"><?php edit_post_link( __( 'Edit this entry', 'buddypress' ) ); ?></span>
 						</p>
 						
+						<?php
+							$terms = get_the_terms( $post->ID , 'mlp_category' );
+							if($terms) :
+						?>
 						<p class="date">
-							<strong>Huvudämne: </strong>
-							<?php
-								$terms = get_the_terms( $post->ID , 'mlp_category' );
+						<strong>Huvudämne: </strong>									
+						<?php
 								foreach ( $terms as $term ) {
 								echo '<a href="' . esc_attr(get_term_link($term, 'mlp_category')) . '" title="' . sprintf( __( "View all posts in %s" ), $term->name ) . '" ' . '>' . $term->name.'</a> ';
 								}
-							?>
-						</p>
+						?>
+						</p>		
+						<?php endif ;?>
 						
+						<?php
+							$terms = get_the_terms( $post->ID , 'mlp_grade' );
+							if($terms) :
+						?>
 						<p class="date">
-							<strong>Årskurs: </strong> 
-							<?php
-								$terms = get_the_terms( $post->ID , 'mlp_grade' );
+						<strong>Årskurs: </strong>									
+						<?php
 								foreach ( $terms as $term ) {
 								echo '<a href="' . esc_attr(get_term_link($term, 'mlp_grade')) . '" title="' . sprintf( __( "View all posts in %s" ), $term->name ) . '" ' . '>' . $term->name.'</a> ';
 								}
-							?>
-						</p>						
+						?>
+						</p>		
+						<?php endif ;?>						
 
 						<div class="entry">
 							<h3>Inledning</h3>
