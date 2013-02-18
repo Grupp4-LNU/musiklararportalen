@@ -166,7 +166,7 @@
 							<h4 class="posttitle"><a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', 'buddypress' ); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h4>
 							
 							<div class="author-box">
-								<?php echo get_avatar( get_the_author_meta( 'user_email' ), '35' ); ?>
+								<?php echo get_avatar( get_the_author_meta( 'user_email' ), '30' ); ?>
 							</div>
 							
 							<div class="post-content">
@@ -175,7 +175,11 @@
 									$terms = get_the_terms( $post->ID , 'mlp_category' );
 									if($terms) :
 								?>
+<<<<<<< HEAD
 								<strong>Huvudämne: </strong>									
+=======
+								Huvudämne:									
+>>>>>>> added theme to lesson
 								<?php
 										foreach ( $terms as $term ) {
 										echo '<a href="' . esc_attr(get_term_link($term, 'mlp_category')) . '" title="' . sprintf( __( "View all posts in %s" ), $term->name ) . '" ' . '>' . $term->name.'</a> ';
@@ -189,7 +193,7 @@
 									if($terms) :
 								?>
 								<p class="date">
-								<strong>Årskurs: </strong>									
+								Årskurs:									
 								<?php
 										foreach ( $terms as $term ) {
 										echo '<a href="' . esc_attr(get_term_link($term, 'mlp_grade')) . '" title="' . sprintf( __( "View all posts in %s" ), $term->name ) . '" ' . '>' . $term->name.'</a> ';

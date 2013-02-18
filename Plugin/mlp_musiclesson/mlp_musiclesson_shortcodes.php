@@ -57,6 +57,11 @@ function shortcode_insert_lesson() {
 				$lesson_grades[] = $grade;
 			}
 			
+			$lesson_themes = array();
+			foreach( $_POST['theme'] as $themes ) {
+				$lesson_themes[] = $themes;
+			}
+			
 			$lesson_categories = array();
 			foreach( $_POST['category'] as $category ) {
 				$lesson_categories[] = $category;
@@ -73,6 +78,7 @@ function shortcode_insert_lesson() {
 			$post_id = wp_insert_post( $new_lesson_post );
 							
 			wp_set_post_terms( $post_id, $lesson_grades, 'mlp_grade', false );
+			wp_set_post_terms( $post_id, $lesson_themes, 'mlp_theme', false );
 			wp_set_post_terms( $post_id, $lesson_categories, 'mlp_category', false );
 			
 			add_post_meta($post_id, 'mlp_intro', $introduction);
@@ -109,6 +115,14 @@ function shortcode_insert_lesson() {
 			foreach ($grades as $grade) {
 				echo '<input type="checkbox" name="grade[]" value="'.$grade->term_id.'" id="grade'.$grade->term_id.'" />';
 				echo '<label for="grade'.$grade->term_id.'">'.$grade->name.'</label>';
+			}
+			
+			echo '<!-- Themes -->';
+			echo '<br /><label for="mlp_musiclesson_themes">'. __( 'Theme', 'mlp_musiclesson' ) .'</label><br />';
+			$themes = get_terms('mlp_theme');
+			foreach ($themes as $theme) {
+				echo '<input type="checkbox" name="theme[]" value="'.$theme->term_id.'" id="theme'.$theme->term_id.'" />';
+				echo '<label for="theme'.$theme->term_id.'">'.$theme->name.'</label>';
 			}
 			
 			echo '<!-- Lesson Categories -->';

@@ -24,4 +24,4 @@ function MLP_musiclesson_init() {
 	mlp_add_lesson_details_metabox();
 }
 
-add_action('init', 'MLP_musiclesson_init');;
+add_action('init', 'MLP_musiclesson_init');

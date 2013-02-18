@@ -2493,9 +2493,9 @@ div.preview_article .post-content .date{
 /*lesson*/
 
 div.preview_lesson{
-	width: 29%;
+	width: 30%;
 	float:left;
-	margin-left: 20px;
+	margin-left: 10px;
 	margin-bottom: 10px;
 	padding: 10px 5px 5px 10px;
 }
@@ -2507,7 +2507,8 @@ div.preview_lesson:nth-child(3n +1){
 }
 div.preview_lesson .author-box{
 	width: 35px;
-	margin-bottom: 0;
+	margin-bottom: 5px;
+	margin-top: 5px;
 }
 div.preview_lesson .post-content{
 	margin-left: 45px;
@@ -2521,4 +2522,5 @@ div.preview_lesson  .date{
 	margin-top: 0;
 	margin-bottom: 0;
 	padding: 0;
+	font-size: 11px;
 }
