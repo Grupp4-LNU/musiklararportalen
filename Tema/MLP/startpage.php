@@ -170,22 +170,12 @@
 							</div>
 							
 							<div class="post-content">
+								<p class="date">
 								<?php
 									$terms = get_the_terms( $post->ID , 'mlp_category' );
 									if($terms) :
 								?>
-								<p class="date">
-								<?php 
-								$args=array('name' => 'mlp_category');
-								$output = 'objects';
-								$taxonomies = get_taxonomies($args,$output);
-var_dump($taxonomies);								
-								if  ($taxonomies) {
-								  foreach ($taxonomies  as $taxonomy ) {
-									echo '<strong>' . $taxonomy->singular_name . '</strong>';
-								  }
-								}  
-								?>							
+								<strong>Huvudämne: </strong>									
 								<?php
 										foreach ( $terms as $term ) {
 										echo '<a href="' . esc_attr(get_term_link($term, 'mlp_category')) . '" title="' . sprintf( __( "View all posts in %s" ), $term->name ) . '" ' . '>' . $term->name.'</a> ';
