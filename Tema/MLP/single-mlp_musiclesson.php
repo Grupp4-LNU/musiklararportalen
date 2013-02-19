@@ -14,7 +14,7 @@
 
 			<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
-				<div id="post-<?php the_ID(); ?>" <?php post_class("post"); ?>>
+				<div id="post-<?php the_ID(); ?>" <?php post_class("post lesson"); ?>>
 
 					<div class="author-box">
 						<?php echo get_avatar( get_the_author_meta( 'user_email' ), '70' ); ?>
@@ -34,7 +34,7 @@
 							if($terms) :
 						?>
 						<p class="date">
-						<strong>Huvudämne: </strong>									
+						Huvudämne:									
 						<?php
 								foreach ( $terms as $term ) {
 								echo '<a href="' . esc_attr(get_term_link($term, 'mlp_category')) . '" title="' . sprintf( __( "View all posts in %s" ), $term->name ) . '" ' . '>' . $term->name.'</a> ';
@@ -48,7 +48,7 @@
 							if($terms) :
 						?>
 						<p class="date">
-						<strong>Årskurs: </strong>									
+						Årskurs:									
 						<?php
 								foreach ( $terms as $term ) {
 								echo '<a href="' . esc_attr(get_term_link($term, 'mlp_grade')) . '" title="' . sprintf( __( "View all posts in %s" ), $term->name ) . '" ' . '>' . $term->name.'</a> ';
@@ -58,11 +58,11 @@
 						<?php endif ;?>						
 
 						<div class="entry">
-							<h3>Inledning</h3>
+							<h4>Inledning</h3>
 							<?php echo esc_html( get_post_meta( get_the_ID(), 'mlp_intro', true ) ); ?>
-							<h3>Mål</h3>
+							<h4>Mål</h3>
 							<?php echo esc_html( get_post_meta( get_the_ID(), 'mlp_goals', true ) ); ?>
-							<h3>Utförande</h3>			
+							<h4>Utförande</h3>			
 							<?php echo esc_html( get_post_meta( get_the_ID(), 'mlp_execution', true ) ); ?>
 
 							<?php wp_link_pages( array( 'before' => '<div class="page-link"><p>' . __( 'Pages: ', 'buddypress' ), 'after' => '</p></div>', 'next_or_number' => 'number' ) ); ?>

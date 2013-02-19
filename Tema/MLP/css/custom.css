@@ -37,6 +37,7 @@ Hello, this is the BuddyPress Default theme stylesheet.
 	6.10 - Extended Profiles
 7.0 - Custom
 	7.1 - Startpage
+	7.2 - Lessons
 --------------------------------------------------------------*/
 
 /*--------------------------------------------------------------
@@ -69,14 +70,13 @@ a img{border:none;}
 --------------------------------------------------------------*/
 body {
 	background-color: #eaeaea;
-	background-image: url( ../images/background.gif );
-	background-repeat: repeat-x;
+	background-image: url( ../images/light_noise_diagonal.png );
+	background-repeat: repeat;
 	background-position: top left;
-	color: #555;
-	font-size: 12px;
-	font-family: Arial, Tahoma, Verdana, sans-serif;
-	line-height: 170%;
-	max-width: 1250px;
+	color: #444;
+	font-size: 14px;
+	font-family: 'PT Serif', serif;
+	line-height: 150%;
 	margin: 0 auto;
 	width: 95%;
 	max-width: 1060px;
@@ -86,8 +86,10 @@ body {
 }
 div#container {
 	background: #fff;
-	border-right: 1px solid #e0e0e0;
-	border-bottom: 1px solid #e0e0e0;
+	border-top: 1px solid #e7e7e7;
+	border-left: 1px solid #e7e7e7;
+	border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
 	-moz-border-radius: 6px;
 	-webkit-border-radius: 6px;
 	border-radius: 6px;
@@ -151,6 +153,7 @@ textarea {
 	background: -o-linear-gradient(top, #1fb3dd 0%,#1fb3dd 15%,#394c79 100%); /* Opera11.10+ */
 	background: -ms-linear-gradient(top, #1fb3dd 0%,#1fb3dd 15%,#394c79 100%); /* IE10+ */
 	background: linear-gradient(top, #1fb3dd 0%,#1fb3dd 15%,#394c79 100%); /* W3C */
+	background-image: url( ../images/dark_noise_diagonal.png );
 	-moz-border-radius-bottomleft: 6px;
 	-webkit-border-bottom-left-radius: 6px;
 	border-bottom-left-radius: 6px;
@@ -193,8 +196,9 @@ textarea {
 }
 #header h1 a {
 	color: #fff;
-	font-size: 26px;
+	font-size: 62px;
 	text-decoration: none;
+	text-shadow: 1px 1px 0px #AAA;
 }
 
 
@@ -260,6 +264,7 @@ div#sidebar {
 	margin-left: -226px;
 	margin-top: 1px;
 	width: 224px;
+
 }
 div#sidebar div#sidebar-me {
 	margin-bottom: 15px;
@@ -429,20 +434,21 @@ h4,
 h5,
 h6 {
 	margin: 5px 0 15px 0;
+	font-family: 'Didact Gothic', sans-serif;
 }
 h1 {
-	font-size: 28px;
+	font-size: 62px;
 	margin-bottom: 25px;
 }
 h2 {
-	font-size: 24px;
+	font-size: 28px;
 	margin-bottom: 20px;
 }
 h3 {
-	font-size: 20px;
+	font-size: 24px;
 }
 h4 {
-	font-size: 16px;
+	font-size: 14px;
 	margin-bottom: 15px;
 }
 h5 {
@@ -508,11 +514,12 @@ div.page ul ol {
 4.0 - Navigation
 --------------------------------------------------------------*/
 a {
-	color: #1fb3dd;
+	color: #950000;
+	text-decoration: none;
 }
 a:hover,
 a:active {
-	color: #888;
+	color: #6c0000;
 }
 a:focus {
 	outline: 1px dotted #ccc;
@@ -953,10 +960,10 @@ img.alignleft {
 5.5 - Posts
 --------------------------------------------------------------*/
 div.post {
-	border: 1px solid #AAA;
+	border: 1px solid #DDD;
 	border-radius: 5px;
 	background: #F7F7F7;
-	padding: 15px 15px 0 15px;;
+	padding: 15px 15px 0 15px;
 }
 
 div.page,
@@ -2470,6 +2477,9 @@ div.preview_news .post-content{
 div.preview_news .post-content .entry{
 	margin-bottom: 0;
 }
+.small_text{
+	font-size: 12px;
+}
 
 /*article*/
 
@@ -2493,9 +2503,9 @@ div.preview_article .post-content .date{
 /*lesson*/
 
 div.preview_lesson{
-	width: 30%;
+	width: 29%;
 	float:left;
-	margin-left: 10px;
+	margin-left: 15px;
 	margin-bottom: 15px;
 	padding: 10px 5px 5px 10px;
 }
@@ -2523,4 +2533,16 @@ div.preview_lesson  .date{
 	margin-bottom: 0;
 	padding: 0;
 	font-size: 11px;
+}
+
+/*--------------------------------------------------------------
+7.2 - Lessons
+--------------------------------------------------------------*/
+
+.lesson h4{
+	margin: 10px 0 2px 0; 
+}
+
+.lesson p.date{
+	margin: 0; 
 }

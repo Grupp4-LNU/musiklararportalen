@@ -12,6 +12,8 @@
 		<?php do_action( 'bp_before_archive' ); ?>
 
 		<div class="page" id="blog-archives" role="main">
+		
+		<a href="http://mlp.rydberg.me/skapa-lektion/">Skapa Lektion</a>
 
 			<h3 class="pagetitle"><?php printf( __( 'You are browsing the archive for %1$s.', 'buddypress' ), wp_title( false, false ) ); ?></h3>
 			
@@ -23,7 +25,7 @@
 
 					<?php do_action( 'bp_before_blog_post' ); ?>
 
-					<div id="post-<?php the_ID(); ?>" <?php post_class('post'); ?>>
+					<div id="post-<?php the_ID(); ?>" <?php post_class('post lesson'); ?>>
 
 						<div class="author-box">
 							<?php echo get_avatar( get_the_author_meta( 'user_email' ), '70' ); ?>
@@ -33,14 +35,14 @@
 						<div class="post-content">
 							<h2 class="posttitle"><a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', 'buddypress' ); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
 
-							<p class="date"><?php printf( __( '%1$s <span>in %2$s</span>', 'buddypress' ), get_the_date(), get_the_category_list( ', ' ) ); ?></p>
+							<p class="date"><?php printf( __( '%1$s', 'buddypress' ), get_the_date() ); ?></p>
 							
 							<?php
 								$terms = get_the_terms( $post->ID , 'mlp_category' );
 								if($terms) :
 							?>
 							<p class="date">
-							<strong>Huvudämne: </strong>									
+							Huvudämne:									
 							<?php
 									foreach ( $terms as $term ) {
 									echo '<a href="' . esc_attr(get_term_link($term, 'mlp_category')) . '" title="' . sprintf( __( "View all posts in %s" ), $term->name ) . '" ' . '>' . $term->name.'</a> ';
@@ -54,7 +56,7 @@
 								if($terms) :
 							?>
 							<p class="date">
-							<strong>Årskurs: </strong>									
+							Årskurs:									
 							<?php
 									foreach ( $terms as $term ) {
 									echo '<a href="' . esc_attr(get_term_link($term, 'mlp_grade')) . '" title="' . sprintf( __( "View all posts in %s" ), $term->name ) . '" ' . '>' . $term->name.'</a> ';
@@ -64,6 +66,7 @@
 							<?php endif ;?>
 
 							<div class="entry">
+							<h4>Inledning</h4>
 								<?php echo esc_html( get_post_meta( get_the_ID(), 'mlp_intro', true ) ); ?>
 								<?php wp_link_pages( array( 'before' => '<div class="page-link"><p>' . __( 'Pages: ', 'buddypress' ), 'after' => '</p></div>', 'next_or_number' => 'number' ) ); ?>
 							</div>

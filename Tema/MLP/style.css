@@ -6,6 +6,8 @@ Author: Simon Ebeling, Christoffer Ryberg, Henrik Petersson
 Template: bp-default
 Tags: buddypress
 */
-
-@import url(css/custom.css); 
+@import url(http://fonts.googleapis.com/css?family=Didact+Gothic|PT+Serif&v2);
+@import url(http://fonts.googleapis.com/css?family=Muli);
+@import url(css/custom.css);
+ 
 

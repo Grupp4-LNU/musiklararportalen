@@ -65,7 +65,7 @@
 			<?php //News Container ?>
 			<div class="preview_post_container">				
 
-				<h3><?php _e( 'Latest News', 'buddypress' ); ?></h3>				
+				<h3>Senaste Nyheter</h3>				
 
 				<?php if ( $news_query->have_posts() ) : ?>
 
@@ -81,7 +81,7 @@
 								<h4 class="posttitle"><a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', 'buddypress' ); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h4>
 
 								<div class="entry">
-									<?php echo excerpt(20); ?>
+									<p class="small_text"><?php echo excerpt(20); ?></p>
 									<?php wp_link_pages( array( 'before' => '<div class="page-link"><p>' . __( 'Pages: ', 'buddypress' ), 'after' => '</p></div>', 'next_or_number' => 'number' ) ); ?>
 								</div>
 
@@ -106,7 +106,7 @@
 			<?php //Article Container ?>			
 			<div class="preview_post_container">
 						
-				<h3><?php _e( 'Latest Articles', 'buddypress' ); ?></h3>	
+				<h3>Senaste Artiklar</h3>	
 
 				<?php if ( $article_query->have_posts() ) : ?>
 
@@ -149,7 +149,7 @@
 			<?php //Lesson Container ?>			
 			<div class="preview_lesson_container">
 						
-				<h3><?php _e( 'Latest Lessons', 'buddypress' ); ?></h3>	
+				<h3>Senaste Lektioner</h3>	
 				
 				<div>
 
