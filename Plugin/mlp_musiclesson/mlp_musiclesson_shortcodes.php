@@ -58,9 +58,7 @@ function shortcode_insert_lesson() {
 			}
 			
 			$lesson_themes = array();
-			foreach( $_POST['theme'] as $themes ) {
-				$lesson_themes[] = $themes;
-			}
+			$lesson_themes[] = $_POST['theme'];
 			
 			$lesson_categories = array();
 			foreach( $_POST['category'] as $category ) {
@@ -85,82 +83,107 @@ function shortcode_insert_lesson() {
 			add_post_meta($post_id, 'mlp_goals', $goal);
 			add_post_meta($post_id, 'mlp_execution', $execution);
 			
-			/*
-			if ( isset( $_FILES['file']['tmp_name'] ) ) {
-				foreach( $_FILES as $file_handler => $data ) {
-					$attachment_id = $this->insert_attachment( $file_handler, $recipe_id );
-				}
-			}
-			*/
-			
-			//set_post_thumbnail( $post_id, $attachment_id );
+			if ( isset( $_FILES['lesson_file']['tmp_name'] ) ) {
+				require_once(ABSPATH . 'wp-admin/includes/admin.php');
+		        // step one upload file to server
+		        $file_return = wp_handle_upload($_FILES['lesson_file'], array('test_form' => false));
 		
-			_e( '<p>Thank you! Your lesson has been submitted to our database. You will be notified when it has been reviewed by an administrator!</p>', 'dp-recipes' );
-			_e( '<p>You will be redirected in 5 seconds, if not click <a href="'.home_url().'">here</a>.</p>', 'dp-recipes' );
-			
-			echo "<meta http-equiv='refresh' content='5;url='".home_url()."' />";
+		        if(isset($file_return['error']) || isset($file_return['upload_error_handler'])) {
+		            echo 'not working again :(';
+		        }
+
+				$wp_upload_dir = wp_upload_dir();
+				$filename = basename($_FILES['lesson_file']['name']);
+				$wp_filetype = wp_check_filetype($filename, null);
+				
+				if(wp_mkdir_p($wp_upload_dir['path']))
+				    $file = $wp_upload_dir['path'] . '/' . $filename;
+				else
+				    $file = $wp_upload_dir['basedir'] . '/' . $filename;
+				
+				$object = array(
+					'guid' => $wp_upload_dir['url'] . '/' . $filename,
+					'post_mime_type' => $wp_filetype['type'],
+					'post_title' => sanitize_file_name($filename),
+					'post_content' => '',
+					'post_status' => 'inherit',
+				);
+				$attach_id = wp_insert_attachment($object, $filename, $post_id);
+				
+				require_once(ABSPATH . 'wp-admin/includes/image.php');
+				$attach_data = wp_generate_attachment_metadata( $attach_id, $filename);
+				wp_update_attachment_metadata( $attach_id, $attach_data );
+			}
+		
+			echo '<p>Tackar! Din lektion har blivit sparad</p>';
+			echo '<p>Du blir skickad tillbaka om 5s, ifall det inte fungerar kan du klicka <a href="'.home_url().'">här</a>.</p>';
+			echo "<meta http-equiv='refresh' content='5; url='".home_url()."' />";
 		}
 		else
 		{
-			echo '<div id="lesson_form">'."\n";
-			echo '<form id="insert_new_lesson" name="insert_new_lesson" method="post" action="" class="lesson-form" enctype="multipart/form-data">'."\n";
-			
-			echo '<!-- Lesson Title -->'."\n";
-			echo '<label for="lesson_title">'. __( 'Lesson Name', 'mlp_musiclesson' ) .':</label>';
-			echo '<input type="text" id="lesson_title" value="" tabindex="1" name="lesson_title" /><br />';
-			
-			echo '<!-- Grades -->';
-			echo '<label for="mlp_musiclesson_grades">'. __( 'Grade', 'mlp_musiclesson' ) .'</label><br />';
-			$grades = get_terms('mlp_grade');
-			foreach ($grades as $grade) {
-				echo '<input type="checkbox" name="grade[]" value="'.$grade->term_id.'" id="grade'.$grade->term_id.'" />';
-				echo '<label for="grade'.$grade->term_id.'">'.$grade->name.'</label>';
-			}
-			
-			echo '<!-- Themes -->';
-			echo '<br /><label for="mlp_musiclesson_themes">'. __( 'Theme', 'mlp_musiclesson' ) .'</label><br />';
-			$themes = get_terms('mlp_theme');
-			foreach ($themes as $theme) {
-				echo '<input type="checkbox" name="theme[]" value="'.$theme->term_id.'" id="theme'.$theme->term_id.'" />';
-				echo '<label for="theme'.$theme->term_id.'">'.$theme->name.'</label>';
-			}
-			
+			echo '<div id="lesson_form">';
+			echo '<form id="insert_new_lesson" name="insert_new_lesson" method="post" action="" class="lesson-form" enctype="multipart/form-data">';
+
 			echo '<!-- Lesson Categories -->';
-			echo '<br /><label for="mlp_musiclesson_categories">'. __( 'Category', 'mlp_musiclesson' ) .'</label><br />';
-			$lessonCategories = get_terms('mlp_category');
+			echo '<label for="mlp_musiclesson_categories">Huvudområden</label>';
+			$lessonCategories = get_terms('mlp_category', array( 'hide_empty' => 0 ));
+			echo '<div class="categories">';
 			foreach ($lessonCategories as $lessonCategory) {
 				echo '<input type="checkbox" name="category[]" value="'.$lessonCategory->term_id.'" id="grade'.$lessonCategory->term_id.'" />';
 				echo '<label for="grade'.$lessonCategory->term_id.'">'.$lessonCategory->name.'</label>';
 			}
+			echo '</div>';
 			
-			echo '<!-- Lesson Intro -->'."\n";
-			echo '<br /><label for="lesson_intro">'. __( 'Introduction', 'mlp_musiclesson' ) .':</label><br />'."\n";
-			echo '<textarea id="lesson_intro" value="" tabindex="1" name="lesson_intro"></textarea><br />'."\n";
+			echo '<!-- Grades -->';
+			echo '<label for="mlp_musiclesson_grades">Årskurser</label>';
+			$grades = get_terms('mlp_grade', array( 'hide_empty' => 0 ));
+			echo '<div class="grades">';
+			foreach ($grades as $grade) {
+				echo '<input type="checkbox" name="grade[]" value="'.$grade->term_id.'" id="grade'.$grade->term_id.'" />';
+				echo '<label for="grade'.$grade->term_id.'">'.$grade->name.'</label>';
+			}
+			echo '</div>';
 			
-			echo '<!-- Lesson Goal -->'."\n";
-			echo '<label for="lesson_goal">'. __( 'Goal', 'mlp_musiclesson' ) .':</label><br />'."\n";
-			echo '<textarea id="lesson_goal" value="" tabindex="1" name="lesson_goal"></textarea><br />'."\n";
+			echo '<!-- Themes -->';
+			echo '<label for="mlp_musiclesson_themes">Tema</label>';
+			$themes = get_terms('mlp_theme', array( 'hide_empty' => 0 ));
+			echo '<div class="themes">';
+			foreach ($themes as $theme) {
+				echo '<input type="radio" name="theme" value="'.$theme->term_id.'" id="theme'.$theme->term_id.'" />';
+				echo '<label for="theme'.$theme->term_id.'">'.$theme->name.'</label>';
+			}
+			echo '</div>';
 			
-			echo '<!-- Lesson Execution -->'."\n";
-			echo '<label for="lesson_execution">'. __( 'Execution', 'mlp_musiclesson' ) .':</label><br />'."\n";
-			echo '<textarea id="lesson_execution" value="" tabindex="1" name="lesson_execution"></textarea><br />'."\n";
+			echo '<!-- Lesson Title -->';
+			echo '<label for="lesson_title">Titel</label>';
+			echo '<input type="text" id="lesson_title" value="" tabindex="1" name="lesson_title" />';
 			
-			/*
-			echo '<label for="file">'. __( 'Select image', 'mlp_musiclesson' ) .':</label>'."\n";
-			echo '<input type="file" id="files" name="file">'."\n";
-			*/
+			echo '<!-- Lesson Intro -->';
+			echo '<label for="lesson_intro">Inledning / Förutsättningar</label>';
+			echo '<textarea id="lesson_intro" value="" tabindex="1" name="lesson_intro"></textarea>';
 			
-			echo '<input type="submit" value="'.__( 'Submit Lesson', 'mlp_musiclesson' ).'" tabindex="40" id="submit" name="submit" />';
+			echo '<!-- Lesson Goal -->';
+			echo '<label for="lesson_goal">Mål</label>';
+			echo '<textarea id="lesson_goal" value="" tabindex="1" name="lesson_goal"></textarea>';
 			
-			echo '<input type="hidden" name="action" value="insert_new_lesson" />'."\n";
+			echo '<!-- Lesson Execution -->';
+			echo '<label for="lesson_execution">Utförande</label>';
+			echo '<textarea id="lesson_execution" value="" tabindex="1" name="lesson_execution"></textarea>';
+			
+			echo '<label for="lesson_file">Välj fil</label>';
+			echo '<input type="file" id="lesson_file" name="lesson_file">';
+			
+			echo '<input type="submit" value="Spara" tabindex="40" id="submit" name="submit" />';
+			
+			echo '<input type="hidden" name="action" value="insert_new_lesson" />';
 			wp_nonce_field( 'insert_new_lesson' );
 			
-			echo '</form>'."\n";				
+			echo '</form>';		
 			echo '</div>';
 		}
 	}
 	else
 	{
-		_e( '<p class="dp-error">You must be logged in to post a new recipe.</p>', 'dp-recipes' );
+		echo '<p class="dp-error">Du måste vara inloggad för att skapa en lektion';
 	}
 }

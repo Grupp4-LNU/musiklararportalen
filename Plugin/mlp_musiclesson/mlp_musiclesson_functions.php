@@ -109,7 +109,7 @@ function mlp_create_lesson_taxonomies() {
 	
 	mlp_register_all_taxonomies($taxonomies);
 	
-	mlp_add_taxonomy_data('mlp_grade', '1-3', "Årskurs 1-3");
+	mlp_add_taxonomy_data('mlp_grade', 'F-3', "Årskurs F-3");
 	mlp_add_taxonomy_data('mlp_grade', '4-6', "Årskurs 4-6");
 	mlp_add_taxonomy_data('mlp_grade', '7-9', "Årskurs 7-9");
 	mlp_add_taxonomy_data('mlp_grade', 'Gymn', "Årskurs Gymnasiet.");
@@ -141,8 +141,6 @@ function mlp_add_taxonomy_data($taxonomy, $value, $description, $parent = null) 
 	
 	wp_insert_term($value, $taxonomy, $args);
 }
-
-
 
 function mlp_add_lesson_details_metabox() {
 	add_action('add_meta_boxes', function() {
@@ -182,4 +180,9 @@ function update_post_meta_data($id, $field) {
 			strip_tags($_POST[$field])
 		);
 	}
+}
+
+function attach_css_files() {
+	wp_register_style( 'mlp_musiclesson', plugins_url('css/mlp_musiclesson.css', __FILE__));
+	wp_enqueue_style( 'mlp_musiclesson' );
 }
