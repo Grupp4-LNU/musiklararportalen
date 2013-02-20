@@ -1,0 +1,53 @@
+#insert_new_lesson {
+	font-size: 15px;
+	line-height: 19px;
+}
+#insert_new_lesson textarea {
+	width: 780px;
+	min-height: 200px;
+	padding: 4px;
+	border-radius: 5px;
+	border: 2px solid #ddd;
+	font-size: 1em;
+}
+
+#insert_new_lesson label {
+	font-size: 1.5em;
+	display: inline-block;
+	margin: 20px 0 5px;
+}
+
+#insert_new_lesson input[type="text"] {
+	border-radius: 5px;
+	display: block;
+	padding: 4px;
+	border: 2px solid #ddd;
+	font-size: 1em;
+}
+
+#insert_new_lesson input[type="submit"] {
+	border-radius: 5px;
+	font-size: 1.3em;
+	font-weight: bold;
+	display: block;
+	padding: 10px 15px;
+	color: darkred;
+	margin: 10px 0 20px;
+}
+
+#insert_new_lesson .grades label,
+#insert_new_lesson .themes label,
+#insert_new_lesson .categories label {
+	font-size: 1em;
+	margin: 0 10px 0 2px;
+}
+
+#insert_new_lesson label.error {
+	color: red;
+	display: block;
+	background: yellow url('images/error.png') no-repeat left center;
+	padding: 10px 5px;
+	text-indent: 40px;
+	font-size: 1em;
+	border: 1px solid red;
+}

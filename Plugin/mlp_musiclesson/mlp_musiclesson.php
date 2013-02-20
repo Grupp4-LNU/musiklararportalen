@@ -23,6 +23,7 @@ function MLP_musiclesson_init() {
 	mlp_create_lesson_taxonomies();
 	mlp_add_lesson_details_metabox();
 	attach_css_files();
+	attach_js_files();
 }
 
 add_action('init', 'MLP_musiclesson_init');

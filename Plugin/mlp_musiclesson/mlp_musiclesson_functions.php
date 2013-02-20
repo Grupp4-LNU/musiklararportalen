@@ -186,3 +186,13 @@ function attach_css_files() {
 	wp_register_style( 'mlp_musiclesson', plugins_url('css/mlp_musiclesson.css', __FILE__));
 	wp_enqueue_style( 'mlp_musiclesson' );
 }
+
+function attach_js_files() {
+	wp_enqueue_script(
+			'jquery-validate',
+			'http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.0/jquery.validate.min.js',
+			array('jquery'),
+			'1.10.0',
+			true
+		);
+}
