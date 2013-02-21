@@ -46,11 +46,31 @@ function mlp_register_lesson_post_type()
 function mlp_create_lesson_taxonomies() {
 	$taxonomies = array();
 	
+	$taxonomies['mlp_category'] = array(
+		'hierarchical' => true,
+		'query_var' => 'mlp_category',
+		'rewrite' => array(
+			'slug' => 'Huvudämne'
+		),
+		'labels' => array(
+			'name' => 'Huvudämne',
+			'singular_name' => "Huvudämne",
+			'add_new' => 'Lägg till Huvudämne',
+			'add_new_item' => 'Lägg till Huvudämne',
+			'edit_item' => 'Redigera Huvudämne',
+			'new_item' => 'Lägg till Huvudämne',
+			'view_item' => 'Visa Huvudämne',
+			'search_items' => 'Sök bland Huvudämnen',
+			'not_found' => 'Inget Huvudämne hittat',
+			'not_found_in_trash' => 'Inget Huvudämne hittat i papperskorgen'				
+		)
+	);
+	
 	$taxonomies['mlp_grade'] = array(
 		'hierarchical' => true,
 		'query_var' => 'mlp_grade',
 		'rewrite' => array(
-			'slug' => 'lektioner/grades'
+			'slug' => 'Årskurs'
 		),
 		'labels' => array(
 			'name' => 'Årskurser',
@@ -70,7 +90,7 @@ function mlp_create_lesson_taxonomies() {
 		'hierarchical' => true,
 		'query_var' => 'mlp_theme',
 		'rewrite' => array(
-			'slug' => 'lektioner/themes'
+			'slug' => 'Tema'
 		),
 		'labels' => array(
 			'name' => 'Teman',
@@ -83,27 +103,6 @@ function mlp_create_lesson_taxonomies() {
 			'search_items' => 'Sök bland teman',
 			'not_found' => 'Inga teman hittad',
 			'not_found_in_trash' => 'Inga teman hittad i papperskorgen'				
-		)
-	);
-	
-	
-	$taxonomies['mlp_category'] = array(
-		'hierarchical' => true,
-		'query_var' => 'mlp_category',
-		'rewrite' => array(
-			'slug' => 'lektioner/mlp_category'
-		),
-		'labels' => array(
-			'name' => 'Huvudämne',
-			'singular_name' => "Huvudämne",
-			'add_new' => 'Lägg till Huvudämne',
-			'add_new_item' => 'Lägg till Huvudämne',
-			'edit_item' => 'Redigera Huvudämne',
-			'new_item' => 'Lägg till Huvudämne',
-			'view_item' => 'Visa Huvudämne',
-			'search_items' => 'Sök bland Huvudämnen',
-			'not_found' => 'Inget Huvudämne hittat',
-			'not_found_in_trash' => 'Inget Huvudämne hittat i papperskorgen'				
 		)
 	);
 	
