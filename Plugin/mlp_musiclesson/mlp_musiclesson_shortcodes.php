@@ -110,38 +110,14 @@ function shortcode_insert_lesson() {
 				add_post_meta($post_id, 'mlp_goals', $goal);
 				add_post_meta($post_id, 'mlp_execution', $execution);
 				
-				if ( isset( $_FILES['lesson_file']['tmp_name'] ) ) {
-					require_once(ABSPATH . 'wp-admin/includes/admin.php');
-			        // step one upload file to server
-			        $file_return = wp_handle_upload($_FILES['lesson_file'], array('test_form' => false));
-			
-			        if(isset($file_return['error']) || isset($file_return['upload_error_handler'])) {
-			            echo 'not working again :(';
-			        }
-	
-					$wp_upload_dir = wp_upload_dir();
-					$filename = basename($_FILES['lesson_file']['name']);
-					$wp_filetype = wp_check_filetype($filename, null);
-					
-					if(wp_mkdir_p($wp_upload_dir['path']))
-					    $file = $wp_upload_dir['path'] . '/' . $filename;
-					else
-					    $file = $wp_upload_dir['basedir'] . '/' . $filename;
-					
-					$object = array(
-						'guid' => $wp_upload_dir['url'] . '/' . $filename,
-						'post_mime_type' => $wp_filetype['type'],
-						'post_title' => sanitize_file_name($filename),
-						'post_content' => '',
-						'post_status' => 'inherit',
-					);
-					$attach_id = wp_insert_attachment($object, $filename, $post_id);
-					
-					require_once(ABSPATH . 'wp-admin/includes/image.php');
-					$attach_data = wp_generate_attachment_metadata( $attach_id, $filename);
-					wp_update_attachment_metadata( $attach_id, $attach_data );
+				if ($_FILES) {
+					foreach ($_FILES as $file => $array) {
+						$newupload = insert_attachment($file,$post_id);
+						// $newupload returns the attachment id of the file that
+						// was just uploaded. Do whatever you want with that now.
+					}
 				}
-			
+							
 				echo '<p>Tackar! Din lektion har blivit sparad</p>';
 				echo '<p>Du blir skickad tillbaka om 5s, ifall det inte fungerar kan du klicka <a href="'.home_url().'">här</a>.</p>';
 				echo "<meta http-equiv='refresh' content='5; url='".home_url()."' />";
@@ -150,7 +126,8 @@ function shortcode_insert_lesson() {
 			{
 				foreach ($errors as $error) {
 					echo $error;
-				}	
+				}
+				echo '<a href="javascript:history.back()">Tillbaka till formuläret</a>';
 			}
 		}
 		else
@@ -204,8 +181,11 @@ function shortcode_insert_lesson() {
 			echo '<label for="lesson_execution">Utförande</label>';
 			echo '<textarea id="lesson_execution" name="lesson_execution"></textarea>';
 			
-			echo '<label for="lesson_file">Välj fil</label>';
-			echo '<input type="file" id="lesson_file" name="lesson_file">';
+			echo '<div class="files">';
+			echo '<label for="lesson_file">Välj fil</label><br />';
+			echo '<input type="file" id="lesson_file" name="lesson_file"><br />';
+			echo '<a href="#" id="add_file_form">Lägg till ytterligare fil</a>';
+			echo '</div>';
 			
 			echo '<input type="submit" value="Spara" tabindex="40" id="submit" name="submit" />';
 			
@@ -217,6 +197,12 @@ function shortcode_insert_lesson() {
 			echo '
 				<script type="text/javascript">
 					$(function() {
+						$("#add_file_form").on("click", function(e) {
+							e.preventDefault();
+							var files = $(".files").children();
+							var counter = files.length; 
+							$(".files").append("<br /><input type=\"file\" id=\"lesson_file" + counter + "\" name=\"lesson_file"+counter+"\">")
+						});
 						$.validator.addMethod("category", function(value, elem, param) {
 						    if($(".category:checkbox:checked").length > 0){
 						       return true;
@@ -266,4 +252,19 @@ function shortcode_insert_lesson() {
 	{
 		echo '<p class="dp-error">Du måste vara inloggad för att skapa en lektion';
 	}
+}
+
+function insert_attachment($file_handler,$post_id,$setthumb='false') {
+
+	// check to make sure its a successful upload
+	if ($_FILES[$file_handler]['error'] !== UPLOAD_ERR_OK) __return_false();
+
+	require_once(ABSPATH . "wp-admin" . '/includes/image.php');
+	require_once(ABSPATH . "wp-admin" . '/includes/file.php');
+	require_once(ABSPATH . "wp-admin" . '/includes/media.php');
+
+	$attach_id = media_handle_upload( $file_handler, $post_id );
+
+	if ($setthumb) update_post_meta($post_id,'_thumbnail_id',$attach_id);
+	return $attach_id;
 }
