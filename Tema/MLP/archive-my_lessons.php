@@ -27,6 +27,10 @@
 			);
 			$wp_query = new WP_Query($args);
 			?>
+			<?php
+			$templates = wp_get_theme()->get_page_templates();
+			var_dump($templates);
+			?>
 			
 			<?php if ( $wp_query->have_posts() ) : ?>
 
