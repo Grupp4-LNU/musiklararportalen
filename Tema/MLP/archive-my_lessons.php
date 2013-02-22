@@ -13,23 +13,19 @@
 
 		<div class="page" id="blog-archives" role="main">
 		
-		<a href="http://mlp.rydberg.me/skapa-lektion/">Skapa Lektion</a>
+		<a href="/skapa-lektion">Skapa ny lektion</a>
 
-			<h3 class="pagetitle">Bläddra på Lektioner</h3>
+			<h3 class="pagetitle">Mina Lektioner</h3>
 			
 			<?php
 			global $current_user;
 			get_currentuserinfo();
-			var_dump($current_user->ID);
+			
 			$args = array(
 				'post_type' => 'mlp_musiclesson',
 				'author' => $current_user->ID 					
 			);
 			$wp_query = new WP_Query($args);
-			?>
-			<?php
-			$templates = wp_get_theme()->get_page_templates();
-			var_dump($templates);
 			?>
 			
 			<?php if ( $wp_query->have_posts() ) : ?>
