@@ -36,7 +36,7 @@
 				'post_type'=> 'post',
 				'category_name'=> 'Nyheter',
 				'order'    => 'DESC',
-				'posts_per_page' => 5			
+				'posts_per_page' => 4			
 				);
 				
 				//Article Query arguments
