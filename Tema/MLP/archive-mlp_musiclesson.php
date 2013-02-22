@@ -13,56 +13,54 @@
 
 		<div class="page" id="lesson-archives" role="main">
 			
-			<h3 class="pagetitle">Lektioner</h3>
-			
-			<div id='filter_lesson_container'>
-				<form method="POST">			
-				<?php 
-				$args = array(
-				  'public'   => true,
-				  '_builtin' => false
-				); 
-				$output = 'objects'; // or objects
-				$operator = 'and'; // 'and' or 'or'
-				$taxonomies = get_taxonomies( $args, $output, $operator ); 
-				if ( $taxonomies ) {
-					$filter_terms = array();
-					foreach ( $taxonomies  as $taxonomy ) {
-						$filter_terms [$taxonomy->name] = array ();
-						echo "<p>";
-						echo "<strong>".$taxonomy->labels->singular_name.":</strong>";
-						
-						$terms = get_terms(
-							$taxonomy->name, 
-							array(
-								'orderby'=> 'id', 
-								'order'=> 'ASC'
-							)
-						);
-						
-						$count = count($terms);
-						if ( $count > 0 ){
-							foreach($terms as $term) {
-								$post_name = str_replace(' ', '_', $term->name);
-								if(isset($_POST[$post_name]) && $_POST[$post_name] == '1'){
-									$filter_terms [$taxonomy->name][] = $term->name;
-									echo "<label class='selected'><input type='checkbox' checked='yes' name='".$post_name."' id='".$post_name."' value='1' onclick='submit()'></input>" . $term->name . "</label>";
-								}								
-								else {
-									echo "<label><input type='checkbox' name='".$post_name."' id='".$post_name."' value='1' onclick='submit()'></input>" . $term->name . "</label>";
+			<h2 class="pagetitle">Lektioner</h2>
+				<form method="POST">
+					<fieldset id='filter_lesson_container'>
+						<legend><p><strong>Filter</strong></p></legend>				
+						<?php 
+						$args = array(
+						  'public'   => true,
+						  '_builtin' => false
+						); 
+						$output = 'objects'; // or objects
+						$operator = 'and'; // 'and' or 'or'
+						$taxonomies = get_taxonomies( $args, $output, $operator ); 
+						if ( $taxonomies ) {
+							$filter_terms = array();
+							foreach ( $taxonomies  as $taxonomy ) {
+								$filter_terms [$taxonomy->name] = array ();
+								echo "<p>";
+								echo $taxonomy->labels->singular_name.":";
+								
+								$terms = get_terms(
+									$taxonomy->name, 
+									array(
+										'orderby'=> 'id', 
+										'order'=> 'ASC'
+									)
+								);
+								
+								$count = count($terms);
+								if ( $count > 0 ){
+									foreach($terms as $term) {
+										$post_name = str_replace(' ', '_', $term->name);
+										if(isset($_POST[$post_name]) && $_POST[$post_name] == '1'){
+											$filter_terms [$taxonomy->name][] = $term->name;
+											echo "<label class='selected'><input type='checkbox' checked='yes' name='".$post_name."' id='".$post_name."' value='1' onclick='submit()'></input>" . $term->name . "</label>";
+										}								
+										else {
+											echo "<label><input type='checkbox' name='".$post_name."' id='".$post_name."' value='1' onclick='submit()'></input>" . $term->name . "</label>";
+										}
+									}
+								echo "</p>";
+
 								}
 							}
-						echo "</p>";
-
 						}
-					}
-				}
-				?>			
-				
-				</p>
+						?>
+						<form method='GET'><button type='submit' id='clear_button'>Rensa filter</button></form>						
+					</fieldset>
 				</form>
-				<form method='GET'><button type='submit' id='clear_button'>Rensa filter</button></form>
-			</div>
 						
 			<?php
 			$category = isset($filter_terms['mlp_category']) ? $filter_terms['mlp_category'] : false;
@@ -103,7 +101,7 @@
 			$wp_query = new WP_Query($args);
 			?>
 			
-			<?php echo "<h4> Antal funna lektioner: $wp_query->found_posts </h4>"; ?>
+			<?php echo "<p><strong>Antal funna lektioner: $wp_query->found_posts</strong></p>"; ?>
 			
 			<?php if ( $wp_query->have_posts() ) : ?>
 

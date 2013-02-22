@@ -1748,7 +1748,7 @@ div.generic-button a,
 	border-radius: 3px;
 	color: #777;
 	cursor: pointer;
-	font: normal 12px/20px Arial, Tahoma, Verdana, sans-serif;
+	font: normal 12px/20px Georgia, times, serif;
 	outline: none;
 	padding: 4px 10px;
 	text-align: center;
@@ -2564,7 +2564,7 @@ div.preview_lesson  .date{
 /*--------------------------------------------------------------
 7.2 - Lessons
 --------------------------------------------------------------*/
-#lesson-archives h3{
+#lesson-archives .pagetitle{
 	margin-bottom: 25px;
 }
 
@@ -2587,7 +2587,7 @@ div.preview_lesson  .date{
 	font-style:italic;
 }
 
-div#filter_lesson_container{
+#filter_lesson_container{
 	background: #F7F7F7;
 	border: 1px solid #DDD;
 	margin-bottom: 10px;
@@ -2595,12 +2595,14 @@ div#filter_lesson_container{
 	overflow:hidden;
 	border-radius: 5px;
 }
-
-div#filter_lesson_container p{
+#filter_lesson_container p{
 	margin-bottom: 25px;
 	font-family: Georgia, times, serif;	
 }
-div#filter_lesson_container label, #clear_button{
+#filter_lesson_container legend{
+	padding: 0 5px;
+}
+#filter_lesson_container label, #clear_button{
 	background: #F7F7F7;
 	color: #750000;
 	display: block-inline;
@@ -2622,17 +2624,17 @@ div#filter_lesson_container label, #clear_button{
 	background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.1) 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#1a000000',GradientType=0 ); /* IE6-9 */
 }
-div#filter_lesson_container label.selected{
+#filter_lesson_container label.selected{
 	background: #950000;
 	color: #FFF;
 	border: 1px solid #650000;
 	border-bottom: 1px solid #a80000;
 	border-right: 1px solid #a80000;		
 }
-div#filter_lesson_container input{
+#filter_lesson_container input{
 	display:none;
 }
-div#filter_lesson_container #clear_button{
+#filter_lesson_container #clear_button{
 	margin-top: -5px;
 	margin-bottom: 0;
 	padding: 2px 6px;
