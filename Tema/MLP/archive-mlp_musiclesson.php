@@ -36,7 +36,8 @@
 						$taxonomy->name, 
 						array(
 							'orderby'=> 'id', 
-							'order'=> 'ASC'
+							'order'=> 'ASC',
+							'hide_empty' => 0
 						)
 					);
 					
