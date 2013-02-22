@@ -2463,6 +2463,10 @@ body.register div.page ul {
 /*--------------------------------------------------------------
 7.1 - Startpage
 --------------------------------------------------------------*/
+.preview_container{
+	overflow: hidden;
+	margin-bottom: 50px;
+}
 
 .preview_post_container{
 	width: 47%;
@@ -2505,7 +2509,7 @@ div.preview_news .post-content .entry{
 /*article*/
 
 div.preview_article{
-	padding: 10px;
+	padding: 5px 0 5px 0;
 }
 div.preview_article .author-box{
 	width: 40px;
@@ -2524,16 +2528,7 @@ div.preview_article .post-content .date{
 /*lesson*/
 
 div.preview_lesson{
-	border-top: 1px solid #EEE;
-	border-left: 1px solid #EEE;
-	border-bottom: 1px solid #CCC;
-	border-right: 1px solid #CCC;
-	border-radius: 5px;	
-	width: 46%;
-	float:left;
-	margin-left: 15px;
-	margin-bottom: 15px;
-	padding: 10px 5px 5px 10px;
+	padding: 0 0 5px 0;
 }
 div.preview_lesson:first-child{
 	margin-left: 0; 
@@ -2547,7 +2542,7 @@ div.preview_lesson .author-box{
 	margin-top: 5px;
 }
 div.preview_lesson .post-content{
-	margin-left: 45px;
+	margin-left: 55px;
 	margin-bottom: 0;
 }
 div.preview_lesson  h4{

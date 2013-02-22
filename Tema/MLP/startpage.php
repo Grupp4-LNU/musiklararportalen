@@ -60,7 +60,7 @@
 				
 				?>
 			
-			<div id='preview_container'>
+			<div class='preview_container'>
 			
 			<?php //News Container ?>
 			<div class="preview_post_container">				
@@ -146,8 +146,16 @@
 
 			</div>			
 
+			</div>
+			
+			<div class='preview_container'>
+			
+			<div class='preview_post_container'>
+			<img width='374' src='http://www.houseofhedda.com/bilder/artiklar/zoom/krabPianoSvart_1.jpg' />
+			</div>
+			
 			<?php //Lesson Container ?>			
-			<div class="preview_lesson_container">
+			<div class='preview_post_container'>
 						
 				<h3>Senaste Lektioner</h3>	
 				
@@ -166,7 +174,7 @@
 							<h4 class="posttitle"><a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', 'buddypress' ); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h4>
 							
 							<div class="author-box">
-								<?php echo get_avatar( get_the_author_meta( 'user_email' ), '35' ); ?>
+								<?php echo get_avatar( get_the_author_meta( 'user_email' ), '40' ); ?>
 							</div>
 							
 							<div class="post-content">
@@ -197,7 +205,7 @@
 								?>
 								</p>		
 								<?php endif ;?>
-
+								
 							</div>
 
 						</div>

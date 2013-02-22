@@ -58,10 +58,10 @@
 							}
 						}
 						?>
-						<form method='GET'><button type='submit' id='clear_button'>Rensa filter</button></form>						
+						<button type='submit' form='clear_filter' id='clear_button'>Rensa filter</button>						
 					</fieldset>
 				</form>
-						
+				<form id='clear_filter' method='GET'></form>		
 			<?php
 			$category = isset($filter_terms['mlp_category']) ? $filter_terms['mlp_category'] : false;
 			$grades = isset($filter_terms['mlp_grade']) ? $filter_terms['mlp_grade'] : false;
@@ -168,9 +168,12 @@
 							</div>
 
 							<div class="entry">
-								<?php echo esc_html( get_post_meta( get_the_ID(), 'mlp_intro', true ) ); ?>
+								<?php
+								$intro = esc_html( get_post_meta( get_the_ID(), 'mlp_intro', true ) );
+								echo substr($intro, 0, 250);
+								?>
 								<?php wp_link_pages( array( 'before' => '<div class="page-link"><p>' . __( 'Pages: ', 'buddypress' ), 'after' => '</p></div>', 'next_or_number' => 'number' ) ); ?>
-								<a href="<?php the_permalink(); ?>" rel="bookmark" title="Läs hela <?php the_title_attribute(); ?>"> Läs mer..</a>
+								<a href="<?php the_permalink(); ?>" rel="bookmark" title="Läs hela <?php the_title_attribute(); ?>"> Läs hela..</a>
 							</div>
 
 							<p class="postmetadata"><?php the_tags( '<span class="tags">' . __( 'Tags: ', 'buddypress' ), ', ', '</span>' ); ?> <span class="comments"><?php comments_popup_link( __( 'No Comments &#187;', 'buddypress' ), __( '1 Comment &#187;', 'buddypress' ), __( '% Comments &#187;', 'buddypress' ) ); ?></span></p>
