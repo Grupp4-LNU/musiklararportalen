@@ -61,9 +61,9 @@
 				
 				</p>
 				</form>
-				<form method='GET'><button type='submit' id='clear_button'>Rensa</button></form>
+				<form method='GET'><button type='submit' id='clear_button'>Rensa filter</button></form>
 			</div>
-			
+						
 			<?php
 			$category = isset($filter_terms['mlp_category']) ? $filter_terms['mlp_category'] : false;
 			$grades = isset($filter_terms['mlp_grade']) ? $filter_terms['mlp_grade'] : false;
@@ -102,6 +102,8 @@
 			);
 			$wp_query = new WP_Query($args);
 			?>
+			
+			<?php echo "<h4> Antal funna lektioner: $wp_query->found_posts </h4>"; ?>
 			
 			<?php if ( $wp_query->have_posts() ) : ?>
 

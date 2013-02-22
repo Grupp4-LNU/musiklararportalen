@@ -2588,11 +2588,12 @@ div.preview_lesson  .date{
 }
 
 div#filter_lesson_container{
-	border-top: 1px solid #DDD;
-	border-bottom: 1px solid #DDD;
+	background: #F7F7F7;
+	border: 1px solid #DDD;
 	margin-bottom: 10px;
-	padding: 15px 0 10px 0;
+	padding: 15px 15px 10px 15px;
 	overflow:hidden;
+	border-radius: 5px;
 }
 
 div#filter_lesson_container p{
