@@ -186,12 +186,25 @@ function attach_css_files() {
 	wp_enqueue_style( 'mlp_musiclesson' );
 }
 
-function attach_js_files() {
-	wp_enqueue_script(
-			'jquery-validate',
-			'http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.0/jquery.validate.min.js',
-			array('jquery'),
-			'1.10.0',
-			true
-		);
+function activate() {
+	mlp_create_my_lesson_archive_page();
+}
+
+function mlp_create_my_lesson_archive_page() {
+	$post = array(
+		'post_type' => 'page',
+		'post_title' => 'Mina lektioner',
+		'post_name' => 'mina_lektioner',
+		'post_status' => 'publish'
+	);
+	$post_id = wp_insert_post( $post );
+	
+	global $wpdb;
+	
+	$post_name = 'mina_lektioner';
+	
+	$query = $wpdb->prepare("SELECT ID FROM {$wpdb->posts} WHERE post_name = %s", $post_name);	
+	$post_id = $wpdb->get_var($query);	
+	
+	update_post_meta($post_id, '_wp_page_template','archive-my_lessons.php');
 }
