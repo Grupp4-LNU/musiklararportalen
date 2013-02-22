@@ -31,23 +31,30 @@
 				foreach ( $taxonomies  as $taxonomy ) {
 					$filter_terms [$taxonomy->name] = array ();
 					echo "<p><strong>".$taxonomy->labels->singular_name."</strong>";
-					$terms = get_terms($taxonomy->name, array(
-														'orderby'=> 'id', 
-														'order'=> 'ASC')
-										);
+					
+					$terms = get_terms(
+						$taxonomy->name, 
+						array(
+							'orderby'=> 'id', 
+							'order'=> 'ASC'
+						)
+					);
+					
 					$count = count($terms);
 					if ( $count > 0 ){
 						foreach($terms as $term) {
 							$post_name = str_replace(' ', '_', $term->name);
-							if($_POST[$post_name] == '1'){
+							if(isset($_POST[$post_name]) && $_POST[$post_name] == '1'){
 								$filter_terms [$taxonomy->name][] = $term->name;
 								echo "<input type='checkbox' checked='yes' name='".$post_name."' value='1' onclick='submit()'>" . $term->name . "</input>";
 							}								
-							else
-								echo "<input type='checkbox' name='".$term->name."' value='1' onclick='submit()'>" . $term->name . "</input>";
+							else {
+								echo "<input type='checkbox' name='".$term->name."' id='" . $term->name . "' value='1' onclick='submit()'></input>";
+								echo "<label for='". $term->name . "'>" . $term->name . "</label>";
 							}
 						}
-					echo "</p>";
+						echo "</p>";
+					}
 				}
 			}
 			?>			
@@ -56,9 +63,12 @@
 			</form>
 			
 			<?php
-			$category = $filter_terms['mlp_category'];
-			$grades = $filter_terms['mlp_grade'];
-			$theme = $filter_terms['mlp_theme'];
+			$category = isset($filter_terms['mlp_category']) ? $filter_terms['mlp_category'] : false;
+			$grades = isset($filter_terms['mlp_grade']) ? $filter_terms['mlp_grade'] : false;
+			$theme = isset($filter_terms['mlp_theme']) ? $filter_terms['mlp_theme'] : false;
+			$category_setting = null;
+			$grades_setting = null;
+			$theme_setting = null;
 			
 			if($category){
 				$category_setting = array(
@@ -85,8 +95,8 @@
 			};
 		
 			$args = array(
-			'post_type' => 'mlp_musiclesson',
-			'tax_query' => array('relation' => 'AND', $category_setting, $grades_setting, $theme_setting)					
+				'post_type' => 'mlp_musiclesson',
+				'tax_query' => array('relation' => 'AND', $category_setting, $grades_setting, $theme_setting)					
 			);
 			$wp_query = new WP_Query($args);
 			?>
