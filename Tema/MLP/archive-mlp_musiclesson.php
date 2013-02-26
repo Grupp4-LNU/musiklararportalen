@@ -101,7 +101,7 @@
 			$wp_query = new WP_Query($args);
 			?>
 			
-			<?php echo "<p><strong>Antal funna lektioner: $wp_query->found_posts</strong></p>"; ?>
+			<p class='found_lessons'><strong>Antal funna lektioner: <?php echo $wp_query->found_posts; ?></strong></p>
 			
 			<?php if ( $wp_query->have_posts() ) : ?>
 

@@ -1594,6 +1594,12 @@ ul.button-nav li.current a {
 /*--------------------------------------------------------------
 6.5 - Forms
 --------------------------------------------------------------*/
+input, button, textarea{
+	font-size: 14px;
+	font-family: 'PT Serif', serif;
+	line-height: 150%;	
+}
+
 .standard-form textarea,
 .standard-form input[type=text],
 .standard-form select,
@@ -2597,7 +2603,7 @@ div.preview_lesson  .date{
 #filter_lesson_container legend{
 	padding: 0 5px;
 }
-#filter_lesson_container label, #clear_button{
+#filter_lesson_container label, #clear_button, .add_lesson{
 	background: #F7F7F7;
 	color: #750000;
 	display: block-inline;
@@ -2638,4 +2644,78 @@ div.preview_lesson  .date{
 	border-radius: 2px;
 	-moz-border-radius: 2px;
 	-webkit-border-radius: 2px;	
+}
+.found_lessons{
+	border-bottom: 1px solid #DDD;
+	padding: 10px 0 20px 0;
+	margin-bottom: 25px;
+}
+.add_lesson{
+	float:right;
+}
+
+/*--------------------------------------------------------------
+7.2.1 - Insert/Edit Lesson
+--------------------------------------------------------------*/
+
+#filter_lesson_container.cat_new_lesson_container input{
+	display:inline;
+	position: relative;
+	top: 2px;
+}
+#filter_lesson_container.cat_new_lesson_container p{
+	margin: 0 0 25px 0;
+}
+#insert_new_lesson p{
+	margin: 25px 0 2px 0;
+}
+#insert_new_lesson {
+
+}
+#insert_new_lesson textarea{
+	width: 99%;
+	padding: 5px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border: 1px solid #ddd;
+	height: 200px;
+}
+#insert_new_lesson input[type="text"] {
+	padding: 5px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border: 1px solid #ddd;
+	height: 35px;
+}
+.files{
+	padding: 10px;
+	background: #F7F7F7;
+	margin: 0 0 10px 0;
+	border: 1px solid #DDD;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+}
+
+#insert_new_lesson button {
+	float:right;
+	margin-top: 20px;
+}
+
+#insert_new_lesson .grades label,
+#insert_new_lesson .themes label,
+#insert_new_lesson .categories label {
+
+}
+
+#insert_new_lesson label.error {
+	color: red;
+	display: block;
+	background: yellow url('images/error.png') no-repeat left center;
+	padding: 10px 5px;
+	text-indent: 40px;
+	font-size: 1em;
+	border: 1px solid red;
 }

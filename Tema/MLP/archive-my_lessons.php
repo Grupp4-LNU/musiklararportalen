@@ -3,7 +3,6 @@
  */
  ?>
  
-
 <?php get_header(); ?>
 
 	<div id="content">
@@ -13,9 +12,9 @@
 
 		<div class="page" id="blog-archives" role="main">
 		
-		<a href="/skapa-lektion">Skapa ny lektion</a>
+		<a href="/skapa-lektion" class='add_lesson'>Skapa ny lektion (+)</a>
 
-			<h3 class="pagetitle">Mina Lektioner</h3>
+			<h2 class="pagetitle">Mina Lektioner</h2>
 			
 			<?php
 			global $current_user;
@@ -93,7 +92,10 @@
 							</div>
 
 							<div class="entry">
-								<?php echo esc_html( get_post_meta( get_the_ID(), 'mlp_intro', true ) ); ?>
+								<?php
+								$intro = esc_html( get_post_meta( get_the_ID(), 'mlp_intro', true ) );
+								echo substr($intro, 0, 250);
+								?>
 								<?php wp_link_pages( array( 'before' => '<div class="page-link"><p>' . __( 'Pages: ', 'buddypress' ), 'after' => '</p></div>', 'next_or_number' => 'number' ) ); ?>
 								<a href="<?php the_permalink(); ?>" rel="bookmark" title="Läs hela <?php the_title_attribute(); ?>"> Läs mer..</a>
 							</div>
