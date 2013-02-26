@@ -12,7 +12,8 @@ function excerpt($limit) {
       return $excerpt;
 }
 
-function custom_excerpt_more( $more ) {
+function custom_excerpt_more($more) {
+	global $post;
 	return '<a class="moretag" href="'. get_permalink($post->ID) . '"> Läs hela...</a>';
 }
 add_filter( 'excerpt_more', 'custom_excerpt_more' );
