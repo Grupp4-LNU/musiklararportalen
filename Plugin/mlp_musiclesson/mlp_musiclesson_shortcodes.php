@@ -132,17 +132,17 @@ function shortcode_insert_lesson() {
 		}
 		else
 		{	
-			echo '<div id="lesson_form">';
+			echo '<div id="filter_lesson_container">';
 			echo '<form id="insert_new_lesson" name="insert_new_lesson" method="post" action="" class="lesson-form" enctype="multipart/form-data">';
 
 			echo '<!-- Lesson Categories -->';
-			echo '<label for="mlp_musiclesson_categories">Huvudområden</label>';
+			echo '<p>';
+			echo 'Huvudområden';
 			$lessonCategories = get_terms('mlp_category', array( 'hide_empty' => 0 ));
-			echo '<div class="categories">';
 			foreach ($lessonCategories as $lessonCategory) {
-				echo '<input class="{category: true}" type="checkbox" name="category[]" value="'.$lessonCategory->term_id.'" id="grade'.$lessonCategory->term_id.'" />';
-				echo '<label for="grade'.$lessonCategory->term_id.'">'.$lessonCategory->name.'</label>';
+				echo '<label><input class="{category: true}" type="checkbox" name="category[]" value="'.$lessonCategory->term_id.'" id="grade'.$lessonCategory->term_id.'" />'.$lessonCategory->name.'</label>';
 			}
+			echo '</p>';
 			echo '</div>';
 			
 			echo '<!-- Grades -->';
