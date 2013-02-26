@@ -158,15 +158,6 @@
 							}
 							?>
 							</p>
-
-							<p>
-							Tema:
-							<?php $themes = get_terms('mlp_theme', array( 'hide_empty' => 0 ));
-							foreach ($themes as $theme) {
-								echo '<label><input class="{theme: true}" type="checkbox" name="theme" value="'.$theme->term_id.'" id="theme'.$theme->term_id.'" />'.$theme->name.'</label>';
-							}
-							?>
-							</p>
 						</fieldset>
 							
 						<!-- Lesson Title -->
@@ -252,7 +243,7 @@
 			},
 			rules: {
 				lesson_title: {
-					required: true
+					required: true,
 				},
 				lesson_intro: {
 					required: true
@@ -263,6 +254,20 @@
 				lesson_execution: {
 					required: true
 				}
+			},
+			messages: {
+				lesson_title: {
+					required: "Detta fält måste fyllas i"
+				},
+				lesson_intro: {
+					required: "Detta fält måste fyllas i"
+				},
+				lesson_goal: {
+					required: "Detta fält måste fyllas i"
+				},
+				lesson_execution: {
+					required: "Detta fält måste fyllas i"
+				}				
 			}
 		});
 	});

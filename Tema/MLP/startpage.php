@@ -186,7 +186,7 @@
 								Huvudämne:									
 								<?php
 										foreach ( $terms as $term ) {
-										echo '<a href="' . esc_attr(get_term_link($term, 'mlp_category')) . '" title="' . sprintf( __( "View all posts in %s" ), $term->name ) . '" ' . '>' . $term->name.'</a> ';
+										echo '<span class="lesson_meta_text">'.$term->name.' </span>';
 										}
 								?>
 								</p>		
@@ -200,7 +200,7 @@
 								Årskurs:									
 								<?php
 										foreach ( $terms as $term ) {
-										echo '<a href="' . esc_attr(get_term_link($term, 'mlp_grade')) . '" title="' . sprintf( __( "View all posts in %s" ), $term->name ) . '" ' . '>' . $term->name.'</a> ';
+										echo '<span class="lesson_meta_text">'.$term->name.' </span>';
 										}
 								?>
 								</p>		

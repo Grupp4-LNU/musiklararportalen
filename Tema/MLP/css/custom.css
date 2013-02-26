@@ -1050,7 +1050,7 @@ div.post-content {
 	margin-left: 85px;
 }
 p.date span:first-child {
-	font-style: italic;
+	font-style: none;
 }
 div.post .entry {
 	margin-bottom: 15px;
@@ -2561,6 +2561,11 @@ div.preview_lesson  .date{
 	padding: 0;
 	font-size: 11px;
 }
+div.preview_lesson span.lesson_meta_text{
+	color: #333;
+	font-weight: normal;
+	font-style: normal;
+}
 
 /*--------------------------------------------------------------
 7.2 - Lessons
@@ -2586,6 +2591,10 @@ div.preview_lesson  .date{
 
 .lesson_meta a{
 	font-style:italic;
+}
+.lesson_meta_text{
+	color: #444;
+	font-weight: bold;
 }
 
 #filter_lesson_container{
@@ -2683,6 +2692,7 @@ div.preview_lesson  .date{
 }
 #insert_new_lesson input[type="text"] {
 	padding: 5px;
+	display:block;
 	border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
@@ -2712,10 +2722,8 @@ div.preview_lesson  .date{
 
 #insert_new_lesson label.error {
 	color: red;
-	display: block;
-	background: yellow url('images/error.png') no-repeat left center;
-	padding: 10px 5px;
-	text-indent: 40px;
-	font-size: 1em;
+	border:none;
+}
+#insert_new_lesson textarea.error, #insert_new_lesson input[type="text"].error {
 	border: 1px solid red;
 }

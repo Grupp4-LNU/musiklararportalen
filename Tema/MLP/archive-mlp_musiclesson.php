@@ -14,7 +14,7 @@
 		<div class="page" id="lesson-archives" role="main">
 			
 			<h2 class="pagetitle">Lektioner</h2>
-				<form method="POST">
+				<form method="GET">
 					<fieldset id='filter_lesson_container'>
 						<legend><p><strong>Filter</strong></p></legend>				
 						<?php 
@@ -44,7 +44,7 @@
 								if ( $count > 0 ){
 									foreach($terms as $term) {
 										$post_name = str_replace(' ', '_', $term->name);
-										if(isset($_POST[$post_name]) && $_POST[$post_name] == '1'){
+										if(isset($_GET[$post_name]) && $_GET[$post_name] == '1'){
 											$filter_terms [$taxonomy->name][] = $term->name;
 											echo "<label class='selected'><input type='checkbox' checked='yes' name='".$post_name."' id='".$post_name."' value='1' onclick='submit()'></input>" . $term->name . "</label>";
 										}								
@@ -65,10 +65,8 @@
 			<?php
 			$category = isset($filter_terms['mlp_category']) ? $filter_terms['mlp_category'] : false;
 			$grades = isset($filter_terms['mlp_grade']) ? $filter_terms['mlp_grade'] : false;
-			$theme = isset($filter_terms['mlp_theme']) ? $filter_terms['mlp_theme'] : false;
 			$category_setting = null;
 			$grades_setting = null;
-			$theme_setting = null;
 			
 			if($category){
 				$category_setting = array(
@@ -85,18 +83,10 @@
 							'terms' => $grades
 						);	
 			};			
-
-			if($theme){
-				$theme_setting = array(
-							'taxonomy' => 'mlp_theme',
-							'field' => 'slug',
-							'terms' => $theme
-						);				
-			};
 		
 			$args = array(
 				'post_type' => 'mlp_musiclesson',
-				'tax_query' => array('relation' => 'AND', $category_setting, $grades_setting, $theme_setting)					
+				'tax_query' => array('relation' => 'AND', $category_setting, $grades_setting)					
 			);
 			$wp_query = new WP_Query($args);
 			?>
@@ -131,7 +121,7 @@
 								Huvudämne:									
 								<?php
 										foreach ( $terms as $term ) {
-										echo '<a href="' . esc_attr(get_term_link($term, 'mlp_category')) . '" title="' . sprintf( __( "View all posts in %s" ), $term->name ) . '" ' . '>' . $term->name.'</a> ';
+										echo '<span class="lesson_meta_text">'.$term->name.' </span>';
 										}
 								?>
 								</p>		
@@ -145,25 +135,11 @@
 								Årskurs:									
 								<?php
 										foreach ( $terms as $term ) {
-										echo '<a href="' . esc_attr(get_term_link($term, 'mlp_grade')) . '" title="' . sprintf( __( "View all posts in %s" ), $term->name ) . '" ' . '>' . $term->name.'</a> ';
+										echo '<span class="lesson_meta_text">'.$term->name.' </span>';
 										}
 								?>
 								</p>		
-								<?php endif ;?>									
-								
-								<?php
-									$terms = get_the_terms( $post->ID , 'mlp_theme' );
-									if($terms) :
-								?>
-								<p>
-								Tema:									
-								<?php
-										foreach ( $terms as $term ) {
-										echo '<a href="' . esc_attr(get_term_link($term, 'mlp_theme')) . '" title="' . sprintf( __( "View all posts in %s" ), $term->name ) . '" ' . '>' . $term->name.'</a> ';
-										}
-								?>
-								</p>		
-								<?php endif ;?>								
+								<?php endif ;?>														
 								
 							</div>
 
