@@ -16,7 +16,6 @@ define('MLP_MUSICLESSON_PLUGIN_PATH', plugin_dir_path( __FILE__ ));
 include_once MLP_MUSICLESSON_PLUGIN_PATH.'/templates/mlp_musiclesson_templates.php';
 
 include_once MLP_MUSICLESSON_PLUGIN_PATH.'/mlp_musiclesson_functions.php';
-include_once MLP_MUSICLESSON_PLUGIN_PATH.'/mlp_musiclesson_shortcodes.php';
 
 function MLP_musiclesson_init() {
 	mlp_register_lesson_post_type();

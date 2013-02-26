@@ -86,41 +86,16 @@ function mlp_create_lesson_taxonomies() {
 		)
 	);
 	
-	$taxonomies['mlp_theme'] = array(
-		'hierarchical' => true,
-		'query_var' => 'mlp_theme',
-		'rewrite' => array(
-			'slug' => 'Tema'
-		),
-		'labels' => array(
-			'name' => 'Teman',
-			'singular_name' => "Tema",
-			'add_new' => 'Lägg till tema',
-			'add_new_item' => 'Lägg till tema',
-			'edit_item' => 'Redigera tema',
-			'new_item' => 'Lägg till tema',
-			'view_item' => 'Visa teman',
-			'search_items' => 'Sök bland teman',
-			'not_found' => 'Inga teman hittad',
-			'not_found_in_trash' => 'Inga teman hittad i papperskorgen'				
-		)
-	);
-	
 	mlp_register_all_taxonomies($taxonomies);
 	
 	mlp_add_taxonomy_data('mlp_grade', 'F-3', "Årskurs F-3");
 	mlp_add_taxonomy_data('mlp_grade', '4-6', "Årskurs 4-6");
 	mlp_add_taxonomy_data('mlp_grade', '7-9', "Årskurs 7-9");
-	mlp_add_taxonomy_data('mlp_grade', 'Gymn', "Årskurs Gymnasiet.");
+	mlp_add_taxonomy_data('mlp_grade', 'Gymn', "Årskurs Gymnasiet.");		
 	
-	mlp_add_taxonomy_data('mlp_theme', 'Musicerande', "Musicerande");
-	mlp_add_taxonomy_data('mlp_theme', 'Musikens verktyg', "Musikens verktyg");
-	mlp_add_taxonomy_data('mlp_theme', 'Musikens sammanhang', "Musikens sammanhang");
-	mlp_add_taxonomy_data('mlp_theme', 'Övrigt', "Ifall lektionen inte passar in under något av de andra teman");		
-	
-	mlp_add_taxonomy_data('mlp_category', 'Spela och Sjunga', 'Spela och Sjunga');
-	mlp_add_taxonomy_data('mlp_category', 'Musikskapande', 'Musikskapande');
-	mlp_add_taxonomy_data('mlp_category', 'Musikanalys', 'Musikanalys');
+	mlp_add_taxonomy_data('mlp_category', 'Musicerande', 'Musicerande');
+	mlp_add_taxonomy_data('mlp_category', 'Musikens verktyg', 'Musikens verktyg');
+	mlp_add_taxonomy_data('mlp_category', 'Musikens sammanhang', 'Musikens sammanhang');
 }
 
 function mlp_register_all_taxonomies($taxonomies) {
