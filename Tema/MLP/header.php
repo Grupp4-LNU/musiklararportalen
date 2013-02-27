@@ -6,7 +6,12 @@
 		<?php if ( current_theme_supports( 'bp-default-responsive' ) ) : ?><meta name="viewport" content="width=device-width, initial-scale=1.0" /><?php endif; ?>
 		<title><?php wp_title( '|', true, 'right' ); bloginfo( 'name' ); ?></title>
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-
+		<?php 
+			function mlp_remove_default_responsive() {
+				remove_theme_support( 'bp-default-responsive' );
+			}
+			add_action( 'wp_enqueue_scripts', 'mlp_remove_default_responsive', 5 );
+		?>
 		<?php do_action( 'bp_head' ); ?>
 		<?php wp_head(); ?>
 

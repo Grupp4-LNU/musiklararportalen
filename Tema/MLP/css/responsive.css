@@ -16,7 +16,7 @@ Hello, this is the BuddyPress Responsive theme stylesheet
 --------------------------------------------------------------*/
 @media only screen and (max-width: 768px) {
 	html {
-		background-color: #eaeaea;
+		background-color: red;
 	}
 	body {
 		margin-top: -28px !important;

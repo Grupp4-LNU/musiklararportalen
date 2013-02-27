@@ -9,6 +9,4 @@ Tags: buddypress
 @import url(http://fonts.googleapis.com/css?family=Didact+Gothic|PT+Serif&v2);
 @import url(http://fonts.googleapis.com/css?family=Muli);
 @import url(css/custom.css);
-@import url(css/responsive.css);
- 
-
+@import url(css/responsive.css?v=1.5);
