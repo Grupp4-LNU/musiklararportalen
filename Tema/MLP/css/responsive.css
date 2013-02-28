@@ -15,13 +15,29 @@ Hello, this is the BuddyPress Responsive theme stylesheet
 1.1 - iPad Landscape
 --------------------------------------------------------------*/
 @media only screen and (max-width: 768px) {
-	html {
-		background-color: red;
-	}
 	body {
 		margin-top: -28px !important;
 		background: #eaeaea;
 	}
+
+	#header h1 a {
+		font-size: 40px;
+	}
+
+	#header {
+		width: 100%;
+	}
+
+	#logo  {
+		color: red;
+		height: 75px;
+		width: 100%;
+	}
+
+	#nav {
+		display: none;
+	}
+
 	#wpadminbar {
 		display: none;
 	}
@@ -79,6 +95,8 @@ Hello, this is the BuddyPress Responsive theme stylesheet
 1.2 - iPad Portrait
 --------------------------------------------------------------*/
 @media only screen and (max-width: 640px) {
+
+
 	div.dir-search {
 		float: none;
 		margin: 1.25em 0 0;
@@ -127,6 +145,7 @@ Hello, this is the BuddyPress Responsive theme stylesheet
 		width: 100%;
 		margin: 0;
 	}
+
 	#container {
 		border: none;
 	}
@@ -208,6 +227,7 @@ Hello, this is the BuddyPress Responsive theme stylesheet
 3.0 - iPhone
 --------------------------------------------------------------*/
 @media only screen and (max-width: 320px) {
+
 	ul#nav li {
 		float: none;
 		width: 100%;
