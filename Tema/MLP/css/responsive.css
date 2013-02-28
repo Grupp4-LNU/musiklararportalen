@@ -20,6 +20,31 @@ Hello, this is the BuddyPress Responsive theme stylesheet
 		background: #eaeaea;
 	}
 
+	.preview_post_container {
+		width: 100% !important;
+		margin-left: 0px !important;
+		margin-bottom: 20px;
+	}
+
+	#logo {
+		text-align: left;
+	}
+
+	#nav {
+		display: none;
+	}
+
+	.menu-huvudmeny-container {
+		display: block;
+		position: relative;
+		bottom: 25px;
+		left: 20px;
+	}
+
+	#responsive-nav {
+		display: block;
+	}
+
 	#header h1 a {
 		font-size: 40px;
 	}
@@ -32,10 +57,6 @@ Hello, this is the BuddyPress Responsive theme stylesheet
 		color: red;
 		height: 75px;
 		width: 100%;
-	}
-
-	#nav {
-		display: none;
 	}
 
 	#wpadminbar {
@@ -96,6 +117,13 @@ Hello, this is the BuddyPress Responsive theme stylesheet
 --------------------------------------------------------------*/
 @media only screen and (max-width: 640px) {
 
+	#header h1 a {
+		font-size: 36px !important;
+	}
+
+	#header {
+		width: 100%;
+	}
 
 	div.dir-search {
 		float: none;
@@ -149,6 +177,7 @@ Hello, this is the BuddyPress Responsive theme stylesheet
 	#container {
 		border: none;
 	}
+
 	div.item-list-tabs ul li {
 		float: none;
 		margin: 0.3em 0.6em;
@@ -227,6 +256,10 @@ Hello, this is the BuddyPress Responsive theme stylesheet
 3.0 - iPhone
 --------------------------------------------------------------*/
 @media only screen and (max-width: 320px) {
+
+	div.post-content {
+		background: red;
+	}
 
 	ul#nav li {
 		float: none;

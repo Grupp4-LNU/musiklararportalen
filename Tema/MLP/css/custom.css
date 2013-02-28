@@ -535,6 +535,11 @@ a:focus {
 	clear: both;
 	visibility: hidden;
 }
+
+.menu-huvudmeny-container {
+	display: none;
+}
+
 #nav {
 	margin: 40px 20px 0 0;
 	list-style: none;
