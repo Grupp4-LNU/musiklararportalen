@@ -84,9 +84,6 @@ body {
 .padder {
 	padding: 19px;
 }
-#navigation select {
-	display: none;
-}
 div#container {
 	background: #fff;
 	border-top: 1px solid #e7e7e7;
@@ -535,6 +532,10 @@ a:focus {
 	height: 0;
 	clear: both;
 	visibility: hidden;
+}
+
+#navigation select {
+	display: none;
 }
 
 .menu-huvudmeny-container {
