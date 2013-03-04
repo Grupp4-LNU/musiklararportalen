@@ -18,7 +18,7 @@
 				$num_comments++;
 		}
 ?>
-	<div id="comments" class="post">
+	<div id="comments" class='post'>
 
 		<h3>
 			<?php printf( _n( '1 response to %2$s', '%1$s responses to %2$s', $num_comments, 'buddypress' ), number_format_i18n( $num_comments ), '<em>' . get_the_title() . '</em>' ); ?>

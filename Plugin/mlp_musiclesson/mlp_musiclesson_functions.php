@@ -88,7 +88,7 @@ function mlp_create_lesson_taxonomies() {
 	
 	mlp_register_all_taxonomies($taxonomies);
 	
-	mlp_add_taxonomy_data('mlp_grade', 'F-3', "Årskurs F-3");
+	mlp_add_taxonomy_data('mlp_grade', '1-3', "Årskurs 1-3");
 	mlp_add_taxonomy_data('mlp_grade', '4-6', "Årskurs 4-6");
 	mlp_add_taxonomy_data('mlp_grade', '7-9', "Årskurs 7-9");
 	mlp_add_taxonomy_data('mlp_grade', 'Gymn', "Årskurs Gymnasiet.");		
@@ -132,7 +132,7 @@ function mlp_add_lesson_details_metabox() {
 			<h3><label for='mlp_goals'>Mål</label></h3>
 			<textarea class='widefat' id='mlp_goals' name='mlp_goals'><?php echo esc_attr($goals); ?></textarea>
 
-			<h3><label for='mlp_execution'>Utförande</label></h3>
+			<h3><label for='mlp_execution'>Undervisning</label></h3>
 			<textarea class='widefat' id='mlp_execution' name='mlp_execution'><?php echo esc_attr($execution); ?></textarea>
 
 		<?php

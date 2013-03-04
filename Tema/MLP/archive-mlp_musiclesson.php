@@ -62,8 +62,8 @@
 					</fieldset>
 				</form>
 				<form id='clear_filter' method='GET'></form>
-				<select name='sortera' id='lesson_sort' onclick='submit()' form="lesson_filter_form">
-				  <option value='senaste'>Senast inlagda</option>
+				<select name='sortera' id='lesson_sort' onchange='submit()' form="lesson_filter_form">
+				  <option value='senaste' >Senast inlagda</option>
 				  <option value='gillade' <?php if(isset($_GET['sortera']) && $_GET['sortera'] == 'gillade') echo 'SELECTED' ?>>Mest gillade</option>
 				  <option value='diskuterade' <?php if(isset($_GET['sortera']) && $_GET['sortera'] == 'diskuterade') echo 'SELECTED' ?>>Mest diskuterade</option>
 				</select>
