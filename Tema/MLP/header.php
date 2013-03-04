@@ -67,7 +67,7 @@
 					  $output = str_replace('<li', '<option '.$href, $output);
 					}
 
-				    function end_el(&$output, $item, $depth){
+				    function end_el($output, $item, $depth){
 				      $output .= "</option>\n"; // replace closing </li> with the option tag
 				    }
 				} ?>
