@@ -35,6 +35,12 @@ Hello, this is the BuddyPress Responsive theme stylesheet
 		display: none;
 	}
 
+	#navigation select {
+		display: block;
+		margin-left: 15px;
+		width: 96%;
+	}
+
 	.menu-huvudmeny-container {
 		display: block;
 		position: relative;
