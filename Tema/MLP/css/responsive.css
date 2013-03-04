@@ -21,12 +21,6 @@ Hello, this is the BuddyPress Responsive theme stylesheet
 		margin-top: -28px !important;
 	}
 
-	#navigation select {
-		display: block;
-		margin-left: 15px;
-		width: 96%;
-	}
-
 	.preview_post_container {
 		width: 100% !important;
 		margin-left: 0px !important;
