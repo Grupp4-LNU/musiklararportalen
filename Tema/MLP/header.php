@@ -29,16 +29,20 @@
 			</div><!-- #search-bar -->
 
 			<div id="navigation" role="navigation">
-				<?php wp_nav_menu( array( 'container' => false,
-										  'menu_id' => 'nav',
-										  'theme_location' => 'primary',
-										  'fallback_cb' => 'bp_dtheme_main_nav' )
+				<?php wp_nav_menu( array(
+					'container' => false,
+					'menu_id' => 'nav',
+					'theme_location' => 'primary',
+					'fallback_cb' => 'bp_dtheme_main_nav' )
 				);
 
 				wp_nav_menu(array(
-				  'theme_location' => 'primary', // your theme location here
-				  'walker'         => new Walker_Nav_Menu_Dropdown(),
-				  'items_wrap'     => '<select>%3$s</select>',
+					'container' => false,
+					'menu_id' => 'nav',
+					'theme_location' => 'primary', // your theme location here
+					'walker'         => new Walker_Nav_Menu_Dropdown(),
+					'items_wrap'     => '<select>%3$s</select>',
+					'fallback_cb'    => 'bp_dtheme_main_nav'
 				));
 
 
@@ -52,19 +56,26 @@
 				    }
 
 				    function start_el(&$output, $item, $depth, $args){
-				      // add spacing to the title based on the depth
-				      $item->title = str_repeat("&nbsp;", $depth * 4).$item->title;
+					  // add spacing to the title based on the depth
+					  $item->title = str_repeat("&nbsp;", $depth * 4).$item->title;
 
+<<<<<<< HEAD
 				      parent::start_el($output, $item, $depth, $args);
+=======
+					  parent::start_el(&$output, $item, $depth, $args);
+>>>>>>> Fixade menyn
 
-				      // no point redefining this method too, we just replace the li tag...
-				      $output = str_replace('<li', '<option', $output);
-				    }
+					  $href = ! empty( $item->url ) ? ' value="'   . esc_attr( $item->url ) .'"' : '#';
+
+					  // no point redefining this method too, we just replace the li tag...
+					  $output = str_replace('<li', '<option '.$href, $output);
+					}
 
 				    function end_el(&$output, $item, $depth){
 				      $output .= "</option>\n"; // replace closing </li> with the option tag
 				    }
 				} ?>
+
 			</div>
 
 			<?php do_action( 'bp_header' ); ?>
