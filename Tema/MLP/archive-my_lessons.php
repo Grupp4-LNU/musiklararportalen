@@ -43,6 +43,7 @@
 						</div>
 
 						<div class="post-content">
+							<?php if( function_exists('zilla_likes') ) zilla_likes(); ?>
 							<h2 class="posttitle"><a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', 'buddypress' ); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
 							<div class="lesson_meta">
 								<p><?php printf( __( '%1$s', 'buddypress' ), get_the_date() ); ?></p>

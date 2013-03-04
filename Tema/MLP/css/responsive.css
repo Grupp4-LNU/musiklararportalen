@@ -258,7 +258,7 @@ Hello, this is the BuddyPress Responsive theme stylesheet
 @media only screen and (max-width: 320px) {
 
 	div.post-content {
-		background: red;
+		background: none;
 	}
 
 	ul#nav li {

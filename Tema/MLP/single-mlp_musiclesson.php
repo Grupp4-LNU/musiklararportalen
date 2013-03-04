@@ -22,6 +22,7 @@
 					</div>
 
 					<div class="post-content">
+						<?php if( function_exists('zilla_likes') ) zilla_likes(); ?>
 						<h2 class="posttitle"><?php the_title(); ?></h2>
 						<div class="lesson_meta">
 							<p><?php printf( __( '%1$s', 'buddypress' ), get_the_date() ); ?></p>

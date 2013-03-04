@@ -14,7 +14,7 @@
 		<div class="page" id="lesson-archives" role="main">
 			
 			<h2 class="pagetitle">Lektioner</h2>
-				<form method="GET">
+				<form method="GET" id="lesson_filter_form">
 					<fieldset id='filter_lesson_container'>
 						<legend><p><strong>Filter</strong></p></legend>				
 						<?php 
@@ -61,8 +61,16 @@
 						<button type='submit' form='clear_filter' id='clear_button'>Rensa filter</button>						
 					</fieldset>
 				</form>
-				<form id='clear_filter' method='GET'></form>		
+				<form id='clear_filter' method='GET'></form>
+				<select name='sortera' id='lesson_sort' onclick='submit()' form="lesson_filter_form">
+				  <option value='senaste'>Senast inlagda</option>
+				  <option value='gillade' <?php if(isset($_GET['sortera']) && $_GET['sortera'] == 'gillade') echo 'SELECTED' ?>>Mest gillade</option>
+				  <option value='diskuterade' <?php if(isset($_GET['sortera']) && $_GET['sortera'] == 'diskuterade') echo 'SELECTED' ?>>Mest diskuterade</option>
+				</select>
+			
 			<?php
+			
+			//Building Filter-query
 			$category = isset($filter_terms['mlp_category']) ? $filter_terms['mlp_category'] : false;
 			$grades = isset($filter_terms['mlp_grade']) ? $filter_terms['mlp_grade'] : false;
 			$category_setting = null;
@@ -82,11 +90,30 @@
 							'field' => 'slug',
 							'terms' => $grades
 						);	
-			};			
-		
+			};
+
+			//Building Sorting-query
+			$sort_term;
+			$order_by;
+			if(isset($_GET['sortera'])){
+			
+				if($_GET['sortera'] == 'gillade'){
+					$order_by = 'meta_value';				
+					$sort_term = '_zilla_likes';
+				}
+				
+				if($_GET['sortera'] == 'diskuterade'){
+					$order_by = 'comment_count';
+				}
+			
+			}
+			
+			
+			//Building complete WP-Query
 			$args = array(
 				'post_type' => 'mlp_musiclesson',
-				'tax_query' => array('relation' => 'AND', $category_setting, $grades_setting)					
+				'tax_query' => array('relation' => 'AND', $category_setting, $grades_setting),
+				'orderby' => $order_by, 'meta_key' => $sort_term
 			);
 			$wp_query = new WP_Query($args);
 			?>
@@ -109,7 +136,9 @@
 						</div>
 
 						<div class="post-content">
+							<?php if( function_exists('zilla_likes') ) zilla_likes(); ?>
 							<h2 class="posttitle"><a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', 'buddypress' ); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
+
 							<div class="lesson_meta">
 								<p><?php printf( __( '%1$s', 'buddypress' ), get_the_date() ); ?></p>
 													
@@ -139,8 +168,7 @@
 										}
 								?>
 								</p>		
-								<?php endif ;?>														
-								
+								<?php endif ;?>																					
 							</div>
 
 							<div class="entry">

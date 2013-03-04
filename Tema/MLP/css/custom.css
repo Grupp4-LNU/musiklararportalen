@@ -75,7 +75,7 @@ body {
 	background-position: top left;
 	color: #444;
 	font-size: 14px;
-	font-family: 'PT Serif', serif;
+	font-family: Times New Roman, serif;
 	line-height: 150%;
 	margin: 0 auto;
 	width: 95%;
@@ -195,6 +195,7 @@ textarea {
 	margin-top: 0;
 }
 #header h1 a {
+	background: none;
 	color: #fff;
 	font-size: 62px;
 	text-decoration: none;
@@ -434,7 +435,6 @@ h4,
 h5,
 h6 {
 	margin: 5px 0 15px 0;
-	font-family: 'Didact Gothic', sans-serif;
 }
 h1 {
 	font-size: 62px;
@@ -514,12 +514,11 @@ div.page ul ol {
 4.0 - Navigation
 --------------------------------------------------------------*/
 a {
-	color: #950000;
-	text-decoration: none;
+	color: #333;
 }
 a:hover,
 a:active {
-	color: #6c0000;
+	color: #333;
 }
 a:focus {
 	outline: 1px dotted #ccc;
@@ -740,6 +739,7 @@ div#pag-bottom {
 	margin-top: 30px;
 	background: #F7F7F7;
 	border: 1px solid #DDD;
+	padding: 15px;
 }
 #comments ol.commentlist {
 	border-bottom: 1px solid #e4e4e4;
@@ -970,7 +970,6 @@ div.post {
 	border-bottom: 1px solid #DDD;
 	border-radius: 2px;
 	background: none;
-	padding: 15px 15px 10px 15px;
 }
 
 div.page,
@@ -998,7 +997,7 @@ h2.pagetitle {
 }
 h2.pagetitle a,
 h2.posttitle a {
-	color: #950000;
+	background:none;
 	text-decoration: none;
 }
 .edit-link,
@@ -1033,7 +1032,7 @@ div.author-box {
 	margin: 0 0 0 0;
 	padding: 0;
 	text-align: center;
-	width: 60px;
+	width: 90px;
 }
 div.author-box p {
 	word-wrap: break-word;
@@ -1052,7 +1051,7 @@ div.author-box img {
 	margin: 0;
 }
 div.post-content {
-	margin-left: 85px;
+
 }
 p.date span:first-child {
 	font-style: none;
@@ -2619,7 +2618,7 @@ div.preview_lesson span.lesson_meta_text{
 }
 #filter_lesson_container label, #clear_button, .add_lesson{
 	background: #F7F7F7;
-	color: #750000;
+	color: #333;
 	display: block-inline;
 	margin-bottom: 25px;
 	cursor: pointer;
@@ -2640,11 +2639,10 @@ div.preview_lesson span.lesson_meta_text{
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#1a000000',GradientType=0 ); /* IE6-9 */
 }
 #filter_lesson_container label.selected{
-	background: #950000;
-	color: #FFF;
-	border: 1px solid #650000;
-	border-bottom: 1px solid #a80000;
-	border-right: 1px solid #a80000;		
+	background: #FFF500;
+	border: 1px solid #cfc700;
+	border-bottom: 1px solid #fef63e;
+	border-right: 1px solid #fef63e;		
 }
 #filter_lesson_container input{
 	display:none;
@@ -2658,6 +2656,17 @@ div.preview_lesson span.lesson_meta_text{
 	border-radius: 2px;
 	-moz-border-radius: 2px;
 	-webkit-border-radius: 2px;	
+}
+#lesson_sort{
+	float:right;
+	font-family: Georgia, times, serif;	
+	background: #F7F7F7;
+	cursor: pointer;
+	border: 1px solid #DDD;
+	border-bottom: 1px solid #777;
+	border-right: 1px solid #777;
+	padding: 4px 10px;
+	border-radius: 3px;	
 }
 .found_lessons{
 	border-bottom: 1px solid #DDD;
