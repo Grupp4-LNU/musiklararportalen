@@ -11,13 +11,20 @@ Hello, this is the BuddyPress Responsive theme stylesheet
 3.0 - iPhone
 --------------------------------------------------------------*/
 
+
+
 /*--------------------------------------------------------------
 1.1 - iPad Landscape
 --------------------------------------------------------------*/
 @media only screen and (max-width: 768px) {
 	body {
 		margin-top: -28px !important;
-		background: #eaeaea;
+	}
+
+	#navigation select {
+		display: block;
+		margin-left: 15px;
+		width: 96%;
 	}
 
 	.preview_post_container {
@@ -117,8 +124,9 @@ Hello, this is the BuddyPress Responsive theme stylesheet
 --------------------------------------------------------------*/
 @media only screen and (max-width: 640px) {
 
-	#header h1 a {
-		font-size: 36px !important;
+	#navigation select {
+		margin-left: 15px;
+		width: 96%;
 	}
 
 	#header {
@@ -172,6 +180,15 @@ Hello, this is the BuddyPress Responsive theme stylesheet
 	body {
 		width: 100%;
 		margin: 0;
+	}
+
+	#container {
+		border-radius: 0px !important;
+	}
+
+	#navigation select {
+		margin-left: 15px;
+		width: 92%;
 	}
 
 	#container {
