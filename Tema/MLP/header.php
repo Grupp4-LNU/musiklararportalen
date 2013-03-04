@@ -59,7 +59,7 @@
 					  // add spacing to the title based on the depth
 					  $item->title = str_repeat("&nbsp;", $depth * 4).$item->title;
 
-					  parent::start_el(&$output, $item, $depth, $args);
+					  parent::start_el($output, $item, $depth, $args);
 
 					  $href = ! empty( $item->url ) ? ' value="'   . esc_attr( $item->url ) .'"' : '#';
 
