@@ -61,7 +61,7 @@
 
 					  parent::start_el($output, $item, $depth, $args);
 
-					  $href = ! empty( $item->url ) ? ' value="'   . esc_attr( $item->url ) .'"' : '#';
+					  $href =! empty( $item->url ) ? ' value="'   . esc_attr( $item->url ) .'"' : '#';
 
 					  // no point redefining this method too, we just replace the li tag...
 					  $output = str_replace('<li', '<option '.$href, $output);
