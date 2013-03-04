@@ -55,7 +55,7 @@
 				      // add spacing to the title based on the depth
 				      $item->title = str_repeat("&nbsp;", $depth * 4).$item->title;
 
-				      parent::start_el(&$output, $item, $depth, $args);
+				      parent::start_el($output, $item, $depth, $args);
 
 				      // no point redefining this method too, we just replace the li tag...
 				      $output = str_replace('<li', '<option', $output);
