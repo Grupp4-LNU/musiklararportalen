@@ -57,7 +57,7 @@
 
 				    function start_el(&$output, $item, $depth, $args){
 					  // add spacing to the title based on the depth
-					  $item->title = str_repeat("&nbsp;-", $depth).$item->title;
+					  $item->title = str_repeat("&nbsp;- ", $depth).$item->title;
 
 					  parent::start_el($output, $item, $depth, $args);
 
