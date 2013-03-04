@@ -59,7 +59,7 @@
 					  // add spacing to the title based on the depth
 					  $item->title = str_repeat("&nbsp;-", $depth).$item->title;
 
-					  parent::start_el(&$output, $item, $depth, $args);
+					  parent::start_el($output, $item, $depth, $args);
 
 					  $href = ! empty( $item->url ) ? ' value="'   . esc_attr( $item->url ) .'"' : '#';
 
@@ -67,7 +67,7 @@
 					  $output = str_replace('<li', '<option '.$href, $output);
 					}
 
-				    function end_el($output, $item, $depth){
+				    function end_el(&$output, $item, $depth){
 				      $output .= "</option>\n"; // replace closing </li> with the option tag
 				    }
 				} ?>
