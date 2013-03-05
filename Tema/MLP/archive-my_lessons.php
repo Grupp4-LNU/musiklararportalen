@@ -12,7 +12,7 @@
 
 		<div class="page" id="blog-archives" role="main">
 		
-		<a href="/skapa-lektion" class='add_lesson'>Skapa ny lektion (+)</a>
+		<a href="../skapa-lektion" class='add_lesson'>Skapa ny lektion (+)</a>
 
 			<h2 class="pagetitle">Mina Lektioner</h2>
 			
