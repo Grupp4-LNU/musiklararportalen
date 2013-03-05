@@ -19,7 +19,6 @@ function MLP_musiclesson_init() {
 	mlp_register_lesson_post_type();
 	mlp_create_lesson_taxonomies();
 	mlp_add_lesson_details_metabox();
-	attach_css_files();
 }
 
 register_activation_hook( __FILE__, 'activate' );

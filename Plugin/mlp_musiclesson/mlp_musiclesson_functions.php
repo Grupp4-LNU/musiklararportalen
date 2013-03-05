@@ -156,11 +156,6 @@ function update_post_meta_data($id, $field) {
 	}
 }
 
-function attach_css_files() {
-	wp_register_style( 'mlp_musiclesson', plugins_url('css/mlp_musiclesson.css', __FILE__));
-	wp_enqueue_style( 'mlp_musiclesson' );
-}
-
 function activate() {
 	mlp_create_my_lesson_archive_page();
 }

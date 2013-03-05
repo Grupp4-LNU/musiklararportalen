@@ -73,17 +73,7 @@
 					{
 						$errors[] = '<p>Du måste ange minst en årskurs för lektionen</p>';	
 					}			
-					
-					if(isset($_POST['theme']))
-					{
-						$lesson_themes = array();
-						$lesson_themes[] = $_POST['theme'];
-					}
-					else 
-					{
-						$errors[] = '<p>Du måste ange ett tema för lektionen</p>';
-					}
-								
+													
 					if(isset($_POST['category']))
 					{
 						$lesson_categories = array();
@@ -107,7 +97,6 @@
 						$post_id = wp_insert_post( $new_lesson_post );
 										
 						wp_set_post_terms( $post_id, $lesson_grades, 'mlp_grade', false );
-						wp_set_post_terms( $post_id, $lesson_themes, 'mlp_theme', false );
 						wp_set_post_terms( $post_id, $lesson_categories, 'mlp_category', false );
 						
 						add_post_meta($post_id, 'mlp_intro', $introduction);

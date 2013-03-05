@@ -443,7 +443,7 @@ h3 {
 	font-size: 24px;
 }
 h4 {
-	font-size: 14px;
+	font-size: 18px;
 	margin-bottom: 15px;
 }
 h5 {
@@ -1043,6 +1043,7 @@ div.comment-avatar-box p {
 div.author-box a,
 div.comment-avatar-box a {
 	text-decoration: none;
+	padding: 0;
 }
 div.author-box img {
 	float: none;
@@ -2591,7 +2592,9 @@ div.preview_lesson span.lesson_meta_text{
 }
 
 .lesson h4{
-	margin: 10px 0 2px 0; 
+	margin: 20px 0 5px 0;
+	background: #EAEAEA;
+	padding: 5px 2px
 }
 .lesson_meta{
 	margin: 10px 0;
