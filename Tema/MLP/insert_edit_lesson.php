@@ -118,7 +118,6 @@
 						if ($_FILES) {
 							$wp_upload_dir = wp_upload_dir();
 							foreach ($_FILES as $file => $array) {
-								$newupload = insert_attachment($file,$post_id);
 								// $newupload returns the attachment id of the file that
 								// was just uploaded. Do whatever you want with that now.
 								require_once(ABSPATH . 'wp-admin/includes/admin.php');
@@ -132,12 +131,13 @@
 								$wp_filetype = wp_check_filetype(basename($array['name']), null );
 								$filename = basename($array['name']);
 								$args = array(
-									'guid' => $wp_upload_dir['path'] . '/' . basename($filename),
+									'guid' => $wp_upload_dir['url'] . '/' . basename($file_return['url']),
 									'post_mime_type' => $wp_filetype['type'],
 									'post_title' => preg_replace('/\.[^.]+$/', '', basename($filename)),
-									'post_status' => 'publish'
+									'post_status' => 'publish',
+									'post_parent' => $post_id
 								);
-								$newupload = wp_insert_attachment($args, $filename, $post_id);
+								$newupload = wp_insert_attachment($args);
 							}
 						}
 									
