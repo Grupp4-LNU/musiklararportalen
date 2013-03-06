@@ -118,11 +118,9 @@
 						if ($_FILES) {
 							$wp_upload_dir = wp_upload_dir();
 							foreach ($_FILES as $file => $array) {
-<<<<<<< HEAD
 								$newupload = insert_attachment($file,$post_id);
 								// $newupload returns the attachment id of the file that
 								// was just uploaded. Do whatever you want with that now.
-=======
 								require_once(ABSPATH . 'wp-admin/includes/admin.php');
 								
 						        $file_return = wp_handle_upload($array, array('test_form' => false));
@@ -140,13 +138,10 @@
 									'post_status' => 'publish'
 								);
 								$newupload = wp_insert_attachment($args, $filename, $post_id);
->>>>>>> upload working
 							}
 						}
 									
 						echo '<p>Tackar! Din lektion har blivit sparad</p>';
-						echo '<p>Du blir skickad tillbaka om 5s, ifall det inte fungerar kan du klicka <a href="'.home_url().'">här</a>.</p>';
-						wp_redirect(home_url());
 					}
 					else 
 					{
