@@ -36,8 +36,8 @@
 									$taxonomy->name, 
 									array(
 										'orderby'=> 'id', 
-										'order'=> 'ASC',
-										'hide_empty' => 0
+										'order'=> 'ASC'
+
 									)
 								);
 								
@@ -97,7 +97,7 @@
 			};
 
 			//Building Sorting-query
-			$sort_term;
+			$sort_term = null;
 			$order_by = 'date';
 			if(isset($_GET['sortera'])){
 						
