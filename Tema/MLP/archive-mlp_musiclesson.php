@@ -14,7 +14,7 @@
 		<div class="page" id="lesson-archives" role="main">
 			
 			<h2 class="pagetitle">Lektioner</h2>
-				<form method="GET" id="lesson_filter_form" action='<?php get_bloginfo('wpurl') ?>mlp/lektioner/'>
+				<form method="GET" id="lesson_filter_form" action='<?php get_bloginfo('wpurl') ?>/lektioner/'>
 					<fieldset id='filter_lesson_container'>
 						<legend><p><strong>Filter</strong></p></legend>				
 						<?php 
@@ -62,7 +62,7 @@
 						<button type='submit' form='clear_filter' id='clear_button'>Rensa filter</button>						
 					</fieldset>
 				</form>
-				<form id='clear_filter' method='GET' action='<?php get_bloginfo('wpurl') ?>mlp/lektioner/'></form>
+				<form id='clear_filter' method='GET' action='<?php get_bloginfo('wpurl') ?>/lektioner/'></form>
 				<select name='sortera' id='lesson_sort' onchange='submit()' form="lesson_filter_form">
 				  <option value='senaste' >Senast inlagda</option>
 				  <option value='gillade' <?php if(isset($_GET['sortera']) && $_GET['sortera'] == 'gillade') echo 'SELECTED' ?>>Mest gillade</option>
