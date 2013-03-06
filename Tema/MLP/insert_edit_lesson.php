@@ -25,9 +25,9 @@
 					{
 						$errors[] = '<p>Du måste ange en lektionstitel</p>';
 					} 
-					else if(strlen($_POST['lesson_title']) < 4)
+					else if(strlen($_POST['lesson_title']) < 10)
 					{
-						$errors[] = '<p>Lektionstiteln är för kort.</p>';
+						$errors[] = '<p>Lektionstiteln är för kort (minst 10 tecken)</p>';
 					}
 					else 
 					{
@@ -38,9 +38,9 @@
 					{
 						$errors[] = '<p>Du måste ange en lektionsintroduktion</p>';
 					}
-					else if(strlen($_POST['lesson_intro']) < 20)
+					else if(strlen($_POST['lesson_intro']) < 40)
 					{
-						$errors[] = '<p>Lektionsintroduktionen är för kort.(Minst 20tecken)</p>';
+						$errors[] = '<p>Lektionsintroduktionen är för kort (minst 40 tecken)</p>';
 					}
 					else
 					{
@@ -51,9 +51,9 @@
 					{
 						$errors[] = '<p>Du måste ange ett mål med lektionen</p>';
 					}
-					else if(strlen($_POST['lesson_goal']) < 20)
+					else if(strlen($_POST['lesson_goal']) < 40)
 					{
-						$errors[] = '<p>Lektionsmål är för kort.(Minst 20tecken)</p>';
+						$errors[] = '<p>Lektionsmål är för kort (minst 40 tecken)</p>';
 					}
 					else 
 					{
@@ -64,9 +64,9 @@
 					{
 						$errors[] = '<p>Du måste ange en beskrivning på hur man utför lektionen</p>';
 					}
-					else if(strlen($_POST['lesson_execution']) < 20)
+					else if(strlen($_POST['lesson_execution']) < 40)
 					{
-						$errors[] = '<p>Lektionsutförande är för kort.(Minst 20tecken)</p>';
+						$errors[] = '<p>Lektionsutförande är för kort (minst 40 tecken)</p>';
 					}
 					else 
 					{
@@ -164,7 +164,7 @@
 
 							<!-- Lesson Categories -->
 							<p>
-							Huvudämne:
+							Huvudområden:
 							<?php $lessonCategories = get_terms('mlp_category', array( 'hide_empty' => 0 ));
 							foreach ($lessonCategories as $lessonCategory) {
 								echo '<label><input class="{category: true}" type="checkbox" name="category[]" value="'.$lessonCategory->term_id.'" id="grade'.$lessonCategory->term_id.'" />'.$lessonCategory->name.'</label>';
@@ -227,49 +227,6 @@
 	</div><!-- #content -->
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.0/jquery.validate.min.js"></script>
-	<script type="text/javascript">
-		$(function() {
-			$("#add_file_form").on("click", function(e) {
-				e.preventDefault();
-				var files = $(".files").children();
-				var counter = files.length; 
-				$(".files").append("<br /><input type=\"file\" id=\"lesson_file" + counter + "\" name=\"lesson_file"+counter+"\">")
-			});
-			$("#insert_new_lesson").validate({
-				errorPlacement: function (error, element) { 
-					error.insertBefore(element);    
-				},
-				rules: {
-					lesson_title: {
-						required: true,
-					},
-					lesson_intro: {
-						required: true
-					},
-					lesson_goal: {
-						required: true
-					},
-					lesson_execution: {
-						required: true
-					}
-				},
-				messages: {
-					lesson_title: {
-						required: "Detta fält måste fyllas i"
-					},
-					lesson_intro: {
-						required: "Detta fält måste fyllas i"
-					},
-					lesson_goal: {
-						required: "Detta fält måste fyllas i"
-					},
-					lesson_execution: {
-						required: "Detta fält måste fyllas i"
-					}				
-				}
-			});
-		});
-	</script>
 	<?php get_sidebar(); ?>
 
 <?php get_footer(); ?>
