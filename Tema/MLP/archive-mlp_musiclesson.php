@@ -198,8 +198,8 @@
 
 			<?php else : ?>
 
-				<h2 class="center"><?php _e( 'Not Found', 'buddypress' ); ?></h2>
-				<?php get_search_form(); ?>
+				<h3>Inga lektioner kunde hittas</h3>
+				<p>Välj andra filterinställningar för att hitta lektioner</p>
 
 			<?php endif; ?>
 
