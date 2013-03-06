@@ -1,11 +1,7 @@
 <?php
  /*Template Name: Insert Edit Lesson
  */
- ?>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.0/jquery.validate.min.js"></script>
- 
+ ?> 
 <?php get_header(); ?>
 
 	<div id="content">
@@ -25,40 +21,56 @@
 					<?php
 					$errors = array();
 					
-					if($_POST['lesson_title'] != "") 
-					{
-						$title = esc_html($_POST['lesson_title']);
-					} 
-					else 
+					if($_POST['lesson_title'] == "") 
 					{
 						$errors[] = '<p>Du måste ange en lektionstitel</p>';
+					} 
+					else if(strlen($_POST['lesson_title']) < 4)
+					{
+						$errors[] = '<p>Lektionstiteln är för kort.</p>';
+					}
+					else 
+					{
+						$title = esc_html($_POST['lesson_title']);
 					}
 					
-					if($_POST['lesson_intro'] != "")
-					{
-						$introduction = esc_html($_POST['lesson_intro']);
-					} 
-					else
+					if($_POST['lesson_intro'] == "")
 					{
 						$errors[] = '<p>Du måste ange en lektionsintroduktion</p>';
 					}
-					
-					if($_POST['lesson_goal'] != "") 
+					else if(strlen($_POST['lesson_intro']) < 20)
 					{
-						$goal = esc_html($_POST['lesson_goal']);
-					} 
-					else 
+						$errors[] = '<p>Lektionsintroduktionen är för kort.(Minst 20tecken)</p>';
+					}
+					else
+					{
+						$introduction = esc_html($_POST['lesson_intro']);
+					}
+					
+					if($_POST['lesson_goal'] == "") 
 					{
 						$errors[] = '<p>Du måste ange ett mål med lektionen</p>';
 					}
-					
-					if($_POST['lesson_execution'] != "") 
+					else if(strlen($_POST['lesson_goal']) < 20)
 					{
-						$execution = esc_html($_POST['lesson_execution']);
-					} 
+						$errors[] = '<p>Lektionsmål är för kort.(Minst 20tecken)</p>';
+					}
 					else 
 					{
+						$goal = esc_html($_POST['lesson_goal']);
+					}
+					
+					if($_POST['lesson_execution'] == "") 
+					{
 						$errors[] = '<p>Du måste ange en beskrivning på hur man utför lektionen</p>';
+					}
+					else if(strlen($_POST['lesson_execution']) < 20)
+					{
+						$errors[] = '<p>Lektionsutförande är för kort.(Minst 20tecken)</p>';
+					}
+					else 
+					{
+						$execution = esc_html($_POST['lesson_execution']);
 					}
 					
 					
@@ -104,10 +116,31 @@
 						add_post_meta($post_id, 'mlp_execution', $execution);
 						
 						if ($_FILES) {
+							$wp_upload_dir = wp_upload_dir();
 							foreach ($_FILES as $file => $array) {
+<<<<<<< HEAD
 								$newupload = insert_attachment($file,$post_id);
 								// $newupload returns the attachment id of the file that
 								// was just uploaded. Do whatever you want with that now.
+=======
+								require_once(ABSPATH . 'wp-admin/includes/admin.php');
+								
+						        $file_return = wp_handle_upload($array, array('test_form' => false));
+						
+						        if(isset($file_return['error']) || isset($file_return['upload_error_handler'])) {
+						            echo $file_return['error'];
+						        }
+								
+								$wp_filetype = wp_check_filetype(basename($array['name']), null );
+								$filename = basename($array['name']);
+								$args = array(
+									'guid' => $wp_upload_dir['path'] . '/' . basename($filename),
+									'post_mime_type' => $wp_filetype['type'],
+									'post_title' => preg_replace('/\.[^.]+$/', '', basename($filename)),
+									'post_status' => 'publish'
+								);
+								$newupload = wp_insert_attachment($args, $filename, $post_id);
+>>>>>>> upload working
 							}
 						}
 									
@@ -192,72 +225,51 @@
 
 		</div><!-- .padder -->
 	</div><!-- #content -->
-
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.0/jquery.validate.min.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$("#add_file_form").on("click", function(e) {
+				e.preventDefault();
+				var files = $(".files").children();
+				var counter = files.length; 
+				$(".files").append("<br /><input type=\"file\" id=\"lesson_file" + counter + "\" name=\"lesson_file"+counter+"\">")
+			});
+			$("#insert_new_lesson").validate({
+				errorPlacement: function (error, element) { 
+					error.insertBefore(element);    
+				},
+				rules: {
+					lesson_title: {
+						required: true,
+					},
+					lesson_intro: {
+						required: true
+					},
+					lesson_goal: {
+						required: true
+					},
+					lesson_execution: {
+						required: true
+					}
+				},
+				messages: {
+					lesson_title: {
+						required: "Detta fält måste fyllas i"
+					},
+					lesson_intro: {
+						required: "Detta fält måste fyllas i"
+					},
+					lesson_goal: {
+						required: "Detta fält måste fyllas i"
+					},
+					lesson_execution: {
+						required: "Detta fält måste fyllas i"
+					}				
+				}
+			});
+		});
+	</script>
 	<?php get_sidebar(); ?>
 
 <?php get_footer(); ?>
-
-<script type="text/javascript">
-	$(function() {
-		$("#add_file_form").on("click", function(e) {
-			e.preventDefault();
-			var files = $(".files").children();
-			var counter = files.length; 
-			$(".files").append("<br /><input type=\"file\" id=\"lesson_file" + counter + "\" name=\"lesson_file"+counter+"\">")
-		});
-		$.validator.addMethod("category", function(value, elem, param) {
-			if($(".category:checkbox:checked").length > 0){
-			   return true;
-		   }else {
-			   return false;
-		   }
-		},"You must select at least one!");
-		$.validator.addMethod("theme", function(value, elem, param) {
-			if($(".theme:checkbox:checked").length > 0){
-			   return true;
-		   }else {
-			   return false;
-		   }
-		},"You must select at least one!");
-		$.validator.addMethod("grade", function(value, elem, param) {
-			if($(".grade:checkbox:checked").length > 0){
-			   return true;
-		   }else {
-			   return false;
-		   }
-		},"You must select at least one!");
-		$("#insert_new_lesson").validate({
-			errorPlacement: function (error, element) { 
-				error.insertBefore(element);    
-			},
-			rules: {
-				lesson_title: {
-					required: true,
-				},
-				lesson_intro: {
-					required: true
-				},
-				lesson_goal: {
-					required: true
-				},
-				lesson_execution: {
-					required: true
-				}
-			},
-			messages: {
-				lesson_title: {
-					required: "Detta fält måste fyllas i"
-				},
-				lesson_intro: {
-					required: "Detta fält måste fyllas i"
-				},
-				lesson_goal: {
-					required: "Detta fält måste fyllas i"
-				},
-				lesson_execution: {
-					required: "Detta fält måste fyllas i"
-				}				
-			}
-		});
-	});
-</script>

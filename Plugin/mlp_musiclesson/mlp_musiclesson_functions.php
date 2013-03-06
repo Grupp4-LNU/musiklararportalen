@@ -178,3 +178,114 @@ function mlp_create_my_lesson_archive_page() {
 	
 	update_post_meta($post_id, '_wp_page_template','archive-my_lessons.php');
 }
+
+add_filter('upload_mimes', 'custom_upload_mimes');
+
+function custom_upload_mimes ( $existing_mimes = array() ) {
+
+	// add your extension to the array
+	$existing_mimes['ppt'] = 'application/vnd.ms-powerpoint';
+	$existing_mimes['ppt'] = 'application/vnd.ms-powerpoint';
+	$existing_mimes['au'] = 'audio/basic';
+	$existing_mimes['au'] = 'audio/x-au';
+	$existing_mimes['avi'] = 'application/x-troff-msvideo';
+	$existing_mimes['avi'] = 'video/avi';
+	$existing_mimes['avi'] = 'video/msvideo';
+	$existing_mimes['avi'] = 'video/x-msvideo';
+	$existing_mimes['bmp'] = 'image/bmp';
+	$existing_mimes['bmp'] = 'image/x-windows-bmp';
+	$existing_mimes['doc'] = 'application/msword';
+	$existing_mimes['gif'] = 'image/gif';
+	$existing_mimes['jpeg'] = 'image/jpeg';
+	$existing_mimes['jpeg'] = 'image/pjpeg';
+	$existing_mimes['jpg'] = 'image/jpeg';
+	$existing_mimes['jpg'] = 'image/pjpeg';
+	$existing_mimes['mid'] = 'application/x-midi';
+	$existing_mimes['mid'] = 'audio/midi';
+	$existing_mimes['mid'] = 'audio/x-mid';
+	$existing_mimes['mid'] = 'audio/x-midi';
+	$existing_mimes['mid'] = 'music/crescendo';
+	$existing_mimes['mid'] = 'x-music/x-midi';
+	$existing_mimes['midi'] = 'audio/x-mid';
+	$existing_mimes['midi'] = 'audio/x-midi';
+	$existing_mimes['midi'] = 'music/crescendo';
+	$existing_mimes['midi'] = 'x-music/x-midi';
+	$existing_mimes['midi'] = 'audio/midi';
+	$existing_mimes['midi'] = 'application/x-midi';
+	$existing_mimes['mov'] = 'video/quicktime';
+	$existing_mimes['moov'] = 'video/quicktime';
+	$existing_mimes['midi'] = 'application/x-midi';
+	$existing_mimes['mp2'] = 'audio/x-mpeg';
+	$existing_mimes['mp2'] = 'video/mpeg';
+	$existing_mimes['mp2'] = 'video/x-mpeg';
+	$existing_mimes['mp2'] = 'video/x-mpeq2a';
+	$existing_mimes['mp3'] = 'audio/mpeg3';
+	$existing_mimes['mp3'] = 'audio/x-mpeg-3';
+	$existing_mimes['mp3'] = 'video/mpeg';
+	$existing_mimes['mp3'] = 'video/x-mpeg';
+	$existing_mimes['mpa'] = 'audio/mpeg';
+	$existing_mimes['mpa'] = 'video/mpeg';
+	$existing_mimes['mpe'] = 'video/mpeg';
+	$existing_mimes['mpeg'] = 'video/mpeg';
+	$existing_mimes['mpg'] = 'audio/mpeg';
+	$existing_mimes['mpg'] = 'video/mpeg';
+	$existing_mimes['mpga'] = 'audio/mpeg';
+	$existing_mimes['mov'] = 'video/quicktime';
+	$existing_mimes['nif'] = 'image/x-niff';
+	$existing_mimes['niff'] = 'image/x-niff';
+	$existing_mimes['pbm'] = 'image/x-portable-bitmap';
+	$existing_mimes['pct'] = 'image/x-pict';
+	$existing_mimes['pcx'] = 'image/x-pcx';
+	$existing_mimes['pdf'] = 'application/pdf';
+	$existing_mimes['pic'] = 'image/pict';
+	$existing_mimes['pict'] = 'image/pict';
+	$existing_mimes['png'] = 'image/png';
+	$existing_mimes['pps'] = 'application/mspowerpoint';
+	$existing_mimes['pps'] = 'application/vnd.ms-powerpoint';
+	$existing_mimes['ppt'] = 'application/vnd.ms-powerpoint';
+	$existing_mimes['ppt'] = 'application/powerpoint';
+	$existing_mimes['ppt'] = 'application/vnd.ms-powerpoint';
+	$existing_mimes['ppt'] = 'application/x-mspowerpoint';
+	$existing_mimes['qif'] = 'image/x-quicktime';
+	$existing_mimes['qt'] = 'video/quicktime';
+	$existing_mimes['qtc'] = 'video/x-qtc';
+	$existing_mimes['qti'] = 'image/x-quicktime';
+	$existing_mimes['qtif'] = 'image/x-quicktime';
+	$existing_mimes['ra'] = 'audio/x-pn-realaudio';
+	$existing_mimes['ra'] = 'audio/x-pn-realaudio-plugin';
+	$existing_mimes['ra'] = 'audio/x-realaudio';
+	$existing_mimes['rgb'] = 'image/x-rgb';
+	$existing_mimes['rm'] = 'application/vnd.rn-realmedia';
+	$existing_mimes['rm'] = 'audio/x-pn-realaudio';
+	$existing_mimes['tif'] = 'image/tiff';
+	$existing_mimes['tif'] = 'image/x-tiff';
+	$existing_mimes['tiff'] = 'image/tiff';
+	$existing_mimes['tiff'] = 'image/x-tiff';
+	$existing_mimes['txt'] = 'text/plain';
+	$existing_mimes['xls'] = 'application/excel';
+	$existing_mimes['xls'] = 'application/vnd.ms-excel';
+	$existing_mimes['xls'] = 'application/x-excel';
+	$existing_mimes['xls'] = 'application/x-msexcel';
+	$existing_mimes['xlsx'] = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+	$existing_mimes['xltx'] = 'application/vnd.openxmlformats-officedocument.spreadsheetml.template';
+	$existing_mimes['potx'] = 'application/vnd.openxmlformats-officedocument.presentationml.template';
+	$existing_mimes['ppsx'] = 'application/vnd.openxmlformats-officedocument.presentationml.slideshow';
+	$existing_mimes['pptx'] = 'application/vnd.openxmlformats-officedocument.presentationml.presentation';
+	$existing_mimes['sldx'] = 'application/vnd.openxmlformats-officedocument.presentationml.slide';
+	$existing_mimes['docx'] = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+	$existing_mimes['dotx'] = 'application/vnd.openxmlformats-officedocument.wordprocessingml.template';
+	$existing_mimes['xlam'] = 'application/vnd.ms-excel.addin.macroEnabled.12';
+	$existing_mimes['xlsb'] = 'application/vnd.ms-excel.sheet.binary.macroEnabled.12';
+	// or: $existing_mimes['ppt|pot|pps'] = 'application/vnd.ms-powerpoint';
+	// to add multiple extensions for the same mime type
+	// add as many as you like
+	// removing existing file types
+	unset( $existing_mimes['exe'] );
+	unset( $existing_mimes['dmg'] );
+	unset( $existing_mimes['bin'] );
+	unset( $existing_mimes['bat'] );
+	unset( $existing_mimes['app'] );
+	// add as many as you like
+	// and return the new full result
+	return $existing_mimes;
+}
