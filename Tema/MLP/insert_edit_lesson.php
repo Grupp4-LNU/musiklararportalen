@@ -164,7 +164,7 @@
 
 							<!-- Lesson Categories -->
 							<p>
-							Huvudområden:
+							Huvudämne:
 							<?php $lessonCategories = get_terms('mlp_category', array( 'hide_empty' => 0 ));
 							foreach ($lessonCategories as $lessonCategory) {
 								echo '<label><input class="{category: true}" type="checkbox" name="category[]" value="'.$lessonCategory->term_id.'" id="grade'.$lessonCategory->term_id.'" />'.$lessonCategory->name.'</label>';
