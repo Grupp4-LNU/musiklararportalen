@@ -24,6 +24,7 @@
 		<?php wp_footer(); ?>
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 		<script type="text/javascript" src="<?php bloginfo('stylesheet_directory'); ?>/js/responsive.js"></script>
+		<script type="text/javascript" src="<?php bloginfo('stylesheet_directory'); ?>/js/jquery.validate.js"></script>
 
 	</body>
 
