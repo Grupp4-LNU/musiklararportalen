@@ -105,13 +105,15 @@
 						
 						if ($_FILES) {
 							foreach ($_FILES as $file => $array) {
-								$newupload = wp_insert_attachment($file,$post_id);
+								$newupload = insert_attachment($file,$post_id);
 								// $newupload returns the attachment id of the file that
 								// was just uploaded. Do whatever you want with that now.
 							}
 						}
-						echo "Tack för att du skapade en lektion för Musiklärarportalen!<br />";
-						echo "Din lektion finns nu tillgänglig för allmänheten att ta del av.";
+									
+						echo '<p>Tackar! Din lektion har blivit sparad</p>';
+						echo '<p>Du blir skickad tillbaka om 5s, ifall det inte fungerar kan du klicka <a href="'.home_url().'">här</a>.</p>';
+						wp_redirect(home_url());
 					}
 					else 
 					{
