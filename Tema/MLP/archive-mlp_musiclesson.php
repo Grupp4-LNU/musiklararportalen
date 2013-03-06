@@ -98,7 +98,7 @@
 
 			//Building Sorting-query
 			$sort_term;
-			$order_by;
+			$order_by = 'date';
 			if(isset($_GET['sortera'])){
 						
 				if($_GET['sortera'] == 'gillade'){
