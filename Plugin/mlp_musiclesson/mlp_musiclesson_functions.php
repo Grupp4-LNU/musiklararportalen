@@ -184,7 +184,8 @@ add_filter('upload_mimes', 'custom_upload_mimes');
 function custom_upload_mimes ( $existing_mimes = array() ) {
 
 	// add your extension to the array
-	$existing_mimes['ppt'] = 'application/vnd.ms-powerpoint';
+	$existing_mimes['3gp'] = 'audio/3gpp';
+	$existing_mimes['3gp'] = 'video/3gpp';
 	$existing_mimes['ppt'] = 'application/vnd.ms-powerpoint';
 	$existing_mimes['au'] = 'audio/basic';
 	$existing_mimes['au'] = 'audio/x-au';
@@ -200,6 +201,7 @@ function custom_upload_mimes ( $existing_mimes = array() ) {
 	$existing_mimes['jpeg'] = 'image/pjpeg';
 	$existing_mimes['jpg'] = 'image/jpeg';
 	$existing_mimes['jpg'] = 'image/pjpeg';
+	$existing_mimes['m2v'] = 'video/mpeg';
 	$existing_mimes['mid'] = 'application/x-midi';
 	$existing_mimes['mid'] = 'audio/midi';
 	$existing_mimes['mid'] = 'audio/x-mid';
@@ -217,8 +219,10 @@ function custom_upload_mimes ( $existing_mimes = array() ) {
 	$existing_mimes['midi'] = 'application/x-midi';
 	$existing_mimes['mp2'] = 'audio/x-mpeg';
 	$existing_mimes['mp2'] = 'video/mpeg';
+	$existing_mimes['mp2v'] = 'video/mpeg';
 	$existing_mimes['mp2'] = 'video/x-mpeg';
 	$existing_mimes['mp2'] = 'video/x-mpeq2a';
+	$existing_mimes['mp2v'] = 'video/mpeg';
 	$existing_mimes['mp3'] = 'audio/mpeg3';
 	$existing_mimes['mp3'] = 'audio/x-mpeg-3';
 	$existing_mimes['mp3'] = 'video/mpeg';
@@ -230,6 +234,7 @@ function custom_upload_mimes ( $existing_mimes = array() ) {
 	$existing_mimes['mpg'] = 'audio/mpeg';
 	$existing_mimes['mpg'] = 'video/mpeg';
 	$existing_mimes['mpga'] = 'audio/mpeg';
+	$existing_mimes['mpv2'] = 'video/mpeg';
 	$existing_mimes['mov'] = 'video/quicktime';
 	$existing_mimes['nif'] = 'image/x-niff';
 	$existing_mimes['niff'] = 'image/x-niff';
@@ -276,6 +281,8 @@ function custom_upload_mimes ( $existing_mimes = array() ) {
 	$existing_mimes['dotx'] = 'application/vnd.openxmlformats-officedocument.wordprocessingml.template';
 	$existing_mimes['xlam'] = 'application/vnd.ms-excel.addin.macroEnabled.12';
 	$existing_mimes['xlsb'] = 'application/vnd.ms-excel.sheet.binary.macroEnabled.12';
+	$existing_mimes['webm'] = 'audio/webm';
+	$existing_mimes['webm'] = 'video/webm';
 	// or: $existing_mimes['ppt|pot|pps'] = 'application/vnd.ms-powerpoint';
 	// to add multiple extensions for the same mime type
 	// add as many as you like
@@ -285,6 +292,21 @@ function custom_upload_mimes ( $existing_mimes = array() ) {
 	unset( $existing_mimes['bin'] );
 	unset( $existing_mimes['bat'] );
 	unset( $existing_mimes['app'] );
+	unset( $existing_mimes['php'] );
+	unset( $existing_mimes['zip'] );
+	unset( $existing_mimes['rar'] );
+	unset( $existing_mimes['7z'] );
+	unset( $existing_mimes['xz'] );
+	unset( $existing_mimes['bzip2'] );
+	unset( $existing_mimes['gzip'] );
+	unset( $existing_mimes['tar'] );
+	unset( $existing_mimes['wim'] );
+	unset( $existing_mimes['tgz'] );
+	unset( $existing_mimes['pkg'] );
+	unset( $existing_mimes['iso'] );
+	unset( $existing_mimes['cdr'] );
+	unset( $existing_mimes['bin'] );
+	unset( $existing_mimes['cue'] );
 	// add as many as you like
 	// and return the new full result
 	return $existing_mimes;

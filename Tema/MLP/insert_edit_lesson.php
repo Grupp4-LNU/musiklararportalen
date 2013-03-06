@@ -125,9 +125,14 @@
 						        $file_return = wp_handle_upload($array, array('test_form' => false));
 						
 						        if(isset($file_return['error']) || isset($file_return['upload_error_handler'])) {
-						            echo $file_return['error'];
+						            $fileUploadError = $file_return['error'];
 						        }
-								
+								if(isset($fileUploadError)){
+									echo $fileUploadError;
+									echo '<a href="javascript:history.back()">Tillbaka till formuläret</a>';
+									wp_delete_post($post_id);
+									die();
+								}
 								$wp_filetype = wp_check_filetype(basename($array['name']), null );
 								$filename = basename($array['name']);
 								$args = array(
