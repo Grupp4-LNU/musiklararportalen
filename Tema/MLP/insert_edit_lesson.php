@@ -113,7 +113,7 @@
 									
 						echo '<p>Tackar! Din lektion har blivit sparad</p>';
 						echo '<p>Du blir skickad tillbaka om 5s, ifall det inte fungerar kan du klicka <a href="'.home_url().'">här</a>.</p>';
-						echo "<meta http-equiv='refresh' content='5; url='".home_url()."' />";
+						wp_redirect(home_url());
 					}
 					else 
 					{
@@ -134,7 +134,7 @@
 							Huvudområden:
 							<?php $lessonCategories = get_terms('mlp_category', array( 'hide_empty' => 0 ));
 							foreach ($lessonCategories as $lessonCategory) {
-								echo '<label><input class="{category: true}" type="radio" name="category[]" value="'.$lessonCategory->term_id.'" id="grade'.$lessonCategory->term_id.'" />'.$lessonCategory->name.'</label>';
+								echo '<label><input class="{category: true}" type="checkbox" name="category[]" value="'.$lessonCategory->term_id.'" id="grade'.$lessonCategory->term_id.'" />'.$lessonCategory->name.'</label>';
 							}
 							?>
 							</p>

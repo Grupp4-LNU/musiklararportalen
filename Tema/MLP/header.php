@@ -29,48 +29,50 @@
 			</div><!-- #search-bar -->
 
 			<div id="navigation" role="navigation">
-				<?php wp_nav_menu( array(
-					'container' => false,
-					'menu_id' => 'nav',
-					'theme_location' => 'primary',
-					'fallback_cb' => 'bp_dtheme_main_nav' )
-				);
-
-				wp_nav_menu(array(
-					'container' => false,
-					'menu_id' => 'nav',
-					'theme_location' => 'primary', // your theme location here
-					'walker'         => new Walker_Nav_Menu_Dropdown(),
-					'items_wrap'     => '<select>%3$s</select>',
-					'fallback_cb'    => 'bp_dtheme_main_nav'
-				));
-
-
-				class Walker_Nav_Menu_Dropdown extends Walker_Nav_Menu{
-				    function start_lvl(&$output, $depth){
-				      $indent = str_repeat("\t", $depth); // don't output children opening tag (`<ul>`)
-				    }
-
-				    function end_lvl(&$output, $depth){
-				      $indent = str_repeat("\t", $depth); // don't output children closing tag
-				    }
-
-				    function start_el(&$output, $item, $depth, $args){
-					  // add spacing to the title based on the depth
-					  $item->title = str_repeat("&nbsp;- ", $depth).$item->title;
-
-					  parent::start_el($output, $item, $depth, $args);
-
-					  $href =! empty( $item->url ) ? ' value="'   . esc_attr( $item->url ) .'"' : '#';
-
-					  // no point redefining this method too, we just replace the li tag...
-					  $output = str_replace('<li', '<option '.$href, $output);
-					}
-
-				    function end_el(&$output, $item, $depth){
-				      $output .= "</option>\n"; // replace closing </li> with the option tag
-				    }
-				} ?>
+				<?php 
+				
+					class Walker_Nav_Menu_Dropdown extends Walker_Nav_Menu{
+					    function start_lvl(&$output, $depth){
+					      $indent = str_repeat("\t", $depth); // don't output children opening tag (`<ul>`)
+					    }
+	
+					    function end_lvl(&$output, $depth){
+					      $indent = str_repeat("\t", $depth); // don't output children closing tag
+					    }
+	
+					    function start_el(&$output, $item, $depth, $args){
+						  // add spacing to the title based on the depth
+						  $item->title = str_repeat("&nbsp;- ", $depth).$item->title;
+	
+						  parent::start_el($output, $item, $depth, $args);
+	
+						  $href =! empty( $item->url ) ? ' value="'   . esc_attr( $item->url ) .'"' : '#';
+	
+						  // no point redefining this method too, we just replace the li tag...
+						  $output = str_replace('<li', '<option '.$href, $output);
+						}
+	
+					    function end_el(&$output, $item, $depth){
+					      $output .= "</option>\n"; // replace closing </li> with the option tag
+					    }
+					} 
+					
+					wp_nav_menu( array(
+						'container' => false,
+						'menu_id' => 'nav',
+						'theme_location' => 'primary',
+						'fallback_cb' => 'bp_dtheme_main_nav' )
+					);
+	
+					wp_nav_menu(array(
+						'container' => false,
+						'menu_id' => 'nav',
+						'theme_location' => 'primary', // your theme location here
+						'walker'         => new Walker_Nav_Menu_Dropdown(),
+						'items_wrap'     => '<select>%3$s</select>',
+						'fallback_cb'    => 'bp_dtheme_main_nav'
+					));
+				?>
 
 			</div>
 
