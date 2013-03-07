@@ -25,7 +25,5 @@
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 		<script type="text/javascript" src="<?php bloginfo('stylesheet_directory'); ?>/js/external.js"></script>
 		<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.0/jquery.validate.min.js"></script>
-
 	</body>
-
 </html>
