@@ -10,33 +10,25 @@ $(function() {
 	    }
 	});
 
-	$.validator.prototype.elements = function() {
-	    var validator = this;
-	    // select all valid inputs inside the form (no submit or reset buttons)
-	    return $(this.currentForm)
-	        .find(":input")
-	        .not(":submit, :reset, :image, [disabled]")
-	        .not( this.settings.ignore )
-	        .filter(function() {
-	            !this.name && validator.settings.debug && window.console && console.error( "%o has no name assigned", this);
-	            return validator.objectLength($(this).rules());
-	        });
-	};
-
 	$("#add_file_form").on("click", function(e) {
-			e.preventDefault();
-			var files = $(".files").children();
-			var counter = files.length; 
-			$(".files").append("<br /><input type=\"file\" id=\"lesson_file" + counter + "\" name=\"lesson_file"+counter+"\">")
-		});
+		e.preventDefault();
+		var files = $(".files").children();
+		var counter = files.length; 
+		$(".files").append("<br /><input type=\"file\" id=\"lesson_file" + counter + "\" name=\"lesson_file"+counter+"\">")
+	});
+
+	$.validator.addMethod('atLeastOneCat', function(value, element, param) {
+	    return $('input[name^="category"]').is(':checked');
+	}, 'Välj minst ett huvudområde');
+
+	$.validator.addMethod('atLeastOneYear', function(value, element, param) {
+	    return $('input[name^="category"]').is(':checked');
+	}, 'Välj minst en årskurs');
+
 	$("#insert_new_lesson").validate({
-		errorPlacement: function (error, element) { 
-			error.insertBefore(element);    
-		},
 		rules: {
-			category: {
-				required: 'input[type="checkbox"]:checked',
-			},
+			'category[]': 'atLeastOneCat',
+			'grade[]':  'atLeastOneYear',
 			lesson_title: {
 				required: true,
 				minlength: 10
@@ -53,8 +45,20 @@ $(function() {
 				required: true,
 				minlength: 40
 			}
-		},
-		messages: {
+		}, groups: {
+            checkboxes: 'category[]'
+        }, errorPlacement: function(error, elem) {
+            if (elem.attr('name').match(/category\[\]/)) {
+				$('input[name^="category"]:last').after(error);
+			}
+			else if (elem.attr('name').match(/grade\[\]/)) {
+				$('input[name^="category"]:last').after(error);
+			}
+			else {
+				elem.parent().after(error);
+			}
+        },
+        messages: {
 			lesson_title: {
 				required: "Detta fält måste fyllas i",
 				minlength: "Lektionstiteln är för kort (minst 10 tecken)"
