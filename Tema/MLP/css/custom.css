@@ -1552,6 +1552,11 @@ div.dir-search input[type=text] {
 /*--------------------------------------------------------------
 6.4 - Errors / Success Messages
 --------------------------------------------------------------*/
+
+#category_error, #grade_error {
+	color: red;
+}
+
 div#message {
 	margin: 0 0 15px;
 }

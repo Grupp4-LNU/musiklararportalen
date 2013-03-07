@@ -164,7 +164,7 @@
 
 							<!-- Lesson Categories -->
 							<p>
-							Huvudämnen:
+							Huvudområden:
 							<?php $lessonCategories = get_terms('mlp_category', array( 'hide_empty' => 0 ));
 							foreach ($lessonCategories as $lessonCategory) {
 								echo '<label><input class="{category: true}" type="checkbox" name="category[]" value="'.$lessonCategory->term_id.'" id="grade'.$lessonCategory->term_id.'" />'.$lessonCategory->name.'</label>';
@@ -180,6 +180,8 @@
 							}
 							?>
 							</p>
+						<div id="category_error"></div>
+						<div id="grade_error"></div>
 						</fieldset>
 							
 						<!-- Lesson Title -->
@@ -225,6 +227,8 @@
 
 		</div><!-- .padder -->
 	</div><!-- #content -->
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.0/jquery.validate.min.js"></script>
 	<?php get_sidebar(); ?>
 
 <?php get_footer(); ?>

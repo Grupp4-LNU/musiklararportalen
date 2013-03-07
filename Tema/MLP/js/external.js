@@ -22,8 +22,13 @@ $(function() {
 	}, 'Välj minst ett huvudområde');
 
 	$.validator.addMethod('atLeastOneYear', function(value, element, param) {
-	    return $('input[name^="category"]').is(':checked');
+	    return $('input[name^="grade"]').is(':checked');
 	}, 'Välj minst en årskurs');
+
+	$('#submit').on('click', function(){
+		$('#category_error').html('');
+		$('#grade_error').html('');
+	});
 
 	$("#insert_new_lesson").validate({
 		rules: {
@@ -49,13 +54,10 @@ $(function() {
             checkboxes: 'category[]'
         }, errorPlacement: function(error, elem) {
             if (elem.attr('name').match(/category\[\]/)) {
-				$('input[name^="category"]:last').after(error);
+				$('#category_error').html(error[0].innerHTML);
 			}
 			else if (elem.attr('name').match(/grade\[\]/)) {
-				$('input[name^="category"]:last').after(error);
-			}
-			else {
-				elem.parent().after(error);
+				$('#grade_error').html(error[0].innerHTML);
 			}
         },
         messages: {
