@@ -115,7 +115,7 @@
 						add_post_meta($post_id, 'mlp_goals', $goal);
 						add_post_meta($post_id, 'mlp_execution', $execution);
 						
-						if ($_FILES) {
+						if ($_FILES['lesson_file']['name'] != "") {
 							$wp_upload_dir = wp_upload_dir();
 							foreach ($_FILES as $file => $array) {
 								// $newupload returns the attachment id of the file that
