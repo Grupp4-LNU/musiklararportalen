@@ -1,15 +1,22 @@
 $(function() {
 	
+	/* DEN RESPONSIVA MENYN */
+
+	// Ser till att sida ändras när man ändrar val i menyn
 	$("#navigation select").on('change', function() {
 		window.location = jq(this).find("option:selected").val();
 	});
 
+	// Ser till att aktuell sida visas som default-val i menyn
 	$("#navigation option").each(function () {
 	    if ($(this).val() == window.location) {
 	        $(this).prop('selected', true);
 	    }
 	});
 
+	/* FILHANTERING */
+
+	// Confirm som visas när man vill ta bort en fil till en lektion 
 	$("#remove_attachement").on('click', function(){
 		var answer = confirm("Vill du ta bort filen?")
         if (answer == false){
@@ -17,6 +24,7 @@ $(function() {
         }
 	});
 
+	// Funktion för knappen för att lägga till ytterligare filer som skapar ytterligare en uppladdningsknapp
 	$("#add_file_form").on("click", function(e) {
 		e.preventDefault();
 		var files = $(".files").children();
@@ -24,6 +32,9 @@ $(function() {
 		$(".files").append("<br /><input type=\"file\" id=\"lesson_file" + counter + "\" name=\"lesson_file"+counter+"\">")
 	});
 
+	/* VALIDERING */
+
+	// Validering av kategorier
 	$.validator.addMethod('atLeastOneCat', function(value, element, param) {
 	    return $('input[name^="category"]').is(':checked');
 	}, 'Välj minst ett huvudområde');
@@ -37,6 +48,7 @@ $(function() {
 		$('#grade_error').html('');
 	});
 
+	// Inställningar för valieringen
 	$("#insert_new_lesson").validate({
 		rules: {
 			'category[]': 'atLeastOneCat',
