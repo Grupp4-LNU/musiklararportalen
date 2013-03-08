@@ -117,7 +117,7 @@
 				'post_type' => 'mlp_musiclesson',
 				'tax_query' => array('relation' => 'AND', $category_setting, $grades_setting),
 				'orderby' => $order_by, 'meta_key' => $sort_term,
-				'posts_per_page' => 3,
+				'posts_per_page' => 10,
 				'paged' => $paged				
 			);
 			$wp_query = new WP_Query($args);

@@ -56,7 +56,7 @@
 				$args = array(
 					'post_type' => 'mlp_musiclesson',
 					'orderby' => $order_by, 'meta_key' => $sort_term,
-					'posts_per_page' => 3,
+					'posts_per_page' => 10,
 					'paged' => $paged,
 					'author' => $current_user->ID 					
 				);

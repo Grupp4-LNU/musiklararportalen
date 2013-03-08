@@ -2715,7 +2715,7 @@ div.preview_lesson span.lesson_meta_text{
 
 }
 #insert_new_lesson textarea{
-	width: 99%;
+	width: 98%;
 	padding: 5px;
 	border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -2731,6 +2731,10 @@ div.preview_lesson span.lesson_meta_text{
 	-webkit-border-radius: 5px;
 	border: 1px solid #ddd;
 	height: 35px;
+}
+#lesson_title{
+	width: 40%;
+	min-width: 200px;
 }
 .files{
 	padding: 10px;
