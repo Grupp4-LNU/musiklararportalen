@@ -2604,6 +2604,11 @@ div.preview_lesson span.lesson_meta_text{
 
 .lesson .attachments {
 	list-style: none;
+	background: url('../images/file.png') no-repeat top left;
+	line-height: 16px;
+	vertical-align: middle;
+	padding: 2px 0 0 20px;
+	margin: 8px 0;
 }
 
 .lesson_meta{
