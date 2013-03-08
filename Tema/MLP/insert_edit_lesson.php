@@ -343,11 +343,11 @@
 										{
 											echo "<ul>";
 											foreach ($attachments as $attachment) {
-												echo "<li>";
+												echo "<li class='attachments'>";
 													echo "<a href='".$attachment->guid."'>";
 														echo $attachment->post_name;
 													echo "</a>";
-													echo " <a class='delete_attachment' href='?id=$post_id&delete_attachment=".$attachment->ID."'>Ta bort fil</a>";
+													echo " <a class='delete_attachment delete_file_image' href='?id=$post_id&delete_attachment=".$attachment->ID."'></a>";
 												echo "</li>";
 											}
 											echo "</ul>";

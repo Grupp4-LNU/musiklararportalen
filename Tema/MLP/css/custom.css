@@ -2745,6 +2745,20 @@ div.preview_lesson span.lesson_meta_text{
 	min-width: 200px;
 }
 
+div.page div.files ul {
+	margin-left: 0;
+}
+
+.attachments {
+	list-style: none;
+	background: url('../images/file.png') no-repeat top left;
+	line-height: 16px;
+	vertical-align: top;
+	text-indent: 20px;
+	margin: 8px 0;
+	display: block;
+}
+
 .delete_file_error,
 .delete_file_success {
 	padding: 1em;
@@ -2760,6 +2774,21 @@ div.preview_lesson span.lesson_meta_text{
 .delete_file_success {
 	background: rgba(0,255,0,.2);
 	border: 1px solid #00ff00;
+}
+
+.delete_file_image {
+	width: 16px;
+	height: 16px;
+	background: url('../images/delete_file.png');
+	opacity: 0.7;
+	display: inline-block;
+	padding: 0;
+}
+
+.delete_file_image:hover,
+.delete_file_image:focus {
+	background: url('../images/delete_file.png');
+	opacity: 1;
 }
 
 .files{
