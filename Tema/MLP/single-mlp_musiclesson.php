@@ -61,9 +61,32 @@
 							<h4>Inledning</h3>
 							<?php echo str_replace("\n","<br/>", get_post_meta( get_the_ID(), 'mlp_intro', true )) ; ?>
 							<h4>Mål</h3>
-							<?php echo str_replace("\n","<br/>",get_post_meta( get_the_ID(), 'mlp_goals', true )); ?>
+							<?php echo str_replace("\n","<br/>", get_post_meta( get_the_ID(), 'mlp_goals', true )); ?>
 							<h4>Utförande</h3>			
-							<?php echo str_replace("\n","<br/>",get_post_meta( get_the_ID(), 'mlp_execution', true )); ?>
+							<?php echo str_replace("\n","<br/>", get_post_meta( get_the_ID(), 'mlp_execution', true )); ?>
+							
+							<?php
+								$args = array(
+									"post_type" => "attachment",
+									"numberposts" => null,
+									"post_status" => null,
+									"post_parent" => $post->ID
+								);
+								$attachments = get_posts($args);
+								$amount_of_attachments = sizeof($attachments);
+								if($amount_of_attachments > 0) { 
+							?>
+							<h4>Filer</h3>
+							<?php
+									foreach ($attachments as $attachment) {
+										echo "<li class='attachments'>";
+											echo "<a href='".$attachment->guid."'>";
+												echo $attachment->post_name;
+											echo "</a>";
+										echo "</li>";							
+									}
+								}
+							?>
 
 							<?php wp_link_pages( array( 'before' => '<div class="page-link"><p>' . __( 'Pages: ', 'buddypress' ), 'after' => '</p></div>', 'next_or_number' => 'number' ) ); ?>
 						</div>

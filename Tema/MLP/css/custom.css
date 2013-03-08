@@ -2601,6 +2601,11 @@ div.preview_lesson span.lesson_meta_text{
 	background: #EAEAEA;
 	padding: 5px 2px
 }
+
+.lesson .attachments {
+	list-style: none;
+}
+
 .lesson_meta{
 	margin: 10px 0;
 }
