@@ -10,6 +10,13 @@ $(function() {
 	    }
 	});
 
+	$("#remove_attachement").on('click', function(){
+		var answer = confirm("Vill du ta bort filen?")
+        if (answer == false){
+            return false;
+        }
+	});
+
 	$("#add_file_form").on("click", function(e) {
 		e.preventDefault();
 		var files = $(".files").children();
