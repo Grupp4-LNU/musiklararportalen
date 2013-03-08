@@ -23,8 +23,8 @@
 			
 			$display_form = true;
 		?>
-				
-		<?php if($_GET['id']) : ?>
+		<?php $get_id = isset($_GET['id']) ? $_GET['id'] : false ?>	
+		<?php if($get_id) : ?>
 			<h2 class="pagetitle">Redigera Lektion</h2>
 			
 			<?php
@@ -49,7 +49,14 @@
 				<?php while ($wp_query->have_posts()) : $wp_query->the_post(); ?>
 				
 					<?php if($current_user->ID == $post->post_author) : ?>
-					
+						<?php
+							// Delete attachment
+							$attachment_id = isset($_GET['delete_attachment']) ? $_GET['delete_attachment'] : null;
+							if($attachment_id)
+							{
+								wp_delete_attachment($attachment_id);
+							}
+						?>
 						<?php
 							$post_id = get_the_ID();
 							$post_categories = array();
@@ -68,11 +75,19 @@
 							$post_intro = esc_html( get_post_meta( get_the_ID(), 'mlp_intro', true ) );
 							$post_goal = esc_html( get_post_meta( get_the_ID(), 'mlp_goals', true ) );
 							$post_execution = esc_html( get_post_meta( get_the_ID(), 'mlp_execution', true ) );
-							$post_media = null;
+							$attach_args = array(
+								'post_type' => 'attachment',
+								'post_parent' => get_the_ID(),
+								'post_status' => null,
+								'numberposts' => null
+							);
+							$attachments = get_posts($attach_args);
+							$post_media = $attachments;
 						?>
 					
 					<?php else: ?>
 					<p>Du har ej behörighet att redigera denna lektion</p>
+					<h2>Istället kan du här nedan skapa ny lektion</h2>
 					<?php endif; ?>	
 
 				<?php endwhile; ?>
@@ -307,8 +322,26 @@
 							
 							<label for="lesson_file"><p>Media</p></label>
 							<div class="files">
-							<input type="file" id="lesson_file" name="lesson_file">
-							<a href="#" id="add_file_form">Lägg till ytterligare fil (+)</a>
+								<?php 
+									if(isset($attachments)) 
+									{
+										if(sizeof($attachments) > 0)
+										{
+											echo "<ul>";
+											foreach ($attachments as $attachment) {
+												echo "<li>";
+													echo "<a href='".$attachment->guid."'>";
+														echo $attachment->post_name;
+													echo "</a>";
+													echo " <a href='?id=$post_id&delete_attachment=".$attachment->ID."'>Delete</a>";
+												echo "</li>";
+											}
+											echo "</ul>";
+										}
+									}
+								?>
+								<input type="file" id="lesson_file" name="lesson_file">
+								<a href="#" id="add_file_form">Lägg till ytterligare fil (+)</a>
 							</div>
 							
 							<button type="submit" tabindex="40" id="submit" name="submit">Spara</button>
