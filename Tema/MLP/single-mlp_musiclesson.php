@@ -59,21 +59,22 @@
 
 						<div class="entry">
 							<h4>Inledning</h3>
-							<?php echo esc_html( get_post_meta( get_the_ID(), 'mlp_intro', true ) ); ?>
+							<?php echo str_replace("\n","<br/>", get_post_meta( get_the_ID(), 'mlp_intro', true )) ; ?>
 							<h4>Mål</h3>
-							<?php echo esc_html( get_post_meta( get_the_ID(), 'mlp_goals', true ) ); ?>
+							<?php echo str_replace("\n","<br/>",get_post_meta( get_the_ID(), 'mlp_goals', true )); ?>
 							<h4>Utförande</h3>			
-							<?php echo esc_html( get_post_meta( get_the_ID(), 'mlp_execution', true ) ); ?>
+							<?php echo str_replace("\n","<br/>",get_post_meta( get_the_ID(), 'mlp_execution', true )); ?>
 
 							<?php wp_link_pages( array( 'before' => '<div class="page-link"><p>' . __( 'Pages: ', 'buddypress' ), 'after' => '</p></div>', 'next_or_number' => 'number' ) ); ?>
 						</div>
-
+						<div id='singel_edit_control'>
+							<?php get_template_part('lessontemplates/edit_button'); ?>
+						</div>
 					</div>
 					<div class="alignleft"><?php previous_post_link( '%link', '<span class="meta-nav">' . _x( '&larr;', 'Previous post link', 'buddypress' ) . '</span> %title' ); ?></div>
 					<div class="alignright"><?php next_post_link( '%link', '%title <span class="meta-nav">' . _x( '&rarr;', 'Next post link', 'buddypress' ) . '</span>' ); ?></div>
 				</div>
-			
-						
+									
 			<?php comments_template(); ?>
 
 			<?php endwhile; else: ?>

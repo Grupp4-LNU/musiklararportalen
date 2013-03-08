@@ -1552,11 +1552,6 @@ div.dir-search input[type=text] {
 /*--------------------------------------------------------------
 6.4 - Errors / Success Messages
 --------------------------------------------------------------*/
-
-#category_error, #grade_error {
-	color: red;
-}
-
 div#message {
 	margin: 0 0 15px;
 }
@@ -2693,7 +2688,14 @@ div.preview_lesson span.lesson_meta_text{
 .add_lesson{
 	float:right;
 }
-
+#singel_edit_control button{
+	margin-bottom: 20px;
+}
+#preview_edit_control button{
+	margin-bottom: -40px;
+	position:relative;
+	top: 5px;
+}
 /*--------------------------------------------------------------
 7.2.1 - Insert/Edit Lesson
 --------------------------------------------------------------*/
