@@ -14,6 +14,7 @@ $(function() {
 	    }
 	});
 
+<<<<<<< HEAD
 	/* FILHANTERING */
 
 	// Confirm som visas när man vill ta bort en fil till en lektion 
@@ -25,6 +26,23 @@ $(function() {
 	});
 
 	// Funktion för knappen för att lägga till ytterligare filer som skapar ytterligare en uppladdningsknapp
+=======
+	/* 
+	 * Delete attachments
+	 */
+	$('.delete_attachment').on("click", function(e) {
+		if(!confirm("Är du säker på att du vill ta bort den här filen?")) {
+			return false;
+		}
+	})
+	
+	$('.delete_file_error').delay(3000).fadeOut("slow");
+	$('.delete_file_success').delay(3000).fadeOut("slow");
+	/*
+	 * End Delete attachments
+	 */
+	
+>>>>>>> fixed rights on delete_attachment
 	$("#add_file_form").on("click", function(e) {
 		e.preventDefault();
 		var files = $(".files").children();

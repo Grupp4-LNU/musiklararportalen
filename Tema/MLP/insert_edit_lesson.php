@@ -54,7 +54,21 @@
 							$attachment_id = isset($_GET['delete_attachment']) ? $_GET['delete_attachment'] : null;
 							if($attachment_id)
 							{
-								wp_delete_attachment($attachment_id);
+								$attachment = get_post($attachment_id);
+								if(isset($attachment))
+								{
+									if($attachment->post_author == $current_user->ID)
+									{
+										wp_delete_attachment($attachment_id);
+										echo "<p class='delete_file_success'>Filen togs bort!</p>";
+									}
+									else {
+										echo "<p class='delete_file_error'>Du har inte rättigheter att ta bort den här filen!</p>";
+									}
+								}
+								else {
+									echo "<p class='delete_file_error'>Det finns ingen fil med de id't!</p>";
+								}
 							}
 						?>
 						<?php
@@ -333,7 +347,7 @@
 													echo "<a href='".$attachment->guid."'>";
 														echo $attachment->post_name;
 													echo "</a>";
-													echo " <a href='?id=$post_id&delete_attachment=".$attachment->ID."'>Delete</a>";
+													echo " <a class='delete_attachment' href='?id=$post_id&delete_attachment=".$attachment->ID."'>Ta bort fil</a>";
 												echo "</li>";
 											}
 											echo "</ul>";

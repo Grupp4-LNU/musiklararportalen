@@ -2721,9 +2721,7 @@ div.preview_lesson span.lesson_meta_text{
 #insert_new_lesson p{
 	margin: 25px 0 2px 0;
 }
-#insert_new_lesson {
 
-}
 #insert_new_lesson textarea{
 	width: 98%;
 	padding: 5px;
@@ -2746,6 +2744,24 @@ div.preview_lesson span.lesson_meta_text{
 	width: 40%;
 	min-width: 200px;
 }
+
+.delete_file_error,
+.delete_file_success {
+	padding: 1em;
+	width: auto;
+	border-radius: 1em;
+}
+
+.delete_file_error {
+	background: rgba(255,0,255,.2);
+	border: 1px solid #f0f;
+}
+
+.delete_file_success {
+	background: rgba(0,255,0,.2);
+	border: 1px solid #00ff00;
+}
+
 .files{
 	padding: 10px;
 	background: #F7F7F7;
