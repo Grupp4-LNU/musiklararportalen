@@ -36,7 +36,7 @@
 				$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 				
 				//Building Sorting-query
-				$sort_term;
+				$sort_term = null;
 				$order_by = 'date';
 				
 				if(isset($_GET['sortera'])){
