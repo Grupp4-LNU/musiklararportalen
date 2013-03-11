@@ -703,10 +703,12 @@ div#pag-bottom {
 .alignright {
 	float: right;
 	margin-left: 15px;
+	margin-bottom: 10px;
 }
 .alignleft {
 	float: left;
 	margin-right: 15px;
+	margin-bottom: 10px;
 }
 .aligncenter {
 	display: block;
@@ -2711,22 +2713,19 @@ div.preview_lesson span.lesson_meta_text{
 .add_lesson{
 	float:right;
 }
-#singel_edit_control{
-	margin-bottom: 20px;
-	overflow: hidden;
-	padding-bottom: 10px;
-}
-#singel_edit_control button{
-	float:left;
-}
-#preview_edit_control{
+#edit_control{
 	margin-bottom: -40px;
 	overflow: hidden;
 	padding-bottom: 10px;
 }
-#preview_edit_control button{
-	float:left;	
+#singel_edit_control #edit_control{
+	margin-bottom: 20px;
 }
+#edit_control button{
+	float:left;
+	margin-right: 10px;
+}
+
 /*--------------------------------------------------------------
 7.2.1 - Insert/Edit Lesson
 --------------------------------------------------------------*/

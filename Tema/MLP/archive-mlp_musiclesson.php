@@ -126,7 +126,7 @@
 				}
 				
 				if($_GET['sortera'] == 'skribent'){
-					$order_by = 'author';
+					$order_by = 'display_name';
 					$order = ASC;
 				}				
 			

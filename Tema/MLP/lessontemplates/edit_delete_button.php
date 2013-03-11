@@ -7,13 +7,15 @@
 	?>
 									
 	<?php if($current_user->ID == $post->post_author) : ?>
-		<form method='GET' action='<?php get_bloginfo('wpurl') ?>/MLP/skapa-lektion/'>
+	<div id='edit_control'>
+		<form method='GET' action='<?php get_bloginfo('wpurl') ?>/skapa-lektion/'>
 			<input type='hidden' name='id' value='<?php the_ID(); ?>'/>										
 			<button type='submit'>Redigera</button>
 		</form>
-		<form method='GET' action='<?php get_bloginfo('wpurl') ?>/MLP/radera-lektion/'>
+		<form method='GET' action='<?php get_bloginfo('wpurl') ?>/radera-lektion/'>
 			<input type='hidden' name='id' value='<?php the_ID(); ?>'/>										
 			<button type='submit'>Radera</button>
-		</form>		
+		</form>
+	</div>		
 	<?php endif; ?>
 <?php endif; ?>
