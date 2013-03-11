@@ -1,5 +1,5 @@
 <?php
- /*Template Name: Single MLP Lesson
+ /*Template Name: MLP Single Lesson
  */
  ?>
 
@@ -58,11 +58,11 @@
 						</div>					
 
 						<div class="entry">
-							<h4>Inledning</h3>
+							<h4>Inledning</h4>
 							<?php echo str_replace("\n","<br/>", get_post_meta( get_the_ID(), 'mlp_intro', true )) ; ?>
-							<h4>Mål</h3>
+							<h4>Mål</h4>
 							<?php echo str_replace("\n","<br/>", get_post_meta( get_the_ID(), 'mlp_goals', true )); ?>
-							<h4>Utförande</h3>			
+							<h4>Utförande</h4>			
 							<?php echo str_replace("\n","<br/>", get_post_meta( get_the_ID(), 'mlp_execution', true )); ?>
 							
 							<?php
@@ -76,7 +76,7 @@
 								$amount_of_attachments = sizeof($attachments);
 								if($amount_of_attachments > 0) { 
 							?>
-							<h4>Filer</h3>
+							<h4>Filer</h4>
 							<?php
 									foreach ($attachments as $attachment) {
 										echo "<li class='attachments'>";
@@ -91,7 +91,8 @@
 							<?php wp_link_pages( array( 'before' => '<div class="page-link"><p>' . __( 'Pages: ', 'buddypress' ), 'after' => '</p></div>', 'next_or_number' => 'number' ) ); ?>
 						</div>
 						<div id='singel_edit_control'>
-							<?php get_template_part('lessontemplates/edit_button'); ?>
+							<h4>Hantera</h4>
+							<?php get_template_part('lessontemplates/edit_delete_button'); ?>
 						</div>
 					</div>
 					<div class="alignleft"><?php previous_post_link( '%link', '<span class="meta-nav">' . _x( '&larr;', 'Previous post link', 'buddypress' ) . '</span> %title' ); ?></div>

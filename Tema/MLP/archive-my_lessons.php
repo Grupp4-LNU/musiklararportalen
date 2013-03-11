@@ -1,5 +1,5 @@
 <?php
- /*Template Name: Archive My Lessons
+ /*Template Name: MLP Archive My Lessons
  */
  ?>
  
@@ -20,9 +20,10 @@
 					
 				<form method="GET" id="lesson_filter_form" action='<?php get_bloginfo('wpurl') ?>/mina_lektioner/'>
 				<select name='sortera' id='lesson_sort' onchange='submit()' form="lesson_filter_form">
-				  <option value='senaste' >Senast inlagda</option>
-				  <option value='gillade' <?php if(isset($_GET['sortera']) && $_GET['sortera'] == 'gillade') echo 'SELECTED' ?>>Mest gillade</option>
-				  <option value='diskuterade' <?php if(isset($_GET['sortera']) && $_GET['sortera'] == 'diskuterade') echo 'SELECTED' ?>>Mest diskuterade</option>
+					<option value='senaste' >Senast inlagda</option>
+					<option value='gillade' <?php if(isset($_GET['sortera']) && $_GET['sortera'] == 'gillade') echo 'SELECTED' ?>>Mest gillade</option>
+					<option value='diskuterade' <?php if(isset($_GET['sortera']) && $_GET['sortera'] == 'diskuterade') echo 'SELECTED' ?>>Mest diskuterade</option>
+					<option value='bokstavsordning' <?php if(isset($_GET['sortera']) && $_GET['sortera'] == 'bokstavsordning') echo 'SELECTED' ?>>Bokstavsordning</option>				  
 				</select>
 				</form>
 				
@@ -49,6 +50,11 @@
 					if($_GET['sortera'] == 'diskuterade'){
 						$order_by = 'comment_count';
 					}
+					
+					if($_GET['sortera'] == 'bokstavsordning'){
+						$order_by = 'title';
+						$order = ASC;
+					}					
 				
 				}
 							

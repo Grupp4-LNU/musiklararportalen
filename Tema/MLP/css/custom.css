@@ -2646,7 +2646,7 @@ div.preview_lesson span.lesson_meta_text{
 #filter_lesson_container legend{
 	padding: 0 5px;
 }
-#filter_lesson_container label, #clear_button, .add_lesson{
+#filter_lesson_container label, .add_lesson{
 	background: #F7F7F7;
 	color: #333;
 	display: block-inline;
@@ -2674,8 +2674,19 @@ div.preview_lesson span.lesson_meta_text{
 	border-bottom: 1px solid #fef63e;
 	border-right: 1px solid #fef63e;		
 }
-#filter_lesson_container input{
+#filter_lesson_container input[type="checkbox"]{
 	display:none;
+}
+#filter_lesson_container input[type="text"]{
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border: 1px solid #DDD;
+	padding-left: 3px;
+}
+#filter_lesson_container button{
+	position: relative;
+	top: -1px;
 }
 #filter_lesson_container #clear_button{
 	margin-top: -5px;
@@ -2683,12 +2694,14 @@ div.preview_lesson span.lesson_meta_text{
 	padding: 2px 6px;
 	margin-left: 0;
 	font-size: 11px;
-	border-radius: 2px;
-	-moz-border-radius: 2px;
-	-webkit-border-radius: 2px;	
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;	
 }
 #lesson_sort{
 	float:right;
+	position: relative;
+	top: 2px;
 }
 .found_lessons{
 	border-bottom: 1px solid #DDD;
@@ -2698,13 +2711,21 @@ div.preview_lesson span.lesson_meta_text{
 .add_lesson{
 	float:right;
 }
-#singel_edit_control button{
+#singel_edit_control{
 	margin-bottom: 20px;
+	overflow: hidden;
+	padding-bottom: 10px;
+}
+#singel_edit_control button{
+	float:left;
+}
+#preview_edit_control{
+	margin-bottom: -40px;
+	overflow: hidden;
+	padding-bottom: 10px;
 }
 #preview_edit_control button{
-	margin-bottom: -40px;
-	position:relative;
-	top: 5px;
+	float:left;	
 }
 /*--------------------------------------------------------------
 7.2.1 - Insert/Edit Lesson
@@ -2783,12 +2804,19 @@ div.page div.files ul {
 	opacity: 0.7;
 	display: inline-block;
 	padding: 0;
+	border:none;
+	position:relative;
+	top: -2px;
 }
 
 .delete_file_image:hover,
 .delete_file_image:focus {
 	background: url('../images/delete_file.png');
-	opacity: 1;
+	opacity: 1;	
+	border:none;
+	position:relative;
+	top: -2px;	
+	
 }
 
 .files{
@@ -2801,7 +2829,7 @@ div.page div.files ul {
 	-webkit-border-radius: 2px;
 }
 
-#insert_new_lesson button {
+#submit {
 	float:right;
 	margin-top: 20px;
 }

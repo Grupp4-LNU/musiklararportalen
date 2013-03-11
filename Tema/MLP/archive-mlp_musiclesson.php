@@ -1,5 +1,5 @@
 <?php
- /*Template Name: Archive MLP Lesson
+ /*Template Name: MLP Archive Lessons
  */
  ?>
  
@@ -14,7 +14,7 @@
 		<div class="page" id="lesson-archives" role="main">
 			
 			<h2 class="pagetitle">Lektioner</h2>
-				<form method="GET" id="lesson_filter_form" action='<?php get_bloginfo('wpurl') ?>/lektioner/'>
+				<form method="GET" id="lesson_filter_form" action='<?php get_bloginfo('wpurl') ?>/mlp/lektioner/'>
 					<fieldset id='filter_lesson_container'>
 						<legend><p><strong>Filter</strong></p></legend>				
 						<?php 
@@ -57,16 +57,19 @@
 
 								}
 							}
-						}
+						}					
 						?>
+						<p>Sökord: <input type='text' name='sokord' value='<?php if(isset($_GET['sokord'])) echo $_GET['sokord']; ?>'><button type='submit'>Filtrera</button></p>
 						<button type='submit' form='clear_filter' id='clear_button'>Rensa filter</button>						
 					</fieldset>
 				</form>
-				<form id='clear_filter' method='GET' action='<?php get_bloginfo('wpurl') ?>/lektioner/'></form>
+				<form id='clear_filter' method='GET' action='<?php get_bloginfo('wpurl') ?>/mlp/lektioner/'></form>
 				<select name='sortera' id='lesson_sort' onchange='submit()' form="lesson_filter_form">
 				  <option value='senaste' >Senast inlagda</option>
 				  <option value='gillade' <?php if(isset($_GET['sortera']) && $_GET['sortera'] == 'gillade') echo 'SELECTED' ?>>Mest gillade</option>
 				  <option value='diskuterade' <?php if(isset($_GET['sortera']) && $_GET['sortera'] == 'diskuterade') echo 'SELECTED' ?>>Mest diskuterade</option>
+				  <option value='bokstavsordning' <?php if(isset($_GET['sortera']) && $_GET['sortera'] == 'bokstavsordning') echo 'SELECTED' ?>>Bokstavsordning</option>
+				  <option value='skribent' <?php if(isset($_GET['sortera']) && $_GET['sortera'] == 'skribent') echo 'SELECTED' ?>>Författare</option>				  
 				</select>
 			
 			<?php
@@ -79,6 +82,7 @@
 			$grades = isset($filter_terms['mlp_grade']) ? $filter_terms['mlp_grade'] : false;
 			$category_setting = null;
 			$grades_setting = null;
+			$keyword = null;
 			
 			if($category){
 				$category_setting = array(
@@ -95,9 +99,15 @@
 							'terms' => $grades
 						);	
 			};
+			
+			//Building keyword-query
+			if(isset($_GET['sokord'])){
+				$keyword = $_GET['sokord'];
+			}
 
 			//Building Sorting-query
-			$sort_term;
+			$sort_term = null;
+			$order = null;
 			$order_by = 'date';
 			if(isset($_GET['sortera'])){
 						
@@ -109,6 +119,16 @@
 				if($_GET['sortera'] == 'diskuterade'){
 					$order_by = 'comment_count';
 				}
+				
+				if($_GET['sortera'] == 'bokstavsordning'){
+					$order_by = 'title';
+					$order = ASC;
+				}
+				
+				if($_GET['sortera'] == 'skribent'){
+					$order_by = 'author';
+					$order = ASC;
+				}				
 			
 			}
 						
@@ -116,7 +136,10 @@
 			$args = array(
 				'post_type' => 'mlp_musiclesson',
 				'tax_query' => array('relation' => 'AND', $category_setting, $grades_setting),
-				'orderby' => $order_by, 'meta_key' => $sort_term,
+				'orderby' => $order_by, 
+				'meta_key' => $sort_term,
+				'order' => $order,
+				's' => $keyword,
 				'posts_per_page' => 10,
 				'paged' => $paged				
 			);

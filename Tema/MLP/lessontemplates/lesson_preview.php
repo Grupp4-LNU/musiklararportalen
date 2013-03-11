@@ -50,7 +50,7 @@
 			<a href="<?php the_permalink(); ?>" rel="bookmark" title="Läs hela <?php the_title_attribute(); ?>"> Läs hela..</a>
 		</div>
 			<div id='preview_edit_control'>
-			<?php get_template_part('lessontemplates/edit_button'); ?>
+			<?php get_template_part('lessontemplates/edit_delete_button'); ?>
 			</div>
 		<p class="postmetadata"><?php the_tags( '<span class="tags">' . __( 'Tags: ', 'buddypress' ), ', ', '</span>' ); ?> <span class="comments"><?php comments_popup_link( __( 'No Comments &#187;', 'buddypress' ), __( '1 Comment &#187;', 'buddypress' ), __( '% Comments &#187;', 'buddypress' ) ); ?></span></p>
 	

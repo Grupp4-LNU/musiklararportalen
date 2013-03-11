@@ -1,5 +1,5 @@
 <?php
- /*Template Name: Insert Edit Lesson
+ /*Template Name: MLP Insert Edit Lesson
  */
  ?> 
 <?php get_header(); ?>
@@ -20,11 +20,15 @@
 			$post_goal = null;
 			$post_execution = null;
 			$post_media = null;
-			
+			$attachment_id = null;
 			$display_form = true;
+
 		?>
-		<?php $get_id = isset($_GET['id']) ? $_GET['id'] : false ?>	
-		<?php if($get_id) : ?>
+		
+		
+		<?php if(isset($_GET['id'])) $post_id = $_GET['id']; else $post_id = false;?>
+		<?php if(isset($_POST['id'])) $post_id = $_POST['id']; ?>
+		<?php if($post_id) : ?>
 			<h2 class="pagetitle">Redigera Lektion</h2>
 			
 			<?php
@@ -37,21 +41,17 @@
 				//Building complete WP-Query
 				$args = array(
 					'post_type' => 'mlp_musiclesson',
-					'p' => $_GET['id']
+					'p' => $post_id
 				);
 				$wp_query = new WP_Query($args);
 			?>
-		
 			<?php if ( $wp_query->have_posts() ) : ?>
-
-				<?php bp_dtheme_content_nav( 'nav-above' ); ?>
-
 				<?php while ($wp_query->have_posts()) : $wp_query->the_post(); ?>
 				
 					<?php if($current_user->ID == $post->post_author) : ?>
 						<?php
 							// Delete attachment
-							$attachment_id = isset($_GET['delete_attachment']) ? $_GET['delete_attachment'] : null;
+							$attachment_id = isset($_POST['att_id']) ? $_POST['att_id'] : null;
 							if($attachment_id)
 							{
 								$attachment = get_post($attachment_id);
@@ -106,7 +106,7 @@
 
 				<?php endwhile; ?>
 			<?php else: ?>
-				<p class="pagetitle">Hittade ingen lektion med detta id</p>
+				<p>Hittade ingen lektion med detta id</p>
 				<?php $display_form = false; ?>
 			<?php endif; ?>	
 
@@ -271,7 +271,7 @@
 							}
 						}
 									
-						echo '<p>Tackar! Din lektion har blivit sparad. Se lektionen <a hrefhär</p>';
+						echo "<p>Tackar! Din lektion har blivit sparad. <a href='".get_post_permalink($post_id)."'>Se din lektion här.</a></p>";
 
 					}
 					else 
@@ -334,36 +334,38 @@
 							<label for="lesson_execution"><p>Utförande</p></label>
 							<textarea id="lesson_execution" name="lesson_execution" ><?php echo $post_execution; ?></textarea>
 							
-							<label for="lesson_file"><p>Media</p></label>
+							<?php wp_nonce_field( 'insert_new_lesson' ); ?>
+							</form>
+							
+							<label for="lesson_file"><p>Filer</p></label>
 							<div class="files">
-								<?php 
-									if(isset($attachments)) 
-									{
-										if(sizeof($attachments) > 0)
-										{
-											echo "<ul>";
-											foreach ($attachments as $attachment) {
-												echo "<li class='attachments'>";
-													echo "<a href='".$attachment->guid."'>";
-														echo $attachment->post_name;
-													echo "</a>";
-													echo " <a class='delete_attachment delete_file_image' href='?id=$post_id&delete_attachment=".$attachment->ID."'></a>";
-												echo "</li>";
-											}
-											echo "</ul>";
-										}
-									}
-								?>
-								<input type="file" id="lesson_file" name="lesson_file">
+							
+									<?php if(isset($attachments)) : ?>
+										<?php if(sizeof($attachments) > 0) : ?>
+											<ul>
+											<?php foreach ($attachments as $attachment) : ?>
+												<li class='attachments'>
+												<form method='POST'>
+												<a href='<?php echo $attachment->guid; ?>'><?php echo $attachment->post_name ?></a>
+												<input type='hidden' name='id' value='<?php the_ID(); ?>'/>
+												<input type='hidden' name='att_id' value='<?php echo $attachment->ID ?>'/>
+												<button type='submit' class='delete_attachment delete_file_image'></button>
+												</form>
+												</li>
+											<?php endforeach ?>
+											</ul>
+										<?php endif; ?>
+									<?php endif; ?>
+									
+								<input type="file" id="lesson_file" form="insert_new_lesson" name="lesson_file">
 								<a href="#" id="add_file_form">Lägg till ytterligare fil (+)</a>
 							</div>
 							
-							<button type="submit" tabindex="40" id="submit" name="submit">Spara</button>
-							<input type="hidden" name="action" value="insert_new_lesson" />
+							<button type="submit" form="insert_new_lesson" tabindex="40" id="submit" name="submit">Spara</button>
+							<input type="hidden" form="insert_new_lesson" name="action" value="insert_new_lesson" />
+							<input type="hidden" form="insert_new_lesson" name="post_id" value= />
+														
 							
-							<?php wp_nonce_field( 'insert_new_lesson' ); ?>
-							
-						</form>		
 					<?php endif; ?>
 				<?php endif; ?>
 				
