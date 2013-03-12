@@ -18,7 +18,7 @@
 			
 			<?php if( is_user_logged_in() ) : ?>
 					
-				<form method="GET" id="lesson_filter_form" action='<?php get_bloginfo('wpurl') ?>/mina_lektioner/'>
+				<form method="GET" id="lesson_filter_form" action='<?php get_bloginfo('wpurl') ?>/mina-lektioner/'>
 				<select name='sortera' id='lesson_sort' onchange='submit()' form="lesson_filter_form">
 					<option value='senaste' >Senast inlagda</option>
 					<option value='gillade' <?php if(isset($_GET['sortera']) && $_GET['sortera'] == 'gillade') echo 'SELECTED' ?>>Mest gillade</option>

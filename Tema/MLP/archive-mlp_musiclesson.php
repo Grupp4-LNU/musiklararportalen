@@ -126,7 +126,7 @@
 				}
 				
 				if($_GET['sortera'] == 'skribent'){
-					$order_by = 'display_name';
+					$order_by = 'name';
 					$order = ASC;
 				}				
 			
@@ -143,6 +143,7 @@
 				'posts_per_page' => 10,
 				'paged' => $paged				
 			);
+
 			$wp_query = new WP_Query($args);
 			?>
 			
