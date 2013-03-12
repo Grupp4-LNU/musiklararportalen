@@ -61,7 +61,9 @@
 				//Building complete WP-Query
 				$args = array(
 					'post_type' => 'mlp_musiclesson',
-					'orderby' => $order_by, 'meta_key' => $sort_term,
+					'orderby' => $order_by, 
+					'meta_key' => $sort_term,
+					'order' => $order,
 					'posts_per_page' => 10,
 					'paged' => $paged,
 					'author' => $current_user->ID 					
