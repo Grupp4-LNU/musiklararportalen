@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * Skapar Lektions post typen.
+ */
 function mlp_register_lesson_post_type()
 {
 	$args = array(
@@ -42,7 +44,9 @@ function mlp_register_lesson_post_type()
 	}
 }
 
-
+/**
+ * Skapar kategorierna.
+ */
 function mlp_create_lesson_taxonomies() {
 	$taxonomies = array();
 	
@@ -85,37 +89,51 @@ function mlp_create_lesson_taxonomies() {
 			'not_found_in_trash' => 'Inga årskurser hittad i papperskorgen'				
 		)
 	);
-	
 	mlp_register_all_taxonomies($taxonomies);
-	
-	mlp_add_taxonomy_data('mlp_grade', '1-3', "Årskurs 1-3");
-	mlp_add_taxonomy_data('mlp_grade', '4-6', "Årskurs 4-6");
-	mlp_add_taxonomy_data('mlp_grade', '7-9', "Årskurs 7-9");
-	mlp_add_taxonomy_data('mlp_grade', 'Gymn', "Årskurs Gymnasiet.");		
-	
-	mlp_add_taxonomy_data('mlp_category', 'Musicerande', 'Musicerande');
-	mlp_add_taxonomy_data('mlp_category', 'Musikens verktyg', 'Musikens verktyg');
-	mlp_add_taxonomy_data('mlp_category', 'Musikens sammanhang', 'Musikens sammanhang');
 }
 
+/**
+ * Registrerar kategorierna för WordPress.
+ */
 function mlp_register_all_taxonomies($taxonomies) {
 	foreach ($taxonomies as $taxonomy => $array) {
 		register_taxonomy($taxonomy, array('mlp_musiclesson'), $array);	
 	}
 }
 
-function mlp_add_taxonomy_data($taxonomy, $value, $description, $parent = null) {
+/**
+ * Lägger till data till kategorierna.
+ */
+function mlp_create_taxonomy_data() {
 	
-	$args = array(
-		'slug' => strtolower($value),
-		'description' => $description,
-	);
+	// Årskurser
+	mlp_add_taxonomy_data('mlp_grade', 'F-3', "Årskurs F-3");
+	mlp_add_taxonomy_data('mlp_grade', '4-6', "Årskurs 4-6");
+	mlp_add_taxonomy_data('mlp_grade', '7-9', "Årskurs 7-9");
+	mlp_add_taxonomy_data('mlp_grade', 'Gymnasiet', "Årskurs Gymnasiet");
+	mlp_add_taxonomy_data('mlp_grade', 'Musikskola', "Musikskola");
 	
-	$args['parent'] = isset($parent) ? $args['parent'] : 0;
-	
-	wp_insert_term($value, $taxonomy, $args);
+	// Huvudämnen	
+	mlp_add_taxonomy_data('mlp_category', 'Musicerande', 'Musicerande');
+	mlp_add_taxonomy_data('mlp_category', 'Musikens verktyg', 'Musikens verktyg');
+	mlp_add_taxonomy_data('mlp_category', 'Musikens sammanhang', 'Musikens sammanhang');
 }
+	function mlp_add_taxonomy_data($taxonomy, $value, $description, $parent = null) {
+		
+		$args = array(
+			'slug' => strtolower($value),
+			'description' => $description,
+		);
+		
+		$args['parent'] = isset($parent) ? $args['parent'] : 0;
+		
+		wp_insert_term($value, $taxonomy, $args);
+	}
 
+
+/**
+ * Lägger till post meta boxarna till adminpanelen samt skapar post metan.
+ */
 function mlp_add_lesson_details_metabox() {
 	add_action('add_meta_boxes', function() {
 		add_meta_box('mlp_lesson_details', 'Lektionsdetaljer', 'lesson_details', 'mlp_musiclesson');
@@ -145,7 +163,9 @@ function mlp_add_lesson_details_metabox() {
 	});
 }
 
-// Save post meta data if 
+/**
+ * Uppdatering av post_meta datan.
+ */
 function update_post_meta_data($id, $field) {
 	if( isset($_POST[$field]) ) {
 		update_post_meta(
@@ -156,31 +176,83 @@ function update_post_meta_data($id, $field) {
 	}
 }
 
-function activate() {
+/**
+ * Vad ska ske när pluginet aktiveras
+ * Detta bestäms här...
+ */
+function mlp_activate() {
+	mlp_create_taxonomy_data();
+	mlp_create_delete_lesson_page();
+	mlp_create_insert_edit_lesson_page();
 	mlp_create_my_lesson_archive_page();
 }
 
-function mlp_create_my_lesson_archive_page() {
+/**
+ * Vad ska ske när pluginet inaktiveras
+ * Detta bestäms här...
+ */
+function mlp_deactivate() {
+	
+}
+
+/**
+ * Skapar en sida med template för att ta bort en lektion.
+ */
+function mlp_create_delete_lesson_page() {
 	$post = array(
 		'post_type' => 'page',
-		'post_title' => 'Mina lektioner',
-		'post_name' => 'mina_lektioner',
+		'post_title' => 'MLP Radera lektion',
+		'post_name' => 'radera-lektion',
 		'post_status' => 'publish'
 	);
 	$post_id = wp_insert_post( $post );
 	
 	global $wpdb;
 	
-	$post_name = 'mina_lektioner';
-	
-	$query = $wpdb->prepare("SELECT ID FROM {$wpdb->posts} WHERE post_name = %s", $post_name);	
-	$post_id = $wpdb->get_var($query);	
-	
-	update_post_meta($post_id, '_wp_page_template','archive-my_lessons.php');
+	add_post_meta($post_id, '_wp_page_template','delete_lesson.php');
 }
 
-add_filter('upload_mimes', 'custom_upload_mimes');
+/**
+ * Skapar en sida med template för skapa/redigera lektion.
+ */
+function mlp_create_insert_edit_lesson_page() {
+	$post = array(
+		'post_type' => 'page',
+		'post_title' => 'MLP Skapa lektion',
+		'post_name' => 'skapa-lektion',
+		'post_status' => 'publish'
+	);
+	$post_id = wp_insert_post( $post );
+	
+	global $wpdb;
+	
+	add_post_meta($post_id, '_wp_page_template','insert_edit_lesson.php');
+}
 
+/**
+ * Skapar en sida med template för mina lektioner arkiv.
+ */
+function mlp_create_my_lesson_archive_page() {
+	$post = array(
+		'post_type' => 'page',
+		'post_title' => 'MLP Mina lektioner',
+		'post_name' => 'mina-lektioner',
+		'post_status' => 'publish'
+	);
+	$post_id = wp_insert_post( $post );
+	
+	global $wpdb;
+	
+	add_post_meta($post_id, '_wp_page_template','archive-my_lessons.php');
+}
+
+
+/**
+ * Uppladdning av fil till Lektioner.
+ * Vilka filtyper är tillåtna, vilka är det inte. 
+ * Detta bestäms här.
+ */
+add_filter('upload_mimes', 'custom_upload_mimes');
 function custom_upload_mimes ( $existing_mimes = array() ) {
 
 	// add your extension to the array
