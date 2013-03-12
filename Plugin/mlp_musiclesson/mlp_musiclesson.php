@@ -20,8 +20,7 @@ function MLP_musiclesson_init() {
 	mlp_create_lesson_taxonomies();
 	mlp_add_lesson_details_metabox();
 }
+add_action('init', 'MLP_musiclesson_init');
 
 register_activation_hook( __FILE__, 'mlp_activate' );
 register_deactivation_hook( __FILE__, 'mlp_deactivate' );
-
-add_action('init', 'MLP_musiclesson_init');

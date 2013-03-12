@@ -79,9 +79,9 @@
 			
 			//Building Filter-query
 			$category = isset($filter_terms['mlp_category']) ? $filter_terms['mlp_category'] : false;
-			$grades = isset($filter_terms['mlp_grade']) ? $filter_terms['mlp_grade'] : false;
+			$target_groups = isset($filter_terms['mlp_target_group']) ? $filter_terms['mlp_target_group'] : false;
 			$category_setting = null;
-			$grades_setting = null;
+			$target_groups_setting = null;
 			$keyword = null;
 			
 			if($category){
@@ -92,11 +92,11 @@
 						);			
 			};
 			
-			if($grades){
-				$grades_setting = array(
-							'taxonomy' => 'mlp_grade',
+			if($target_groups){
+				$target_groups_setting = array(
+							'taxonomy' => 'mlp_target_group',
 							'field' => 'slug',
-							'terms' => $grades
+							'terms' => $target_groups
 						);	
 			};
 			
@@ -135,7 +135,7 @@
 			//Building complete WP-Query
 			$args = array(
 				'post_type' => 'mlp_musiclesson',
-				'tax_query' => array('relation' => 'AND', $category_setting, $grades_setting),
+				'tax_query' => array('relation' => 'AND', $category_setting, $target_groups_setting),
 				'orderby' => $order_by, 
 				'meta_key' => $sort_term,
 				'order' => $order,

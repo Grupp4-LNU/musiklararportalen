@@ -2768,8 +2768,8 @@ div.preview_lesson span.lesson_meta_text{
 div.page div.files ul {
 	margin-left: 0;
 }
-#category_error, #grade_error{
-	color: RED;
+#category_error, #target_group_error{
+	color: red;
 }
 .files_label{
 	margin: 25px 0 2px 0;
@@ -2836,12 +2836,6 @@ div.page div.files ul {
 #submit_button {
 	float:right;
 	margin-top: 20px;
-}
-
-#insert_new_lesson .grades label,
-#insert_new_lesson .themes label,
-#insert_new_lesson .categories label {
-
 }
 
 #insert_new_lesson label.error {

@@ -14,7 +14,7 @@
 		<?php
 			$post_id = null;
 			$post_categories = null;
-			$post_grades = null;
+			$post_target_groups = null;
 			$post_title = null;
 			$post_intro = null;
 			$post_goal = null;
@@ -88,16 +88,16 @@
 					$execution = esc_html($_POST['lesson_execution']);
 				}
 				
-				if(isset($_POST['grade']))
+				if(isset($_POST['target_group']))
 				{
-					$lesson_grades = array();
-					foreach( $_POST['grade'] as $grade ) {
-						$lesson_grades[] = $grade;
+					$lesson_target_groups = array();
+					foreach( $_POST['target_group'] as $target_group ) {
+						$lesson_target_groups[] = $target_group;
 					}
 				}
 				else 
 				{
-					$errors[] = '<p>Du måste ange minst en årskurs för lektionen</p>';	
+					$errors[] = '<p>Du måste ange minst en målgrupp för lektionen</p>';	
 				}			
 												
 				if(isset($_POST['category']))
@@ -126,7 +126,7 @@
 						);
 						wp_update_post( $update_post );
 										
-						wp_set_post_terms( $post_id, $lesson_grades, 'mlp_grade', false );
+						wp_set_post_terms( $post_id, $lesson_target_groups, 'mlp_target_group', false );
 						wp_set_post_terms( $post_id, $lesson_categories, 'mlp_category', false );
 						
 						update_post_meta($post_id, 'mlp_intro', $introduction);
@@ -166,7 +166,7 @@
 						);
 						$post_id = wp_insert_post( $new_lesson_post );
 										
-						wp_set_post_terms( $post_id, $lesson_grades, 'mlp_grade', false );
+						wp_set_post_terms( $post_id, $lesson_target_groups, 'mlp_target_group', false );
 						wp_set_post_terms( $post_id, $lesson_categories, 'mlp_category', false );
 						
 						add_post_meta($post_id, 'mlp_intro', $introduction);
@@ -249,10 +249,10 @@
 									$post_categories[] = $term->term_id;
 								}
 								
-								$post_grades = array();
-								$grade_terms = get_the_terms( $post->ID , 'mlp_grade' );
-								foreach($grade_terms as $term){
-									$post_grades[] = $term->term_id;
+								$post_target_groups = array();
+								$target_group_terms = get_the_terms( $post->ID , 'mlp_target_group' );
+								foreach($target_group_terms as $term){
+									$post_target_groups[] = $term->term_id;
 								}
 								
 								$post_title = get_the_title();
@@ -294,26 +294,26 @@
 							
 							foreach ($lessonCategories as $lessonCategory) {
 								if(isset($post_categories) && in_array($lessonCategory->term_id, $post_categories))
-									echo '<label><input class="{category: true}" type="checkbox" checked name="category[]" value="'.$lessonCategory->term_id.'" id="grade'.$lessonCategory->term_id.'" />'.$lessonCategory->name.'</label>';
+									echo '<label><input class="{category: true}" type="checkbox" checked name="category[]" value="'.$lessonCategory->term_id.'" id="target_group'.$lessonCategory->term_id.'" />'.$lessonCategory->name.'</label>';
 								else
-									echo '<label><input class="{category: true}" type="checkbox" name="category[]" value="'.$lessonCategory->term_id.'" id="grade'.$lessonCategory->term_id.'" />'.$lessonCategory->name.'</label>';
+									echo '<label><input class="{category: true}" type="checkbox" name="category[]" value="'.$lessonCategory->term_id.'" id="target_group'.$lessonCategory->term_id.'" />'.$lessonCategory->name.'</label>';
 							}
 							?>
 							</p>
 
 							<p>
-							Årskurs:
-							<?php $grades = get_terms('mlp_grade', array( 'hide_empty' => 0 ));
-							foreach ($grades as $grade) {
-								if(isset($post_grades) && in_array($grade->term_id, $post_grades))
-									echo '<label><input class="{grade: true}" checked type="checkbox" name="grade[]" value="'.$grade->term_id.'" id="grade'.$grade->term_id.'" />'.$grade->name.'</label>';
+							Målgrupp:
+							<?php $target_groups = get_terms('mlp_target_group', array( 'hide_empty' => 0 ));
+							foreach ($target_groups as $target_group) {
+								if(isset($post_target_groups) && in_array($target_group->term_id, $post_target_groups))
+									echo '<label><input class="{target_group: true}" checked type="checkbox" name="target_group[]" value="'.$target_group->term_id.'" id="target_group'.$target_group->term_id.'" />'.$target_group->name.'</label>';
 								else
-									echo '<label><input class="{grade: true}" type="checkbox" name="grade[]" value="'.$grade->term_id.'" id="grade'.$grade->term_id.'" />'.$grade->name.'</label>';
+									echo '<label><input class="{target_group: true}" type="checkbox" name="target_group[]" value="'.$target_group->term_id.'" id="target_group'.$target_group->term_id.'" />'.$target_group->name.'</label>';
 							}
 							?>
 							</p>
 						<div id="category_error"></div>
-						<div id="grade_error"></div>
+						<div id="target_group_error"></div>
 						</fieldset>
 							
 						<!-- Lesson Title -->

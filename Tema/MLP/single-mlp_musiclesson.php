@@ -42,11 +42,11 @@
 								<?php endif ;?>
 								
 								<?php
-									$terms = get_the_terms( $post->ID , 'mlp_grade' );
+									$terms = get_the_terms( $post->ID , 'mlp_target_group' );
 									if($terms) :
 								?>
 								<p>
-								Årskurs:									
+								Målgrupp:									
 								<?php
 										foreach ( $terms as $term ) {
 										echo '<span class="lesson_meta_text">'.$term->name.' </span>';

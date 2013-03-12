@@ -70,23 +70,23 @@ function mlp_create_lesson_taxonomies() {
 		)
 	);
 	
-	$taxonomies['mlp_grade'] = array(
+	$taxonomies['mlp_target_group'] = array(
 		'hierarchical' => true,
-		'query_var' => 'mlp_grade',
+		'query_var' => 'mlp_target_group',
 		'rewrite' => array(
-			'slug' => 'Årskurs'
+			'slug' => 'Målgrupp'
 		),
 		'labels' => array(
-			'name' => 'Årskurser',
-			'singular_name' => "Årskurs",
-			'add_new' => 'Lägg till årskurs',
-			'add_new_item' => 'Lägg till årskurs',
-			'edit_item' => 'Redigera årskurs',
-			'new_item' => 'Lägg till årskurs',
-			'view_item' => 'Visa Årskurs',
-			'search_items' => 'Sök bland årskurser',
-			'not_found' => 'Inga årskurser hittad',
-			'not_found_in_trash' => 'Inga årskurser hittad i papperskorgen'				
+			'name' => 'Målgrupper',
+			'singular_name' => "Målgrupp",
+			'add_new' => 'Lägg till Målgrupp',
+			'add_new_item' => 'Lägg till Målgrupp',
+			'edit_item' => 'Redigera Målgrupp',
+			'new_item' => 'Lägg till Målgrupp',
+			'view_item' => 'Visa Målgrupp',
+			'search_items' => 'Sök bland Målgrupper',
+			'not_found' => 'Inga Målgrupper hittad',
+			'not_found_in_trash' => 'Inga Målgrupper hittad i papperskorgen'				
 		)
 	);
 	mlp_register_all_taxonomies($taxonomies);
@@ -101,22 +101,25 @@ function mlp_register_all_taxonomies($taxonomies) {
 	}
 }
 
+
 /**
  * Lägger till data till kategorierna.
  */
+/*
 function mlp_create_taxonomy_data() {
 	
-	// Årskurser
-	mlp_add_taxonomy_data('mlp_grade', 'F-3', "Årskurs F-3");
-	mlp_add_taxonomy_data('mlp_grade', '4-6', "Årskurs 4-6");
-	mlp_add_taxonomy_data('mlp_grade', '7-9', "Årskurs 7-9");
-	mlp_add_taxonomy_data('mlp_grade', 'Gymnasiet', "Årskurs Gymnasiet");
-	mlp_add_taxonomy_data('mlp_grade', 'Musikskola', "Musikskola");
+	// Målgrupper
+	mlp_add_taxonomy_data('mlp_target_group', 'F-3', "F-3");
+	mlp_add_taxonomy_data('mlp_target_group', '4-6', "4-6");
+	mlp_add_taxonomy_data('mlp_target_group', '7-9', "7-9");
+	mlp_add_taxonomy_data('mlp_target_group', 'Gymnasiet', "Gymnasiet");
+	mlp_add_taxonomy_data('mlp_target_group', 'Musikskola', "Musikskola");
 	
 	// Huvudämnen	
-	mlp_add_taxonomy_data('mlp_category', 'Musicerande', 'Musicerande');
-	mlp_add_taxonomy_data('mlp_category', 'Musikens verktyg', 'Musikens verktyg');
-	mlp_add_taxonomy_data('mlp_category', 'Musikens sammanhang', 'Musikens sammanhang');
+	mlp_add_taxonomy_data('mlp_category', 'Spela och sjunga', 'pela och sjunga');
+	mlp_add_taxonomy_data('mlp_category', 'Skapa musik', 'Skapa musik');
+	mlp_add_taxonomy_data('mlp_category', 'Analysera och samtala', 'Analysera och samtala');
+	mlp_add_taxonomy_data('mlp_category', 'Tema', 'Tema');
 }
 	function mlp_add_taxonomy_data($taxonomy, $value, $description, $parent = null) {
 		
@@ -129,7 +132,7 @@ function mlp_create_taxonomy_data() {
 		
 		wp_insert_term($value, $taxonomy, $args);
 	}
-
+*/
 
 /**
  * Lägger till post meta boxarna till adminpanelen samt skapar post metan.
@@ -181,7 +184,6 @@ function update_post_meta_data($id, $field) {
  * Detta bestäms här...
  */
 function mlp_activate() {
-	mlp_create_taxonomy_data();
 	mlp_create_delete_lesson_page();
 	mlp_create_insert_edit_lesson_page();
 	mlp_create_my_lesson_archive_page();
