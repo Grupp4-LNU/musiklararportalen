@@ -122,12 +122,12 @@
 				
 				if($_GET['sortera'] == 'bokstavsordning'){
 					$order_by = 'title';
-					$order = ASC;
+					$order = 'ASC';
 				}
 				
 				if($_GET['sortera'] == 'skribent'){
 					$order_by = 'name';
-					$order = ASC;
+					$order = 'ASC';
 				}				
 			
 			}

@@ -2609,7 +2609,7 @@ div.preview_lesson span.lesson_meta_text{
 	background: url('../images/file.png') no-repeat top left;
 	line-height: 16px;
 	vertical-align: middle;
-	padding: 2px 0 0 20px;
+	padding: 2px 0 0 2px;
 	margin: 8px 0;
 }
 
@@ -2768,7 +2768,12 @@ div.preview_lesson span.lesson_meta_text{
 div.page div.files ul {
 	margin-left: 0;
 }
-
+#category_error, #grade_error{
+	color: RED;
+}
+.files_label{
+	margin: 25px 0 2px 0;
+}
 .attachments {
 	list-style: none;
 	background: url('../images/file.png') no-repeat top left;
@@ -2779,21 +2784,21 @@ div.page div.files ul {
 	display: block;
 }
 
+.lesson_saved{
+
+}
+
 .delete_file_error,
 .delete_file_success {
-	padding: 1em;
-	width: auto;
-	border-radius: 1em;
+
 }
 
 .delete_file_error {
-	background: rgba(255,0,255,.2);
-	border: 1px solid #f0f;
+	color: RED;
 }
 
 .delete_file_success {
-	background: rgba(0,255,0,.2);
-	border: 1px solid #00ff00;
+
 }
 
 .delete_file_image {
@@ -2828,7 +2833,7 @@ div.page div.files ul {
 	-webkit-border-radius: 2px;
 }
 
-#submit {
+#submit_button {
 	float:right;
 	margin-top: 20px;
 }

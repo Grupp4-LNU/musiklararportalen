@@ -15,14 +15,25 @@ $(function() {
 	});
 
 	/* TA BORT ATTACHMENT */
-	$('.delete_attachment').on("click", function(e) {
+	/*$('.delete_attachment').on("click", function(e) {
 		if(!confirm("Är du säker på att du vill ta bort den här filen?")) {
 			return false;
 		}
-	})
+	})*/
+	
+	/* TA BORT ATTACHMENT */
+	$('.delete_attachment').on("click", function(e) {
+		if(!confirm("Är du säker på att du vill ta bort filen?")) {
+			return false;
+		}
+		$('#insert_new_lesson').append('<input type="hidden" name="remove_att_id" value="' + this.id + '" />');
+		$("#insert_new_lesson").submit();
+
+	});	
 	
 	$('.delete_file_error').delay(3000).fadeOut("slow");
 	$('.delete_file_success').delay(3000).fadeOut("slow");
+	$('.lesson_saved').delay(10000).fadeOut("slow");
 	
 	/* LÄGGA TILL NYTT FÄLT FÖR NY FIL */
 	

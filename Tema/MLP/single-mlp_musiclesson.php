@@ -62,7 +62,7 @@
 							<?php echo str_replace("\n","<br/>", get_post_meta( get_the_ID(), 'mlp_intro', true )) ; ?>
 							<h4>Mål</h4>
 							<?php echo str_replace("\n","<br/>", get_post_meta( get_the_ID(), 'mlp_goals', true )); ?>
-							<h4>Utförande</h4>			
+							<h4>Undervisning</h4>			
 							<?php echo str_replace("\n","<br/>", get_post_meta( get_the_ID(), 'mlp_execution', true )); ?>
 							
 							<?php
