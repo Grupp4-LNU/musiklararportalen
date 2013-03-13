@@ -53,7 +53,7 @@ $(function() {
 
 	$.validator.addMethod('atLeastOneYear', function(value, element, param) {
 	    return $('input[name^="target_group"]').is(':checked');
-	}, 'Välj minst en årskurs');
+	}, 'Välj minst en målgrupp');
 
 	$('#submit').on('click', function(){
 		$('#category_error').html('');

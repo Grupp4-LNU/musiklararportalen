@@ -303,7 +303,15 @@
 
 							<p>
 							Målgrupp:
-							<?php $target_groups = get_terms('mlp_target_group', array( 'hide_empty' => 0 ));
+							<?php 
+							$target_groups = get_terms(
+								'mlp_target_group', 
+								array( 
+									'orderby'=> 'id', 
+									'order'=> 'ASC', 
+									'hide_empty' => 0 
+								)
+							);
 							foreach ($target_groups as $target_group) {
 								if(isset($post_target_groups) && in_array($target_group->term_id, $post_target_groups))
 									echo '<label><input class="{target_group: true}" checked type="checkbox" name="target_group[]" value="'.$target_group->term_id.'" id="target_group'.$target_group->term_id.'" />'.$target_group->name.'</label>';
