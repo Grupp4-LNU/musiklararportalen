@@ -2497,6 +2497,10 @@ body.register div.page ul {
 	padding: 0;
 }
 
+#start_page h3{
+	line-height: 1.2em;
+}
+
 .preview_container{
 	overflow: hidden;
 }
