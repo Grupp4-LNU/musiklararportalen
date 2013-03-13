@@ -2770,6 +2770,9 @@ div.page div.files ul {
 }
 #category_error, #target_group_error{
 	color: red;
+	font-weight: bold;
+	font-size: 1.2em;
+	font-family: Georgia, 'Times new roman', serif;
 }
 .files_label{
 	margin: 25px 0 2px 0;
@@ -2782,23 +2785,6 @@ div.page div.files ul {
 	text-indent: 20px;
 	margin: 8px 0;
 	display: block;
-}
-
-.lesson_saved{
-
-}
-
-.delete_file_error,
-.delete_file_success {
-
-}
-
-.delete_file_error {
-	color: RED;
-}
-
-.delete_file_success {
-
 }
 
 .delete_file_image {
@@ -2816,11 +2802,10 @@ div.page div.files ul {
 .delete_file_image:hover,
 .delete_file_image:focus {
 	background: url('../images/delete_file.png');
-	opacity: 1;	
+	opacity: 1;
 	border:none;
 	position:relative;
-	top: -2px;	
-	
+	top: -2px;
 }
 
 .files{
