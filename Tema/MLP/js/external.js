@@ -23,7 +23,7 @@ $(function() {
 	
 	/* TA BORT ATTACHMENT */
 	$('.delete_attachment').on("click", function(e) {
-		if(!confirm("Är du säker på att du vill ta bort filen?")) {
+		if(!confirm("Är du säker på att du vill ta bort filen?\n\nObs. Din lektion sparas vid borttagning av fil, se till att du har redigerat klart i textfälten.")) {
 			return false;
 		}
 		$('#insert_new_lesson').append('<input type="hidden" name="remove_att_id" value="' + this.id + '" />');
