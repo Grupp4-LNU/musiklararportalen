@@ -51,7 +51,7 @@
 				$lesson_args = array(
 				'post_type'=> 'mlp_musiclesson',
 				'order'    => 'DESC',
-				'posts_per_page' => 5			
+				'posts_per_page' => 4			
 				);  				
 
 				$news_query = new WP_Query( $news_args );
@@ -80,7 +80,7 @@
 							<div class="post-content">
 								<h3 class="posttitle"><a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', 'buddypress' ); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h3>
 								<?php if ( has_post_thumbnail() ) : // check if the post has a Post Thumbnail assigned to it.?>
-									<?php the_post_thumbnail(array(150,100)); ?>
+									<?php the_post_thumbnail(array(100,100)); ?>
 								<?php endif; ?>
 								<div class="entry">
 									<p class="date"><?php printf( __( '%1$s', 'buddypress' ), get_the_date()); ?></p>
