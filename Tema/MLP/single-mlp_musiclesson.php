@@ -91,8 +91,19 @@
 							<?php wp_link_pages( array( 'before' => '<div class="page-link"><p>' . __( 'Pages: ', 'buddypress' ), 'after' => '</p></div>', 'next_or_number' => 'number' ) ); ?>
 						</div>
 						<div id='singel_edit_control'>
-							<h4>Hantera</h4>
+						<?php if( is_user_logged_in() ) : ?>
+
+						<?php
+						//Checking current user
+						global $current_user;
+						get_currentuserinfo();
+						?>
+									
+						<?php if($current_user->ID == $post->post_author) : ?>
+							<h4>Hantera Lektion</h4>
 							<?php get_template_part('lessontemplates/edit_delete_button'); ?>
+						<?php endif; ?>
+						<?php endif; ?>
 						</div>
 					</div>
 					<div class="alignleft"><?php previous_post_link( '%link', '<span class="meta-nav">' . _x( '&larr;', 'Previous post link', 'buddypress' ) . '</span> %title' ); ?></div>

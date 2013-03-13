@@ -4,27 +4,46 @@ Hello, this is the BuddyPress Responsive theme stylesheet
 ----------------------------------------------------------------
 >>> TABLE OF CONTENTS:
 ----------------------------------------------------------------
+0.8 - max-width: 960px
+0.9 - max-width: 860px
 1.0 - iPad
 	1.1 - Landscape
 	1.2 - Portrait
 2.0 - Smartphone
 3.0 - iPhone
 --------------------------------------------------------------*/
+/*--------------------------------------------------------------
+0.8 - max-width: 960px
+--------------------------------------------------------------*/
+@media only screen and (max-width: 960px) {
+	
+	.preview_post_container{
+		width: 100% !important;
+		margin-left: 0px !important;
+		float: none;
+		margin-bottom: 40px;
+	}
+	
+	#filter_lesson_container label{
+		display: block;
+		margin: 10px 0 0 0;
+		width: 250px;
+	
+	}	
+}
+/*--------------------------------------------------------------
+0.9 - max-width: 860px
+--------------------------------------------------------------*/
+@media only screen and (max-width: 860px) {
+	
 
-
-
+}
 /*--------------------------------------------------------------
 1.1 - iPad Landscape
 --------------------------------------------------------------*/
 @media only screen and (max-width: 768px) {
 	body {
 		margin-top: -28px !important;
-	}
-
-	.preview_post_container {
-		width: 100% !important;
-		margin-left: 0px !important;
-		margin-bottom: 20px;
 	}
 
 	#logo {

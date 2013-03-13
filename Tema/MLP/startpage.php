@@ -97,8 +97,7 @@
 
 				<?php else : ?>
 
-					<h2 class="center"><?php _e( 'Not Found', 'buddypress' ); ?></h2>
-					<?php get_search_form(); ?>
+					<p class="center"><?php _e( 'Not Found', 'buddypress' ); ?></p>
 
 				<?php endif; ?>
 			</div>
@@ -139,19 +138,10 @@
 
 				<?php else : ?>
 
-					<h2 class="center"><?php _e( 'Not Found', 'buddypress' ); ?></h2>
-					<?php get_search_form(); ?>
+					<p class="center"><?php _e( 'Not Found', 'buddypress' ); ?></p>
 
 				<?php endif; ?>
 
-			</div>			
-
-			</div>
-			
-			<div class='preview_container'>
-			
-			<div class='preview_post_container'>
-			<img width='374' src='http://www.houseofhedda.com/bilder/artiklar/zoom/krabPianoSvart_1.jpg' />
 			</div>
 			
 			<?php //Lesson Container ?>			
@@ -218,8 +208,7 @@
 
 					<?php else : ?>
 
-						<h2 class="center"><?php _e( 'Not Found', 'buddypress' ); ?></h2>
-						<?php get_search_form(); ?>
+						<p class="center"><?php _e( 'Not Found', 'buddypress' ); ?></p>
 
 					<?php endif; ?>
 			
