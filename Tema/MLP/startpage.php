@@ -63,7 +63,7 @@
 			<div class='preview_container'>
 			
 			<?php //News Container ?>
-			<div class="preview_post_container">				
+				
 
 				<h3>Senaste Nyheter</h3>				
 
@@ -78,10 +78,13 @@
 						<div id="post-<?php the_ID(); ?>" <?php post_class('preview_news'); ?>>
 
 							<div class="post-content">
-								<h4 class="posttitle"><a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', 'buddypress' ); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h4>
-
+								<h3 class="posttitle"><a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', 'buddypress' ); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a></h3>
+								<?php if ( has_post_thumbnail() ) : // check if the post has a Post Thumbnail assigned to it.?>
+									<?php the_post_thumbnail(array(150,100)); ?>
+								<?php endif; ?>
 								<div class="entry">
-									<p class="small_text"><?php echo excerpt(20); ?></p>
+									<p class="date"><?php printf( __( '%1$s', 'buddypress' ), get_the_date()); ?></p>
+									<p><?php echo excerpt(50); ?></p>
 									<?php wp_link_pages( array( 'before' => '<div class="page-link"><p>' . __( 'Pages: ', 'buddypress' ), 'after' => '</p></div>', 'next_or_number' => 'number' ) ); ?>
 								</div>
 
@@ -100,7 +103,10 @@
 					<p class="center"><?php _e( 'Not Found', 'buddypress' ); ?></p>
 
 				<?php endif; ?>
+
 			</div>
+			
+			<div class='preview_container'>
 
 			<?php //Article Container ?>			
 			<div class="preview_post_container">
