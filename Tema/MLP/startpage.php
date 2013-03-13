@@ -10,7 +10,7 @@
 
 		<?php do_action( 'bp_before_blog_page' ); ?>
 
-		<div class="page" id="blog-page" role="main">
+		<div class="page" id="start_page" role="main">
 
 			<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
