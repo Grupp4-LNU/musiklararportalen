@@ -57,7 +57,7 @@
 
 								}
 							}
-						}					
+						}
 						?>
 						<p>Sökord: <input type='text' name='sokord' value='<?php if(isset($_GET['sokord'])) echo $_GET['sokord']; ?>'><button type='submit'>Filtrera</button></p>
 						<button type='submit' form='clear_filter' id='clear_button'>Rensa filter</button>						
