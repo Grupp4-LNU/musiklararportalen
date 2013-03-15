@@ -78,17 +78,17 @@
 			$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 			
 			//Building Filter-query
-			$category = isset($filter_terms['mlp_category']) ? $filter_terms['mlp_category'] : false;
+			$goal = isset($filter_terms['mlp_goal']) ? $filter_terms['mlp_goal'] : false;
 			$target_groups = isset($filter_terms['mlp_target_group']) ? $filter_terms['mlp_target_group'] : false;
-			$category_setting = null;
+			$goal_setting = null;
 			$target_groups_setting = null;
 			$keyword = null;
 			
-			if($category){
-				$category_setting = array(
-							'taxonomy' => 'mlp_category',
+			if($goal){
+				$goal_setting = array(
+							'taxonomy' => 'mlp_goal',
 							'field' => 'slug',
-							'terms' => $category
+							'terms' => $goal
 						);			
 			};
 			
@@ -135,7 +135,7 @@
 			//Building complete WP-Query
 			$args = array(
 				'post_type' => 'mlp_musiclesson',
-				'tax_query' => array('relation' => 'AND', $category_setting, $target_groups_setting),
+				'tax_query' => array('relation' => 'AND', $goal_setting, $target_groups_setting),
 				'orderby' => $order_by, 
 				'meta_key' => $sort_term,
 				'order' => $order,

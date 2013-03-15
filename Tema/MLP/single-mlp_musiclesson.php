@@ -32,7 +32,7 @@
 									if($terms) :
 								?>
 								<p>
-								Huvudämne:									
+								Syfte & Mål:									
 								<?php
 										foreach ( $terms as $term ) {
 										echo '<span class="lesson_meta_text">'.$term->name.' </span>';

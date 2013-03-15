@@ -50,23 +50,23 @@ function mlp_register_lesson_post_type()
 function mlp_create_lesson_taxonomies() {
 	$taxonomies = array();
 	
-	$taxonomies['mlp_category'] = array(
+	$taxonomies['mlp_goal'] = array(
 		'hierarchical' => true,
-		'query_var' => 'mlp_category',
+		'query_var' => 'mlp_goal',
 		'rewrite' => array(
-			'slug' => 'Huvudämne'
+			'slug' => 'Mål'
 		),
 		'labels' => array(
-			'name' => 'Huvudämne',
-			'singular_name' => "Huvudämne",
-			'add_new' => 'Lägg till Huvudämne',
-			'add_new_item' => 'Lägg till Huvudämne',
-			'edit_item' => 'Redigera Huvudämne',
-			'new_item' => 'Lägg till Huvudämne',
-			'view_item' => 'Visa Huvudämne',
-			'search_items' => 'Sök bland Huvudämnen',
-			'not_found' => 'Inget Huvudämne hittat',
-			'not_found_in_trash' => 'Inget Huvudämne hittat i papperskorgen'				
+			'name' => 'Mål',
+			'singular_name' => "Mål",
+			'add_new' => 'Lägg till Mål',
+			'add_new_item' => 'Lägg till Mål',
+			'edit_item' => 'Redigera Mål',
+			'new_item' => 'Lägg till Mål',
+			'view_item' => 'Visa Mål',
+			'search_items' => 'Sök bland Mål',
+			'not_found' => 'Inget Mål hittat',
+			'not_found_in_trash' => 'Inget Mål hittat i papperskorgen'				
 		)
 	);
 	
@@ -101,39 +101,6 @@ function mlp_register_all_taxonomies($taxonomies) {
 	}
 }
 
-
-/**
- * Lägger till data till kategorierna.
- */
-/*
-function mlp_create_taxonomy_data() {
-	
-	// Målgrupper
-	mlp_add_taxonomy_data('mlp_target_group', 'F-3', "F-3");
-	mlp_add_taxonomy_data('mlp_target_group', '4-6', "4-6");
-	mlp_add_taxonomy_data('mlp_target_group', '7-9', "7-9");
-	mlp_add_taxonomy_data('mlp_target_group', 'Gymnasiet', "Gymnasiet");
-	mlp_add_taxonomy_data('mlp_target_group', 'Musikskola', "Musikskola");
-	
-	// Huvudämnen	
-	mlp_add_taxonomy_data('mlp_category', 'Spela och sjunga', 'pela och sjunga');
-	mlp_add_taxonomy_data('mlp_category', 'Skapa musik', 'Skapa musik');
-	mlp_add_taxonomy_data('mlp_category', 'Analysera och samtala', 'Analysera och samtala');
-	mlp_add_taxonomy_data('mlp_category', 'Tema', 'Tema');
-}
-	function mlp_add_taxonomy_data($taxonomy, $value, $description, $parent = null) {
-		
-		$args = array(
-			'slug' => strtolower($value),
-			'description' => $description,
-		);
-		
-		$args['parent'] = isset($parent) ? $args['parent'] : 0;
-		
-		wp_insert_term($value, $taxonomy, $args);
-	}
-*/
-
 /**
  * Lägger till post meta boxarna till adminpanelen samt skapar post metan.
  */
@@ -144,16 +111,12 @@ function mlp_add_lesson_details_metabox() {
 	
 	function lesson_details($post) {
 		$intro = get_post_meta($post->ID, 'mlp_intro', true);
-		$goals = get_post_meta($post->ID, 'mlp_goals', true);
 		$execution = get_post_meta($post->ID, 'mlp_execution', true);
 		?>
-			<h3><label for='mlp_intro'>Inledning</label></h3>
+			<h3><label for='mlp_intro'>Förutsättningar</label></h3>
 			<textarea class='widefat' id='mlp_intro' name='mlp_intro'><?php echo esc_attr($intro); ?></textarea>
 
-			<h3><label for='mlp_goals'>Mål</label></h3>
-			<textarea class='widefat' id='mlp_goals' name='mlp_goals'><?php echo esc_attr($goals); ?></textarea>
-
-			<h3><label for='mlp_execution'>Undervisning</label></h3>
+			<h3><label for='mlp_execution'>Genomförande</label></h3>
 			<textarea class='widefat' id='mlp_execution' name='mlp_execution'><?php echo esc_attr($execution); ?></textarea>
 
 		<?php
@@ -161,7 +124,6 @@ function mlp_add_lesson_details_metabox() {
 
 	add_action('save_post', function($id) {
 		update_post_meta_data($id, 'mlp_intro');
-		update_post_meta_data($id, 'mlp_goals');
 		update_post_meta_data($id, 'mlp_execution');
 	});
 }

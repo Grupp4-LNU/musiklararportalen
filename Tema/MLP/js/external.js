@@ -48,32 +48,28 @@ $(function() {
 
 	// Validering av kategorier
 	$.validator.addMethod('atLeastOneCat', function(value, element, param) {
-	    return $('input[name^="category"]').is(':checked');
-	}, 'Välj minst ett huvudområde');
+	    return $('input[name^="goal"]').is(':checked');
+	}, 'Välj minst ett Syfte/Mål');
 
 	$.validator.addMethod('atLeastOneYear', function(value, element, param) {
 	    return $('input[name^="target_group"]').is(':checked');
 	}, 'Välj minst en målgrupp');
 
 	$('#submit').on('click', function(){
-		$('#category_error').html('');
+		$('#goal_error').html('');
 		$('#target_group_error').html('');
 	});
 
 	// Inställningar för valieringen
 	$("#insert_new_lesson").validate({
 		rules: {
-			'category[]': 'atLeastOneCat',
-			'target_group[]':  'atLeastOneYear',
+			'goal[]': 'atLeastOneGoal',
+			'target_group[]':  'atLeastOneTargetGroup',
 			lesson_title: {
 				required: true,
 				minlength: 10
 			},
 			lesson_intro: {
-				required: true,
-				minlength: 40
-			},
-			lesson_goal: {
 				required: true,
 				minlength: 40
 			},
@@ -84,8 +80,8 @@ $(function() {
 		}, groups: {
             checkboxes: 'category[]'
         }, errorPlacement: function(error, elem) {
-            if (elem.attr('name').match(/category\[\]/)) {
-				$('#category_error').html(error[0].innerHTML);
+            if (elem.attr('name').match(/goal\[\]/)) {
+				$('#goal_error').html(error[0].innerHTML);
 			}
 			else if (elem.attr('name').match(/target_group\[\]/)) {
 				$('#target_group_error').html(error[0].innerHTML);
@@ -99,10 +95,6 @@ $(function() {
 			lesson_intro: {
 				required: "Detta fält måste fyllas i",
 				minlength: "Lektionsintroduktionen är för kort (minst 40 tecken)"
-			},
-			lesson_goal: {
-				required: "Detta fält måste fyllas i",
-				minlength: "Lektionsmål är för kort (minst 40 tecken)"
 			},
 			lesson_execution: {
 				required: "Detta fält måste fyllas i",

@@ -2779,7 +2779,7 @@ div.preview_lesson span.lesson_meta_text{
 div.page div.files ul {
 	margin-left: 0;
 }
-#category_error, #target_group_error{
+#goal_error, #target_group_error{
 	color: red;
 	font-weight: bold;
 	font-size: 1.2em;

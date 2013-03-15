@@ -13,11 +13,10 @@
 		
 		<?php
 			$post_id = null;
-			$post_categories = null;
+			$post_goals = null;
 			$post_target_groups = null;
 			$post_title = null;
 			$post_intro = null;
-			$post_goal = null;
 			$post_execution = null;
 			$post_media = null;
 			$attachment_id = null;
@@ -61,20 +60,7 @@
 				{
 					$introduction = esc_html($_POST['lesson_intro']);
 				}
-				
-				if($_POST['lesson_goal'] == "") 
-				{
-					$errors[] = '<p>Du måste ange ett mål med lektionen</p>';
-				}
-				else if(strlen($_POST['lesson_goal']) < 40)
-				{
-					$errors[] = '<p>Lektionsmål är för kort (minst 40 tecken)</p>';
-				}
-				else 
-				{
-					$goal = esc_html($_POST['lesson_goal']);
-				}
-				
+
 				if($_POST['lesson_execution'] == "") 
 				{
 					$errors[] = '<p>Du måste ange en beskrivning på hur man utför undervisningen</p>';
@@ -100,16 +86,16 @@
 					$errors[] = '<p>Du måste ange minst en målgrupp för lektionen</p>';	
 				}			
 												
-				if(isset($_POST['category']))
+				if(isset($_POST['goal']))
 				{
-					$lesson_categories = array();
-					foreach( $_POST['category'] as $category ) {
-						$lesson_categories[] = $category;
+					$lesson_goals = array();
+					foreach( $_POST['goal'] as $goal ) {
+						$lesson_goals[] = $goal;
 					}
 				}
 				else
 				{
-					$errors[] = '<p>Du måste ange minst ett huvudämne för lektionen</p>';
+					$errors[] = '<p>Du måste ange minst ett syfte/mål för lektionen</p>';
 				}
 				
 				if(count($errors) == 0)
@@ -127,10 +113,9 @@
 						wp_update_post( $update_post );
 										
 						wp_set_post_terms( $post_id, $lesson_target_groups, 'mlp_target_group', false );
-						wp_set_post_terms( $post_id, $lesson_categories, 'mlp_category', false );
+						wp_set_post_terms( $post_id, $lesson_goals, 'mlp_goal', false );
 						
 						update_post_meta($post_id, 'mlp_intro', $introduction);
-						update_post_meta($post_id, 'mlp_goals', $goal);
 						update_post_meta($post_id, 'mlp_execution', $execution);
 
 						// Delete attachment
@@ -167,10 +152,9 @@
 						$post_id = wp_insert_post( $new_lesson_post );
 										
 						wp_set_post_terms( $post_id, $lesson_target_groups, 'mlp_target_group', false );
-						wp_set_post_terms( $post_id, $lesson_categories, 'mlp_category', false );
+						wp_set_post_terms( $post_id, $lesson_goals, 'mlp_goal', false );
 						
 						add_post_meta($post_id, 'mlp_intro', $introduction);
-						add_post_meta($post_id, 'mlp_goals', $goal);
 						add_post_meta($post_id, 'mlp_execution', $execution);
 					}
 						
@@ -243,10 +227,10 @@
 						
 							<?php
 								$post_id = get_the_ID();
-								$post_categories = array();
-								$category_terms = get_the_terms( $post->ID , 'mlp_category' );
-								foreach($category_terms as $term){
-									$post_categories[] = $term->term_id;
+								$post_goals = array();
+								$goal_terms = get_the_terms( $post->ID , 'mlp_goal' );
+								foreach($goal_terms as $term){
+									$post_goals[] = $term->term_id;
 								}
 								
 								$post_target_groups = array();
@@ -257,7 +241,6 @@
 								
 								$post_title = get_the_title();
 								$post_intro = esc_html( get_post_meta( get_the_ID(), 'mlp_intro', true ) );
-								$post_goal = esc_html( get_post_meta( get_the_ID(), 'mlp_goals', true ) );
 								$post_execution = esc_html( get_post_meta( get_the_ID(), 'mlp_execution', true ) );
 								$attach_args = array(
 									'post_type' => 'attachment',
@@ -287,16 +270,16 @@
 						<fieldset id='filter_lesson_container' class='cat_new_lesson_container'>
 							<legend><p><strong>Välj Kategorier</strong></p></legend>	
 
-							<!-- Lesson Categories -->
+							<!-- Lesson goals -->
 							<p>
-							Huvudämnen:
-							<?php $lessonCategories = get_terms('mlp_category', array( 'hide_empty' => 0 ));
+							Syfte & Mål:
+							<?php $lessongoals = get_terms('mlp_goal', array( 'hide_empty' => 0 ));
 							
-							foreach ($lessonCategories as $lessonCategory) {
-								if(isset($post_categories) && in_array($lessonCategory->term_id, $post_categories))
-									echo '<label><input class="{category: true}" type="checkbox" checked name="category[]" value="'.$lessonCategory->term_id.'" id="target_group'.$lessonCategory->term_id.'" />'.$lessonCategory->name.'</label>';
+							foreach ($lessongoals as $lessongoal) {
+								if(isset($post_goals) && in_array($lessongoal->term_id, $post_goals))
+									echo '<label><input class="{goal: true}" type="checkbox" checked name="goal[]" value="'.$lessongoal->term_id.'" id="target_group'.$lessongoal->term_id.'" />'.$lessongoal->name.'</label>';
 								else
-									echo '<label><input class="{category: true}" type="checkbox" name="category[]" value="'.$lessonCategory->term_id.'" id="target_group'.$lessonCategory->term_id.'" />'.$lessonCategory->name.'</label>';
+									echo '<label><input class="{goal: true}" type="checkbox" name="goal[]" value="'.$lessongoal->term_id.'" id="target_group'.$lessongoal->term_id.'" />'.$lessongoal->name.'</label>';
 							}
 							?>
 							</p>
@@ -320,7 +303,7 @@
 							}
 							?>
 							</p>
-						<div id="category_error"></div>
+						<div id="goal_error"></div>
 						<div id="target_group_error"></div>
 						</fieldset>
 							
@@ -329,15 +312,11 @@
 						<input type="text" id="lesson_title" name="lesson_title" value='<?php echo $post_title; ?>' />
 						
 						<!-- Lesson Intro -->
-						<label for="lesson_intro"><p>Inledning / Förutsättningar</p></label>
+						<label for="lesson_intro"><p>Förutsättningar</p></label>
 						<textarea id="lesson_intro" name="lesson_intro" ><?php echo $post_intro; ?></textarea>
 						
-						<!-- Lesson Goal -->
-						<label for="lesson_goal"><p>Mål</p></label>
-						<textarea id="lesson_goal" name="lesson_goal" ><?php echo $post_goal; ?></textarea>
-						
 						<!-- Lesson Execution -->
-						<label for="lesson_execution"><p>Undervisning</p></label>
+						<label for="lesson_execution"><p>Genomförande</p></label>
 						<textarea id="lesson_execution" name="lesson_execution" ><?php echo $post_execution; ?></textarea>
 						
 						<?php wp_nonce_field( 'insert_new_lesson' ); ?>

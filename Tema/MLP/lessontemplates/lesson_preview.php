@@ -13,11 +13,11 @@
 			<p><?php printf( __( '%1$s', 'buddypress' ), get_the_date() ); ?></p>
 								
 			<?php
-				$terms = get_the_terms( $post->ID , 'mlp_category' );
+				$terms = get_the_terms( $post->ID , 'mlp_goal' );
 				if($terms) :
 			?>
 			<p>
-			Huvudämne:									
+			Syfte & Mål:									
 			<?php
 					foreach ( $terms as $term ) {
 					echo '<span class="lesson_meta_text">'.$term->name.' </span>';
