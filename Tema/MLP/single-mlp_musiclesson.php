@@ -28,7 +28,7 @@
 							<p><?php printf( __( '%1$s', 'buddypress' ), get_the_date() ); ?></p>
 							
 								<?php
-									$terms = get_the_terms( $post->ID , 'mlp_category' );
+									$terms = get_the_terms( $post->ID , 'mlp_goal' );
 									if($terms) :
 								?>
 								<p>
@@ -58,11 +58,9 @@
 						</div>					
 
 						<div class="entry">
-							<h4>Inledning</h4>
+							<h4>Förutsättningar</h4>
 							<?php echo str_replace("\n","<br/>", get_post_meta( get_the_ID(), 'mlp_intro', true )) ; ?>
-							<h4>Mål</h4>
-							<?php echo str_replace("\n","<br/>", get_post_meta( get_the_ID(), 'mlp_goals', true )); ?>
-							<h4>Undervisning</h4>			
+							<h4>Genomförande</h4>			
 							<?php echo str_replace("\n","<br/>", get_post_meta( get_the_ID(), 'mlp_execution', true )); ?>
 							
 							<?php
