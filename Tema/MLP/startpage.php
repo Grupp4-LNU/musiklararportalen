@@ -176,10 +176,10 @@
 							<div class="post-content">
 								<p class="date">
 								<?php
-									$terms = get_the_terms( $post->ID , 'mlp_category' );
+									$terms = get_the_terms( $post->ID , 'mlp_goal' );
 									if($terms) :
 								?>
-								Huvudämne:									
+								Syfte & Mål:									
 								<?php
 										foreach ( $terms as $term ) {
 										echo '<span class="lesson_meta_text">'.$term->name.' </span>';
