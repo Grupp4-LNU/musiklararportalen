@@ -2749,8 +2749,16 @@ div.preview_lesson span.lesson_meta_text{
 #filter_lesson_container.cat_new_lesson_container p{
 	margin: 0 0 25px 0;
 }
-#insert_new_lesson p{
+#insert_new_lesson label span{
+	display: block;
 	margin: 25px 0 2px 0;
+	font-size: 1.3em;
+}
+
+#insert_new_lesson p.help{
+	display: block;
+	font-size: 1em;
+	font-style: italic;
 }
 
 #insert_new_lesson textarea{
@@ -2779,7 +2787,7 @@ div.preview_lesson span.lesson_meta_text{
 div.page div.files ul {
 	margin-left: 0;
 }
-#goal_error, #target_group_error{
+#goal_error, #target_group_error, #lesson_title_error, #lesson_intro_error, #lesson_execution_error{
 	color: red;
 	font-weight: bold;
 	font-size: 1.2em;

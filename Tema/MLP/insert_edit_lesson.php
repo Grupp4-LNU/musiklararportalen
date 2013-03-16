@@ -50,11 +50,11 @@
 				
 				if($_POST['lesson_intro'] == "")
 				{
-					$errors[] = '<p>Du måste ange en lektionsintroduktion</p>';
+					$errors[] = '<p>Du måste ange Lektionsförutsättningar</p>';
 				}
 				else if(strlen($_POST['lesson_intro']) < 40)
 				{
-					$errors[] = '<p>Lektionsintroduktionen är för kort (minst 40 tecken)</p>';
+					$errors[] = '<p>Lektionsförutsättningar är för kort (minst 40 tecken)</p>';
 				}
 				else
 				{
@@ -63,11 +63,11 @@
 
 				if($_POST['lesson_execution'] == "") 
 				{
-					$errors[] = '<p>Du måste ange en beskrivning på hur man utför undervisningen</p>';
+					$errors[] = '<p>Du måste ange Lektionsgenomförande</p>';
 				}
 				else if(strlen($_POST['lesson_execution']) < 40)
 				{
-					$errors[] = '<p>Lektionsutförande är för kort (minst 40 tecken)</p>';
+					$errors[] = '<p>Lektionsgenomförande är för kort (minst 40 tecken)</p>';
 				}
 				else 
 				{
@@ -168,10 +168,17 @@
 							$file_return = wp_handle_upload($array, array('test_form' => false));
 					
 							if(isset($file_return['error']) || isset($file_return['upload_error_handler'])) {
-								$fileUploadError = $file_return['error'];
+								$fileUploadError[] = $file_return['error'];
+								$fileUploadError['fileType'] = $array['type'];
 							}
 							if(isset($fileUploadError)){
-								echo $fileUploadError;
+								echo $fileUploadError[0]. "<br />";
+								echo "Filtypen som inte tilläts var av typen: ".$fileUploadError['fileType'];
+								if(isset($_GET['id'])){
+									echo "<br /><br />Sidan laddas automatiskt om och ger dig en ny chans om 5 sekunder";
+									echo "<meta http-equiv='refresh' content='5'>";
+									die();
+								}
 								wp_delete_post($post_id);
 								die();
 							}
@@ -267,6 +274,11 @@
 							
 			<?php if($display_form) : ?>
 					<form name="insert_new_lesson" id='insert_new_lesson' method="post" action="" class="lesson-form" enctype="multipart/form-data">
+						<div id="goal_error"></div>
+						<div id="target_group_error"></div>
+						<div id="lesson_title_error"></div>
+						<div id="lesson_intro_error"></div>
+						<div id="lesson_execution_error"></div>
 						<fieldset id='filter_lesson_container' class='cat_new_lesson_container'>
 							<legend><p><strong>Välj Kategorier</strong></p></legend>	
 
@@ -303,20 +315,21 @@
 							}
 							?>
 							</p>
-						<div id="goal_error"></div>
-						<div id="target_group_error"></div>
 						</fieldset>
 							
 						<!-- Lesson Title -->
-						<label for="lesson_title"><p>Titel</p></label>
+						<label for="lesson_title"><span>Titel</span></label>
+						<p class="help">Lektionstiteln matas in här, sökord tas ifrån den. Så välj en titel med omtanke.</p>
 						<input type="text" id="lesson_title" name="lesson_title" value='<?php echo $post_title; ?>' />
 						
 						<!-- Lesson Intro -->
-						<label for="lesson_intro"><p>Förutsättningar</p></label>
+						<label for="lesson_intro"><span>Förutsättningar</span></label>
+						<p class="help">Här skriver man in eventuella förkunskapskrav, material som krävs eller ifall det är ett krav att man har ex antal lokaler</p>
 						<textarea id="lesson_intro" name="lesson_intro" ><?php echo $post_intro; ?></textarea>
 						
 						<!-- Lesson Execution -->
-						<label for="lesson_execution"><p>Genomförande</p></label>
+						<label for="lesson_execution"><span>Genomförande</span></label>
+						<p class="help">Här skriver man in hur lektionen är tänkt att genomföras. Hur lång tid ska man ägna sig åt den här delen hur lång tid åt nästa del o.s.v.</p>
 						<textarea id="lesson_execution" name="lesson_execution" ><?php echo $post_execution; ?></textarea>
 						
 						<?php wp_nonce_field( 'insert_new_lesson' ); ?>
@@ -330,7 +343,7 @@
 										<ul>
 										<?php foreach ($attachments as $attachment) : ?>
 											<li class='attachments'>
-											<a href='<?php echo $attachment->guid; ?>'><?php echo $attachment->post_name ?></a>
+											<a href='<?php echo $attachment->guid; ?>'><?php echo $attachment->post_name ?></a> <?php echo " [".$attachment->post_mime_type."]"; ?>
 											<button type='button' id='<?php echo $attachment->ID ?>' class='delete_attachment delete_file_image'></button>
 											</li>
 										<?php endforeach ?>

@@ -81,6 +81,7 @@
 											echo "<a href='".$attachment->guid."'>";
 												echo $attachment->post_name;
 											echo "</a>";
+											echo " [".$attachment->post_mime_type."]";
 										echo "</li>";							
 									}
 								}
