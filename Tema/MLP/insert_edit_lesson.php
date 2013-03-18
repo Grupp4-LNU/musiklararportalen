@@ -156,6 +156,7 @@
 						
 						add_post_meta($post_id, 'mlp_intro', $introduction);
 						add_post_meta($post_id, 'mlp_execution', $execution);
+						add_post_meta($post_id, 'mlp_author', $current_user->first_name . $current_user->last_name);
 					}
 						
 					if ($_FILES['lesson_file']['name'] != "") {

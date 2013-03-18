@@ -13,13 +13,6 @@ $(function() {
 	        $(this).prop('selected', true);
 	    }
 	});
-
-	/* TA BORT ATTACHMENT */
-	/*$('.delete_attachment').on("click", function(e) {
-		if(!confirm("Är du säker på att du vill ta bort den här filen?")) {
-			return false;
-		}
-	})*/
 	
 	/* TA BORT ATTACHMENT */
 	$('.delete_attachment').on("click", function(e) {
@@ -36,7 +29,6 @@ $(function() {
 	$('.lesson_saved').delay(10000).fadeOut("slow");
 	
 	/* LÄGGA TILL NYTT FÄLT FÖR NY FIL */
-	
 	$("#add_file_form").on("click", function(e) {
 		e.preventDefault();
 		var files = $(".files").children();
@@ -62,6 +54,20 @@ $(function() {
 		$('#lesson_intro_error').html('');
 		$('#lesson_execution_error').html('');
 	});
+	
+	$('#lesson_title').on('change', function() {
+		$('#lesson_title_error').html('');
+	});
+	
+	$('#lesson_intro').on('change', function() {
+		$('#lesson_intro_error').html('');
+	});
+
+
+	$('#lesson_execution').on('change', function() {
+		$('#lesson_execution_error').html('');
+	});
+
 
 	// Inställningar för valieringen
 	$("#insert_new_lesson").validate({

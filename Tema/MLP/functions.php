@@ -37,4 +37,8 @@ if ( !defined( 'BP_DTHEME_DISABLE_CUSTOM_HEADER' ) ) {
 	);
 	add_theme_support( 'custom-header', $custom_header_args );
 }
-	
+
+// Gör så att buddypress är kompatibelt för nyare versioner av WP än 3.3 då Buddypress kräver att man använder jQuery 1.7 och inte nyare versioner än 1.8.
+wp_deregister_script('jquery');
+wp_register_script('jquery', ("http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"), false, '1.7.2');
+wp_enqueue_script('jquery');

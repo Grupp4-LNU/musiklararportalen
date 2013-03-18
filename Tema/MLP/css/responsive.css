@@ -53,6 +53,7 @@ Hello, this is the BuddyPress Responsive theme stylesheet
 	}
 
 	#navigation select {
+		clear: both;
 		display: block;
 		margin-left: 15px;
 		width: 96%;

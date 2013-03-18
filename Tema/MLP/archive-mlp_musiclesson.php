@@ -59,7 +59,7 @@
 							}
 						}
 						?>
-						<p>Sökord: <input type='text' name='sokord' value='<?php if(isset($_GET['sokord'])) echo $_GET['sokord']; ?>'><button type='submit'>Filtrera</button></p>
+						<p>Sökord: <input type='text' name='sokord' value='<?php if(isset($_GET['sokord'])) echo $_GET['sokord']; ?>'><button type='submit'>Filtrera</button><span class="search_help">OBS. Sökning gäller bara titeln.</span></p>
 						<button type='submit' form='clear_filter' id='clear_button'>Rensa filter</button>						
 					</fieldset>
 				</form>
@@ -126,7 +126,8 @@
 				}
 				
 				if($_GET['sortera'] == 'skribent'){
-					$order_by = 'name';
+					$order_by = 'meta_value';
+					$sort_term = 'mlp_author';
 					$order = 'ASC';
 				}				
 			
