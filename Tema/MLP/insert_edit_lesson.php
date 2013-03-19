@@ -325,12 +325,12 @@
 						
 						<!-- Lesson Intro -->
 						<label for="lesson_intro"><span>Förutsättningar</span></label>
-						<p class="help">Här skriver man om vilka resurser som krävs i form av material, utrustning, lokaler och dylikt för att lektionen ska kunna genomföras samt om de eventuella förkunskaper som eleverna måste ha </p>
+						<p class="help">Här skriver du om vilka resurser som krävs i form av material, utrustning, lokaler och dylikt för att lektionen ska kunna genomföras samt om de eventuella förkunskaper som eleverna måste ha </p>
 						<textarea id="lesson_intro" name="lesson_intro" ><?php echo $post_intro; ?></textarea>
 						
 						<!-- Lesson Execution -->
 						<label for="lesson_execution"><span>Genomförande</span></label>
-						<p class="help">Här skriver man om lektionens upplägg. Man kan också lämna information om hur lektionen kan kopplas till Lgr 11 samt vilka kunskapskvaliteter som eleverna utvecklar genom lektionen och hur dessa kan bedömas.</p>
+						<p class="help">Här skriver u om lektionens upplägg. Du kan också lämna information om hur lektionen kan kopplas till Lgr 11 samt vilka kunskapskvaliteter som eleverna utvecklar genom lektionen och hur dessa kan bedömas.</p>
 						<textarea id="lesson_execution" name="lesson_execution" ><?php echo $post_execution; ?></textarea>
 						
 						<?php wp_nonce_field( 'insert_new_lesson' ); ?>
@@ -338,7 +338,7 @@
 						
 						<label for="lesson_file"><p class='files_label'>Filer</p></label>
 						<div class="files">
-								<p class="help">Här lägger man in filer (pdf, aiff, ppt, mp4, mp3. m.m.)</p>
+								<p class="help">Här lägger du in filer (pdf, aiff, ppt, mp4, mp3. m.m.)</p>
 								<?php if(isset($attachments)) : ?>
 									<?php if(sizeof($attachments) > 0) : ?>
 										<ul>
