@@ -320,17 +320,17 @@
 							
 						<!-- Lesson Title -->
 						<label for="lesson_title"><span>Titel</span></label>
-						<p class="help">Lektionstiteln matas in här, sökord tas ifrån den. Så välj en titel med omtanke.</p>
+						<p class="help">Lektionens titel skrivs in här, sökord tas ifrån den. Välj en titel med omtanke.</p>
 						<input type="text" id="lesson_title" name="lesson_title" value='<?php echo $post_title; ?>' />
 						
 						<!-- Lesson Intro -->
 						<label for="lesson_intro"><span>Förutsättningar</span></label>
-						<p class="help">Här skriver man in eventuella förkunskapskrav, material som krävs eller ifall det är ett krav att man har ex antal lokaler</p>
+						<p class="help">Här skriver man om vilka resurser som krävs i form av material, utrustning, lokaler och dylikt för att lektionen ska kunna genomföras samt om de eventuella förkunskaper som eleverna måste ha </p>
 						<textarea id="lesson_intro" name="lesson_intro" ><?php echo $post_intro; ?></textarea>
 						
 						<!-- Lesson Execution -->
 						<label for="lesson_execution"><span>Genomförande</span></label>
-						<p class="help">Här skriver man in hur lektionen är tänkt att genomföras. Hur lång tid ska man ägna sig åt den här delen hur lång tid åt nästa del o.s.v.</p>
+						<p class="help">Här skriver man om lektionens upplägg. Man kan också lämna information om hur lektionen kan kopplas till Lgr 11 samt vilka kunskapskvaliteter som eleverna utvecklar genom lektionen och hur dessa kan bedömas.</p>
 						<textarea id="lesson_execution" name="lesson_execution" ><?php echo $post_execution; ?></textarea>
 						
 						<?php wp_nonce_field( 'insert_new_lesson' ); ?>
@@ -338,7 +338,7 @@
 						
 						<label for="lesson_file"><p class='files_label'>Filer</p></label>
 						<div class="files">
-						
+								<p class="help">Här lägger man in filer (pdf, aiff, ppt, mp4, mp3. m.m.)</p>
 								<?php if(isset($attachments)) : ?>
 									<?php if(sizeof($attachments) > 0) : ?>
 										<ul>
