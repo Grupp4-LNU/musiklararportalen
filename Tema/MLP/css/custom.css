@@ -273,6 +273,10 @@ div#sidebar div#sidebar-me h4 {
 	margin: 0 0 8px 0;
 	font-weight: normal;
 }
+div#sidebar div#sidebar-me a {
+	padding: 0;
+	background: none;
+}
 div#sidebar ul#bp-nav {
 	clear: left;
 	margin: 15px -16px;
@@ -2381,6 +2385,10 @@ div.item-list-tabs ul li.feed a {
 	overflow: auto;
 }
 
+div.item-avatar a {
+	background: none;
+	padding: 0;
+}
 
 /*--------------------------------------------------------------
 6.9 - Private Messaging Threads
