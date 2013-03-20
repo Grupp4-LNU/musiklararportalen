@@ -515,7 +515,8 @@ a {
 	padding: 2px 1px;
 }
 a:hover,
-a:active {
+a:active,
+a:focus {
 	color: #333;
 	background: #00FF00;
 }
@@ -1537,6 +1538,16 @@ div.activity-comments form div.ac-reply-content {
 	width: 95% !important; /* Line up the Toolbar with the content body in this theme */
 }
 
+#wp-admin-bar a  {
+	background: transparent;
+}
+
+#wp-admin-bar a:hover,
+#wp-admin-bar a:visited,
+#wp-admin-bar a:active,
+#wp-admin-bar a:focus{
+	background: transparent;
+}
 
 /*--------------------------------------------------------------
 6.3 - Directories - Members, Groups, Blogs, Forums

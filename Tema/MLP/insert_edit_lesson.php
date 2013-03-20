@@ -286,7 +286,14 @@
 							<!-- Lesson goals -->
 							<p>
 							Syfte & Mål:
-							<?php $lessongoals = get_terms('mlp_goal', array( 'hide_empty' => 0 ));
+							<?php $lessongoals = get_terms(
+								'mlp_goal', 
+								array( 
+									'orderby'=> 'id', 
+									'order'=> 'ASC',
+									'hide_empty' => 0 
+								)
+							);
 							
 							foreach ($lessongoals as $lessongoal) {
 								if(isset($post_goals) && in_array($lessongoal->term_id, $post_goals))
@@ -320,7 +327,7 @@
 							
 						<!-- Lesson Title -->
 						<label for="lesson_title"><span>Titel</span></label>
-						<p class="help">Lektionens titel skrivs in här, sökord tas ifrån den. Välj en titel med omtanke.</p>
+						<p class="help">Här skriver du lektionens titel, sökord tas ifrån den. Välj därför en titel med omtanke.</p>
 						<input type="text" id="lesson_title" name="lesson_title" value='<?php echo $post_title; ?>' />
 						
 						<!-- Lesson Intro -->

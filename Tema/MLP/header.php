@@ -14,7 +14,7 @@
 		?>
 		<?php do_action( 'bp_head' ); ?>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-		<?php wp_head(); ?>		
+		<?php wp_head(); ?>
 	</head>
 
 	<body <?php body_class(); ?> id="bp-default">
