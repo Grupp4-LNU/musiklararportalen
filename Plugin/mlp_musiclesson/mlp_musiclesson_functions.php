@@ -152,20 +152,12 @@ function mlp_activate() {
 }
 
 /**
- * Vad ska ske när pluginet inaktiveras
- * Detta bestäms här...
- */
-function mlp_deactivate() {
-	
-}
-
-/**
  * Skapar en sida med template för att ta bort en lektion.
  */
 function mlp_create_delete_lesson_page() {
 	$post = array(
 		'post_type' => 'page',
-		'post_title' => 'MLP Radera lektion',
+		'post_title' => 'Radera lektion',
 		'post_name' => 'radera-lektion',
 		'post_status' => 'publish'
 	);
@@ -182,7 +174,7 @@ function mlp_create_delete_lesson_page() {
 function mlp_create_insert_edit_lesson_page() {
 	$post = array(
 		'post_type' => 'page',
-		'post_title' => 'MLP Skapa lektion',
+		'post_title' => 'Skapa lektion',
 		'post_name' => 'skapa-lektion',
 		'post_status' => 'publish'
 	);
@@ -199,7 +191,7 @@ function mlp_create_insert_edit_lesson_page() {
 function mlp_create_my_lesson_archive_page() {
 	$post = array(
 		'post_type' => 'page',
-		'post_title' => 'MLP Mina lektioner',
+		'post_title' => 'Mina lektioner',
 		'post_name' => 'mina-lektioner',
 		'post_status' => 'publish'
 	);
@@ -208,6 +200,25 @@ function mlp_create_my_lesson_archive_page() {
 	global $wpdb;
 	
 	add_post_meta($post_id, '_wp_page_template','archive-my_lessons.php');
+}
+
+/**
+ * Tar bort en sida by page title 
+ */
+function mlp_remove_page_by_title($title) {
+	$post = get_page_by_title($title);
+	wp_delete_post($post->ID, true);
+}
+
+
+/**
+ * Vad ska ske när pluginet inaktiveras
+ * Detta bestäms här...
+ */
+function mlp_deactivate() {
+	mlp_remove_page_by_title("Radera Lektion");
+	mlp_remove_page_by_title("Skapa Lektion");
+	mlp_remove_page_by_title("Mina Lektioner");
 }
 
 

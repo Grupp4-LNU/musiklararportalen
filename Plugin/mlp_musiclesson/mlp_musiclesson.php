@@ -15,7 +15,7 @@ define('MLP_MUSICLESSON_PLUGIN_PATH', plugin_dir_path( __FILE__ ));
 
 include_once MLP_MUSICLESSON_PLUGIN_PATH.'/mlp_musiclesson_functions.php';
 
-function MLP_musiclesson_init() {
+function MLP_musiclesson_init() {	
 	mlp_register_lesson_post_type();
 	mlp_create_lesson_taxonomies();
 	mlp_add_lesson_details_metabox();
