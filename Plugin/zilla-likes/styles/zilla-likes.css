@@ -1,0 +1,34 @@
+@import url(http://fonts.googleapis.com/css?family=Candal);
+
+.zilla-likes {
+	float: right;
+	height: 32px;
+	background: url(../images/heart.png) no-repeat 0 49%;
+	border: 0 !important;
+	display: inline-block;
+	margin-bottom: 10px;
+	min-height: 32px;
+	min-width: 32px;
+	padding-left: 21px;
+	padding-top: 5px;	
+	text-decoration: none;
+	font-family: 'Candal', sans-serif;
+	font-size: 19px;
+	color: #b9b9b9;
+}
+.zilla-likes:hover,
+.zilla-likes.active {
+	background: url(../images/heart_active.png) no-repeat 0 49%;
+	border: 0 !important;
+	margin: 0 0 10px 0 !important;
+	padding-left: 21px !important;
+	padding-top: 5px !important;	
+	text-decoration: none;
+	color: #b88282;
+}
+
+.zilla-blog-widget .zilla-likes,
+.tz_recentwork_widget .zilla-likes,
+.tz_blog_widget .zilla-likes,
+.home div#the_body #slider .excerpt .zilla-likes,
+.archive div#the_body #slider .excerpt .zilla-likes { display: none; } /* Hide Zilla Share in custom post widget and sliders in themes */
