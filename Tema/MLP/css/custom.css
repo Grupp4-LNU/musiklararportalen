@@ -1542,6 +1542,10 @@ div.activity-comments form div.ac-reply-content {
 	width: 95% !important; /* Line up the Toolbar with the content body in this theme */
 }
 
+#wp-admin-bar {
+	font-size: 1em;
+}
+
 #wp-admin-bar a  {
 	background: transparent;
 }
@@ -2386,6 +2390,11 @@ div.item-list-tabs ul li.feed a {
 }
 
 div.item-avatar a {
+	background: none;
+	padding: 0;
+}
+
+div#item-header-avatar a {
 	background: none;
 	padding: 0;
 }

@@ -23,18 +23,30 @@
 			$display_form = true;		
 		?>
 		
+		<?php // Är det en editering som ska ske? ?>
 		<?php if(isset($_GET['id'])) $post_id = $_GET['id']; ?>
+		
+		<?php // Är det en ny lektion som ska skapas. ?>
 		<?php if(isset($_POST['post_id']) && $_POST['post_id'] > 0) $post_id = $_POST['post_id']; ?>
 
 				
+		<?php // Är användaren inloggad ?>
 		<?php if( is_user_logged_in() ) : ?>		
 		
-			<?php // Check if the form has been submitted ?>
+			<?php // Kontrollerar ifall det är en nu lektion som ska skapas ?>
 			<?php if ( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) && 'insert_new_lesson' == $_POST['action'] ) : ?>
 								
 				<?php
 				$errors = array();
 				
+				
+				/**
+				 * Validering på serversidan ifall man har javascript avaktiverat.
+				 * Detta är alltså inte de röda felmeddelandne som kommer upp.
+				 * för att ändra de röda texterna kolla js/external.js
+				 */
+				 
+				// Felmeddelnande för lektionstitlen
 				if($_POST['lesson_title'] == "") 
 				{
 					$errors[] = '<p>Du måste ange en lektionstitel</p>';
@@ -48,6 +60,7 @@
 					$title = esc_html($_POST['lesson_title']);
 				}
 				
+				// Felmeddelnande för lektionsförutsättingar
 				if($_POST['lesson_intro'] == "")
 				{
 					$errors[] = '<p>Du måste ange Lektionsförutsättningar</p>';
@@ -61,6 +74,7 @@
 					$introduction = esc_html($_POST['lesson_intro']);
 				}
 
+				// Felmeddelnande för genomförande
 				if($_POST['lesson_execution'] == "") 
 				{
 					$errors[] = '<p>Du måste ange Lektionsgenomförande</p>';
@@ -74,6 +88,7 @@
 					$execution = esc_html($_POST['lesson_execution']);
 				}
 				
+				// Felmeddelnande för målgrupp
 				if(isset($_POST['target_group']))
 				{
 					$lesson_target_groups = array();
@@ -85,7 +100,8 @@
 				{
 					$errors[] = '<p>Du måste ange minst en målgrupp för lektionen</p>';	
 				}			
-												
+				
+				// Felmeddelnande för syfte & mål							
 				if(isset($_POST['goal']))
 				{
 					$lesson_goals = array();
@@ -98,9 +114,13 @@
 					$errors[] = '<p>Du måste ange minst ett syfte/mål för lektionen</p>';
 				}
 				
+				/**
+				 * Ifall det inte var några fel så skapas/redigeras här lektionen.
+				 */
 				if(count($errors) == 0)
 				{
 
+					// Ifall variabalen post_id är större än 0 så är det en redigering av lektionen.
 					if($post_id > 0){
 						
 						// Prepare update lesson
@@ -118,7 +138,7 @@
 						update_post_meta($post_id, 'mlp_intro', $introduction);
 						update_post_meta($post_id, 'mlp_execution', $execution);
 
-						// Delete attachment
+						// tar bort en fil ifall användaren har valt att klicka på att den ska tabort en fil.
 						$attachment_id = isset($_POST['remove_att_id']) ? $_POST['remove_att_id'] : false;
 						if($attachment_id)
 						{
@@ -141,9 +161,10 @@
 					
 					
 					}
+					// Annars så skapas en ny lektion
 					else{
-										
-						// Prepare insert new lesson
+					
+						//  Förberedelse för att skapa en lektion.
 						$new_lesson_post = array(
 							'post_title'    => $title,
 							'post_status'   => 'publish',
@@ -158,20 +179,24 @@
 						add_post_meta($post_id, 'mlp_execution', $execution);
 						add_post_meta($post_id, 'mlp_author', $current_user->first_name . $current_user->last_name);
 					}
-						
+					
+					// Ifall det finns eventuella filer som ska laddas upp.
 					if ($_FILES['lesson_file']['name'] != "") {
 						$wp_upload_dir = wp_upload_dir();
+						
+						// För varje fil laddas det upp.
 						foreach ($_FILES as $file => $array) {
-							// $newupload returns the attachment id of the file that
-							// was just uploaded. Do whatever you want with that now.
 							require_once(ABSPATH . 'wp-admin/includes/admin.php');
 							
 							$file_return = wp_handle_upload($array, array('test_form' => false));
-					
+							
+							// Ifall det fanns några frel med filen, eventuellt var filtypen inte tillåten
 							if(isset($file_return['error']) || isset($file_return['upload_error_handler'])) {
 								$fileUploadError[] = $file_return['error'];
 								$fileUploadError['fileType'] = $array['type'];
 							}
+							
+							// Skriv ut felmeddelande om det fanns några fel.
 							if(isset($fileUploadError)){
 								echo $fileUploadError[0]. "<br />";
 								echo "Filtypen som inte tilläts var av typen: ".$fileUploadError['fileType'];
@@ -272,7 +297,8 @@
 			<?php else: ?>
 				<h2 class="pagetitle">Skapa Lektion</h2>
 			<?php endif; ?>		
-							
+					
+			<?php // Formuläret som visas när man redigerar och skapar en lektion ?>	
 			<?php if($display_form) : ?>
 					<form name="insert_new_lesson" id='insert_new_lesson' method="post" action="" class="lesson-form" enctype="multipart/form-data">
 						<div id="goal_error"></div>

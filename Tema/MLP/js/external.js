@@ -106,6 +106,7 @@ $(function() {
 				$('#lesson_execution_error').html(error[0].innerHTML);
 			}
         },
+        // De röda Felmeddelanden för de olika textfälten. 
         messages: {
 			lesson_title: {
 				required: "Detta fält måste fyllas i",

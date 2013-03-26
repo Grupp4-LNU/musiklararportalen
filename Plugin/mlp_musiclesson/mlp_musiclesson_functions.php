@@ -102,7 +102,7 @@ function mlp_register_all_taxonomies($taxonomies) {
 }
 
 /**
- * Lägger till post meta boxarna till adminpanelen samt skapar post metan.
+ * Lägger till post_meta till adminpanelen samt skapar post_meta.
  */
 function mlp_add_lesson_details_metabox() {
 	add_action('add_meta_boxes', function() {
@@ -230,7 +230,9 @@ function mlp_deactivate() {
 add_filter('upload_mimes', 'custom_upload_mimes');
 function custom_upload_mimes ( $existing_mimes = array() ) {
 
-	// add your extension to the array
+	/**
+	 * Tillåtna filtyper.
+	 */
 	$existing_mimes['3gp'] = 'audio/3gpp';
 	$existing_mimes['3gp'] = 'video/3gpp';
 	$existing_mimes['ppt'] = 'application/vnd.ms-powerpoint';
@@ -330,10 +332,11 @@ function custom_upload_mimes ( $existing_mimes = array() ) {
 	$existing_mimes['xlsb'] = 'application/vnd.ms-excel.sheet.binary.macroEnabled.12';
 	$existing_mimes['webm'] = 'audio/webm';
 	$existing_mimes['webm'] = 'video/webm';
-	// or: $existing_mimes['ppt|pot|pps'] = 'application/vnd.ms-powerpoint';
-	// to add multiple extensions for the same mime type
-	// add as many as you like
-	// removing existing file types
+	
+	
+	/**
+	 * Otillåtna filtyper.
+	 */
 	unset( $existing_mimes['exe'] );
 	unset( $existing_mimes['dmg'] );
 	unset( $existing_mimes['bin'] );
@@ -354,7 +357,7 @@ function custom_upload_mimes ( $existing_mimes = array() ) {
 	unset( $existing_mimes['cdr'] );
 	unset( $existing_mimes['bin'] );
 	unset( $existing_mimes['cue'] );
-	// add as many as you like
-	// and return the new full result
+	
+	
 	return $existing_mimes;
 }
